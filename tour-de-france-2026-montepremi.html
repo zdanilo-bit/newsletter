@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour de France 2026 — Montepremi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+  :root{
+    --bg:#111315;
+    --bg2:#181b1e;
+    --card:#1d2023;
+    --line:#2a2e32;
+    --orange:#FC5200;
+    --orange-dim:#7a2f04;
+    --yellow:#FFD400;
+    --green:#3CB44A;
+    --white:#F5F6F7;
+    --grey:#9AA0A6;
+    --grey-dim:#63686d;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 0 80px;}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(180deg,#1a1c1e 0%, var(--bg) 100%);
+    border-bottom:1px solid var(--line);
+    padding:48px 32px 36px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-40%;right:-10%;
+    width:520px;height:520px;
+    background:radial-gradient(circle, rgba(252,82,0,0.16) 0%, transparent 70%);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--orange);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px;height:8px;
+    background:var(--orange);
+    border-radius:50%;
+    display:inline-block;
+  }
+  h1{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:56px;
+    line-height:0.95;
+    letter-spacing:-0.5px;
+    margin-top:10px;
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--orange);}
+  .hero-sub{
+    color:var(--grey);
+    font-size:15px;
+    margin-top:12px;
+    max-width:520px;
+    line-height:1.5;
+  }
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:32px;
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .hero-stat{
+    background:var(--bg2);
+    padding:18px 16px;
+  }
+  .hero-stat .num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    font-size:34px;
+    color:var(--orange);
+    line-height:1;
+  }
+  .hero-stat .lbl{
+    font-size:11px;
+    color:var(--grey);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-top:6px;
+    font-weight:600;
+  }
+
+  /* SECTION */
+  section{padding:36px 32px 0;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:16px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:12px;
+  }
+  .sec-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--bg);
+    background:var(--orange);
+    font-weight:700;
+    padding:3px 7px;
+    border-radius:4px;
+    letter-spacing:0.5px;
+  }
+  .sec-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    font-size:24px;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+  }
+  .sec-title small{
+    color:var(--grey-dim);
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    text-transform:none;
+    margin-left:8px;
+  }
+
+  /* LEADERBOARD (podio generale) */
+  .podium{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .pod-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 16px;
+    position:relative;
+  }
+  .pod-card.gold{
+    border-color:var(--orange);
+    background:linear-gradient(180deg,#241a10 0%, var(--card) 60%);
+  }
+  .pod-rank{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--grey);
+    font-weight:700;
+  }
+  .pod-card.gold .pod-rank{color:var(--orange);}
+  .pod-amount{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:32px;
+    margin-top:6px;
+    line-height:1;
+  }
+  .pod-card.gold .pod-amount{color:var(--orange);font-size:38px;}
+  .pod-jersey{
+    font-size:11px;
+    color:var(--grey);
+    margin-top:6px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    font-weight:600;
+  }
+
+  /* Full ranking table (rows like activity feed) */
+  .feed{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:28px;
+  }
+  .feed-row{
+    display:grid;
+    grid-template-columns:56px 1fr auto;
+    align-items:center;
+    padding:11px 16px;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .feed-row:last-child{border-bottom:none;}
+  .feed-row .rank{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--grey);
+    font-weight:700;
+    font-size:13px;
+  }
+  .feed-row .amount{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    color:var(--white);
+    text-align:right;
+  }
+  .feed-row.top .amount{color:var(--orange);}
+  .feed-row .barbg{
+    height:5px;
+    background:var(--bg);
+    border-radius:3px;
+    overflow:hidden;
+    margin:0 12px;
+  }
+  .feed-row .bar{
+    height:100%;
+    background:var(--orange-dim);
+    border-radius:3px;
+  }
+  .feed-row.top .bar{background:var(--orange);}
+
+  /* Classification grid */
+  .jersey-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .jersey-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--orange);
+    border-radius:10px;
+    padding:18px 18px;
+  }
+  .jersey-card.yellow{border-left-color:var(--yellow);}
+  .jersey-card.green{border-left-color:var(--green);}
+  .jersey-card.polka{border-left-color:#fff;}
+  .jersey-card.white{border-left-color:#cfd3d6;}
+  .jersey-name{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:18px;
+    text-transform:uppercase;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .jersey-name .win{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--orange);
+    font-size:20px;
+    font-weight:700;
+  }
+  .jersey-podio{
+    display:flex;
+    gap:14px;
+    margin-top:10px;
+    font-size:12px;
+    color:var(--grey);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .jersey-podio span b{color:var(--white);}
+
+  /* Bonus grid - small tiles */
+  .bonus-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .bonus-tile{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 12px;
+    text-align:center;
+  }
+  .bonus-amount{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--orange);
+  }
+  .bonus-lbl{
+    font-size:10.5px;
+    color:var(--grey);
+    margin-top:4px;
+    line-height:1.3;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+  }
+
+  /* GPM table */
+  .gpm-table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    font-size:13px;
+    margin-bottom:28px;
+  }
+  .gpm-table th{
+    background:var(--bg2);
+    color:var(--grey);
+    text-transform:uppercase;
+    font-size:10.5px;
+    letter-spacing:0.5px;
+    padding:10px 14px;
+    text-align:left;
+    font-weight:700;
+  }
+  .gpm-table td{
+    padding:10px 14px;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .gpm-table td:first-child{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+  }
+  .gpm-table td:not(:first-child){color:var(--orange);font-weight:700;}
+
+  /* comparison strip */
+  .compare{
+    background:var(--bg2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 22px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+  }
+  .compare-item{flex:1;text-align:center;}
+  .compare-item .amount{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:30px;
+  }
+  .compare-item.tour .amount{color:var(--orange);}
+  .compare-item.giro .amount{color:var(--grey);}
+  .compare-item .lbl{
+    font-size:11px;
+    color:var(--grey);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-top:4px;
+  }
+  .compare-vs{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--grey-dim);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  footer{
+    padding:28px 32px 0;
+    color:var(--grey-dim);
+    font-size:11px;
+    font-family:'JetBrains Mono',monospace;
+    border-top:1px solid var(--line);
+    margin-top:20px;
+    padding-top:16px;
+  }
+
+  @media(max-width:640px){
+    h1{font-size:38px;}
+    .hero-stats{grid-template-columns:1fr;}
+    .podium{grid-template-columns:1fr;}
+    .jersey-grid{grid-template-columns:1fr;}
+    .bonus-grid{grid-template-columns:repeat(2,1fr);}
+    .gpm-table{font-size:11.5px;}
+    .compare{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">113ª edizione · ASO</div>
+    <h1>Tour de France <span>2026</span><br>Montepremi</h1>
+    <p class="hero-sub">Barcellona → Parigi, 21 tappe. Il Grande Giro più pagato della stagione: ecco dove vanno i soldi, tappa per tappa e classifica per classifica.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">500K€</div><div class="lbl">Vincitore generale</div></div>
+      <div class="hero-stat"><div class="num">11K€</div><div class="lbl">Vincitore tappa</div></div>
+      <div class="hero-stat"><div class="num">20K€</div><div class="lbl">Supercombattività</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-tag">GC</span>
+      <span class="sec-title">Classifica Generale <small>maglia gialla · top 20+</small></span>
+    </div>
+    <div class="podium">
+      <div class="pod-card gold"><div class="pod-rank">1° · GIALLA</div><div class="pod-amount">500.000€</div><div class="pod-jersey">Parigi</div></div>
+      <div class="pod-card"><div class="pod-rank">2°</div><div class="pod-amount">200.000€</div><div class="pod-jersey">Podio</div></div>
+      <div class="pod-card"><div class="pod-rank">3°</div><div class="pod-amount">100.000€</div><div class="pod-jersey">Podio</div></div>
+    </div>
+    <div class="feed">
+      <div class="feed-row"><span class="rank">4°</span><div class="barbg"><div class="bar" style="width:14%"></div></div><span class="amount">70.000€</span></div>
+      <div class="feed-row"><span class="rank">5°</span><div class="barbg"><div class="bar" style="width:10%"></div></div><span class="amount">50.000€</span></div>
+      <div class="feed-row"><span class="rank">6°</span><div class="barbg"><div class="bar" style="width:5%"></div></div><span class="amount">25.000€</span></div>
+      <div class="feed-row"><span class="rank">7°</span><div class="barbg"><div class="bar" style="width:2.3%"></div></div><span class="amount">11.500€</span></div>
+      <div class="feed-row"><span class="rank">8°</span><div class="barbg"><div class="bar" style="width:1.6%"></div></div><span class="amount">7.800€</span></div>
+      <div class="feed-row"><span class="rank">9°</span><div class="barbg"><div class="bar" style="width:0.9%"></div></div><span class="amount">4.500€</span></div>
+      <div class="feed-row"><span class="rank">10°</span><div class="barbg"><div class="bar" style="width:0.8%"></div></div><span class="amount">3.800€</span></div>
+      <div class="feed-row"><span class="rank">11°-19°</span><div class="barbg"><div class="bar" style="width:0.5%"></div></div><span class="amount">1.100 – 3.000€</span></div>
+      <div class="feed-row"><span class="rank">20°-160°</span><div class="barbg"><div class="bar" style="width:0.2%"></div></div><span class="amount">1.000€ fisso</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-tag">STAGE</span>
+      <span class="sec-title">Vittorie di Tappa <small>× 21 tappe</small></span>
+    </div>
+    <div class="feed">
+      <div class="feed-row top"><span class="rank">1°</span><div class="barbg"><div class="bar" style="width:100%"></div></div><span class="amount">11.000€</span></div>
+      <div class="feed-row"><span class="rank">2°</span><div class="barbg"><div class="bar" style="width:50%"></div></div><span class="amount">5.500€</span></div>
+      <div class="feed-row"><span class="rank">3°</span><div class="barbg"><div class="bar" style="width:25%"></div></div><span class="amount">2.800€</span></div>
+      <div class="feed-row"><span class="rank">4°</span><div class="barbg"><div class="bar" style="width:14%"></div></div><span class="amount">1.500€</span></div>
+      <div class="feed-row"><span class="rank">5°-10°</span><div class="barbg"><div class="bar" style="width:6%"></div></div><span class="amount">600 – 830€</span></div>
+      <div class="feed-row"><span class="rank">11°-20°</span><div class="barbg"><div class="bar" style="width:3%"></div></div><span class="amount">300 – 540€</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-tag">CLASS</span>
+      <span class="sec-title">Le altre maglie</span>
+    </div>
+    <div class="jersey-grid">
+      <div class="jersey-card green">
+        <div class="jersey-name">Maglia Verde <span class="win">25.000€</span></div>
+        <div class="jersey-podio"><span>2° <b>15.000€</b></span><span>3° <b>10.000€</b></span></div>
+      </div>
+      <div class="jersey-card polka">
+        <div class="jersey-name">Maglia a Pois <span class="win">25.000€</span></div>
+        <div class="jersey-podio"><span>2° <b>15.000€</b></span><span>3° <b>10.000€</b></span></div>
+      </div>
+      <div class="jersey-card white">
+        <div class="jersey-name">Maglia Bianca <span class="win">20.000€</span></div>
+        <div class="jersey-podio"><span>2° <b>15.000€</b></span><span>3° <b>10.000€</b></span></div>
+      </div>
+      <div class="jersey-card">
+        <div class="jersey-name">Classifica Squadre <span class="win">50.000€</span></div>
+        <div class="jersey-podio"><span>2° <b>30.000€</b></span><span>3° <b>20.000€</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-tag">DAILY</span>
+      <span class="sec-title">Premi giornalieri & speciali</span>
+    </div>
+    <div class="bonus-grid">
+      <div class="bonus-tile"><div class="bonus-amount">500€</div><div class="bonus-lbl">Giorno in giallo</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">300€</div><div class="bonus-lbl">Giorno verde/pois/bianca</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">2.000€</div><div class="bonus-lbl">Combattivo di giornata</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">20.000€</div><div class="bonus-lbl">Supercombattività finale</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">2.800€</div><div class="bonus-lbl">Giorno miglior squadra</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">2.000€</div><div class="bonus-lbl">Miglior gregario (sett.)</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">5.000€</div><div class="bonus-lbl">Premio Henri-Desgrange (Galibier)</div></div>
+      <div class="bonus-tile"><div class="bonus-amount">5.000€</div><div class="bonus-lbl">Premio Jacques-Goddet (Tourmalet)</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-tag">GPM</span>
+      <span class="sec-title">Traguardi in salita <small>+ sprint intermedi</small></span>
+    </div>
+    <table class="gpm-table">
+      <tr><th>Categoria</th><th>1°</th><th>2°</th><th>3°</th></tr>
+      <tr><td>Hors Catégorie</td><td>800€</td><td>450€</td><td>300€</td></tr>
+      <tr><td>1ª categoria</td><td>650€</td><td>400€</td><td>150€</td></tr>
+      <tr><td>2ª categoria</td><td>500€</td><td>250€</td><td>—</td></tr>
+      <tr><td>3ª categoria</td><td>300€</td><td>—</td><td>—</td></tr>
+      <tr><td>4ª categoria</td><td>200€</td><td>—</td><td>—</td></tr>
+      <tr><td>Sprint intermedio</td><td>1.500€</td><td>1.000€</td><td>500€</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-tag">VS</span>
+      <span class="sec-title">Tour vs Giro d'Italia 2026</span>
+    </div>
+    <div class="compare">
+      <div class="compare-item tour"><div class="amount">500.000€</div><div class="lbl">Tour · vincitore GC</div></div>
+      <div class="compare-vs">VS</div>
+      <div class="compare-item giro"><div class="amount">265.000€</div><div class="lbl">Giro · vincitore GC</div></div>
+    </div>
+    <div class="compare">
+      <div class="compare-item giro"><div class="amount">11.010€</div><div class="lbl">Giro · vincitore tappa</div></div>
+      <div class="compare-vs">VS</div>
+      <div class="compare-item tour"><div class="amount">11.000€</div><div class="lbl">Tour · vincitore tappa</div></div>
+    </div>
+  </section>
+
+  <footer>
+    FONTE: EUROSPORT.IT — L. STAMERRA, 29/06/2026 · ASO MONTEPREMI UFFICIALE · 113ª EDIZIONE, BARCELLONA→PARIGI, 21 TAPPE
+  </footer>
+
+</div>
+</body>
+</html>
