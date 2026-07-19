@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zona 2: sotto la prima soglia — ZD Bike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0B2A42;
+    --sea:#155A82;
+    --ember:#E15A2C;
+    --gold:#F0B429;
+    --sand:#F4EFE3;
+    --border:#E4DDC9;
+    --border2:#E9E3D3;
+    --shadow:0 18px 45px rgba(11,42,66,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--sand);color:var(--navy);font-family:Inter,sans-serif;line-height:1.55}
+  .page{width:min(880px, calc(100vw - 24px));margin:0 auto;padding:0 0 40px}
+
+  .hero{position:relative;min-height:400px;border-radius:0 0 28px 28px;overflow:hidden;background:radial-gradient(circle at 25% 15%, #155A82 0%, #0B2A42 55%, #05141F 100%)}
+  .hero-inner{position:relative;z-index:2;padding:34px 30px 28px;min-height:400px;display:flex;flex-direction:column;justify-content:space-between}
+  .eyebrow{font-family:'JetBrains Mono', monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .mega{font-family:'Barlow Condensed', sans-serif;font-size:clamp(42px, 8.5vw, 76px);line-height:.92;font-weight:800;text-transform:uppercase;color:var(--gold);max-width:600px;margin-top:12px}
+  .intro{max-width:640px;color:#fff;font-size:18px;line-height:1.45;margin-top:18px}
+  .intro span{color:var(--gold);font-weight:700}
+  .badge{position:absolute;top:26px;right:24px;z-index:3;width:96px;height:96px;border-radius:999px;border:3px solid var(--gold);background:linear-gradient(180deg,#274861,#0B2A42);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+  .badge-core{font-family:'JetBrains Mono', monospace;color:var(--gold);font-size:14px;font-weight:700;text-align:center;line-height:1.2}
+
+  .section{padding:28px 6px 0}
+  .section-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .sec-no{font-family:'JetBrains Mono', monospace;font-size:14px;color:var(--ember);font-weight:700}
+  .sec-title{font-family:'Barlow Condensed', sans-serif;font-size:32px;line-height:1;text-transform:uppercase;color:var(--navy);font-weight:800}
+  .sec-line{height:1px;background:var(--border);flex:1}
+  .card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .card-sand{background:var(--sand);border:1px solid var(--border2);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .body{font-size:17px;color:var(--navy)}
+  .body b{font-weight:700}
+
+  .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .check-item{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+  .check-mark{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;color:var(--gold);-webkit-text-stroke:1px var(--navy);flex:0 0 auto}
+  .check-text{font-size:14.5px}
+
+  .threshold-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .threshold-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px;text-align:center}
+  .threshold-num{font-family:'Barlow Condensed', sans-serif;font-size:38px;line-height:1;color:var(--ember);font-weight:800}
+  .threshold-label{font-family:'JetBrains Mono', monospace;font-size:11px;text-transform:uppercase;color:var(--sea);font-weight:700;margin-top:6px}
+
+  .drift-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .drift-box{border-radius:16px;padding:16px;border:1px solid var(--border)}
+  .drift-box.up{background:#FCEBEB;border-color:#F3CFCF}
+  .drift-box.down{background:#EFF6EF;border-color:#CFE3CF}
+  .drift-arrow{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px}
+  .drift-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;margin-top:4px;color:var(--navy);font-weight:700}
+
+  .zone-compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center}
+  .zc-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 10px}
+  .zc-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px}
+  .zc-note{font-size:12.5px;color:#5b6d79;margin-top:4px}
+
+  .footer{margin-top:26px;background:var(--navy);color:#fff;border-radius:20px;padding:16px 18px;display:flex;justify-content:space-between;gap:14px;font-family:'JetBrains Mono', monospace;font-size:11px;text-transform:uppercase;flex-wrap:wrap}
+
+  @media (max-width: 760px) {
+    .hero,.hero-inner{min-height:380px}
+    .badge{width:78px;height:78px}
+    .mega{font-size:44px}
+    .checklist,.threshold-row,.drift-row,.zone-compare{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="badge"><div class="badge-core">SOTTO<br>VT1/LT1</div></div>
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">— ALLENAMENTO · ZONA 2</div>
+          <div class="mega">LA VERA ZONA 2<br>NON È UN NUMERO</div>
+        </div>
+        <p class="intro">Non è una percentuale fissa della frequenza cardiaca massima. È una condizione metabolica: stare <span>appena sotto la prima soglia</span> (VT1/LT1), dove il corpo regge ore di lavoro restando stabile.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">01</div><div class="sec-title">Cosa succede sotto soglia</div><div class="sec-line"></div></div>
+      <div class="card">
+        <p class="body">Allenarsi appena sotto VT1/LT1 significa restare in una condizione relativamente stabile:</p>
+        <div class="checklist" style="margin-top:16px;">
+          <div class="check-item"><span class="check-mark">✓</span><span class="check-text">Consumo di ossigeno stabile</span></div>
+          <div class="check-item"><span class="check-mark">✓</span><span class="check-text">Lattato basso e poco variabile</span></div>
+          <div class="check-item"><span class="check-mark">✓</span><span class="check-text">Affaticamento lento</span></div>
+          <div class="check-item"><span class="check-mark">✓</span><span class="check-text">Molte ore accumulabili</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">02</div><div class="sec-title">Come dovresti sentirti</div><div class="sec-line"></div></div>
+      <div class="card-sand">
+        <p class="body">Criterio pratico: sensazione <b>comoda</b>, respirazione controllata, frasi complete senza affanno. Se non riesci a parlare, sei già sopra la prima soglia — troppo intenso. Non è pedalare senza sforzo: si lavora, ma in modo sostenibile.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">03</div><div class="sec-title">Perché il % di FC max inganna</div><div class="sec-line"></div></div>
+      <div class="threshold-row">
+        <div class="threshold-box"><div class="threshold-num">70–75%</div><div class="threshold-label">FC max · principianti</div></div>
+        <div class="threshold-box"><div class="threshold-num">80–82%</div><div class="threshold-label">FC max · atleti allenati</div></div>
+      </div>
+      <p class="body" style="margin-top:16px;">Sono medie. La variabilità individuale è enorme: due ciclisti con la stessa FC max possono avere la prima soglia a battiti molto diversi. "Zona 2 = 60-70% FC max" resta solo una stima generica.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">04</div><div class="sec-title">La deriva nelle uscite lunghe</div><div class="sec-line"></div></div>
+      <div class="drift-row">
+        <div class="drift-box up"><div class="drift-arrow">↑ FC</div><div class="drift-label">Stessi watt, più battiti</div></div>
+        <div class="drift-box down"><div class="drift-arrow">↓ WATT</div><div class="drift-label">Stessa FC, meno potenza</div></div>
+      </div>
+      <p class="body" style="margin-top:16px;">Dopo 2-3 ore, caldo, disidratazione, fatica e consumo di glicogeno spostano il rapporto potenza/battiti. La ventilazione resterebbe più stabile di entrambi — da qui l'ipotesi su futuri sensori di ventilazione per regolare la Zona 2 in tempo reale durante il lungo.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">05</div><div class="sec-title">Zona 2 del ciclocomputer ≠ Zona 2 fisiologica</div><div class="sec-line"></div></div>
+      <div class="zone-compare">
+        <div class="zc-box"><div class="zc-title" style="color:var(--sea)">3 domini</div><div class="zc-note">Zona 2 = tutto sotto LT1/VT1 (dominio basso-moderato)</div></div>
+        <div class="zc-box"><div class="zc-title" style="color:var(--ember)">5–7 zone</div><div class="zc-note">"Z2" del device è una fascia arbitraria, non coincide</div></div>
+        <div class="zc-box"><div class="zc-title" style="color:var(--gold)">Risultato</div><div class="zc-note">La scritta "Z2" sul ciclocomputer non è automaticamente la Zona 2 degli studi</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">06</div><div class="sec-title">Tradotto per il tuo lungo</div><div class="sec-line"></div></div>
+      <div class="card">
+        <div class="checklist">
+          <div class="check-item"><span class="check-mark">→</span><span class="check-text">Parti volutamente tranquillo</span></div>
+          <div class="check-item"><span class="check-mark">→</span><span class="check-text">Mantieni respirazione regolare</span></div>
+          <div class="check-item"><span class="check-mark">→</span><span class="check-text">Verifica che riesci a parlare</span></div>
+          <div class="check-item"><span class="check-mark">→</span><span class="check-text">Non inseguire i watt se sale la fatica</span></div>
+        </div>
+        <p class="body" style="margin-top:16px;">Se a parità di percorso i battiti salgono molto e il respiro si fa pesante, riduci leggermente la potenza. La Zona 2 non è un numero fisso: è una condizione da leggere insieme a respirazione, durata, caldo, idratazione e percezione dello sforzo.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>FONTE · SINTESI DI SLIDE SU FISIOLOGIA DELL'ALLENAMENTO</div>
+      <div>NON È UN PROTOCOLLO MEDICO · SOLO ANALISI</div>
+    </footer>
+  </main>
+</body>
+</html>

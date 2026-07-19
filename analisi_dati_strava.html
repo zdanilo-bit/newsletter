@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>strava-dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#0B2A42;
+      --sea:#155A82;
+      --ember:#E15A2C;
+      --gold:#F0B429;
+      --sand:#F4EFE3;
+      --border:#E4DDC9;
+      --border2:#E9E3D3;
+      --shadow:0 18px 45px rgba(11,42,66,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--sand);color:var(--navy);font-family:Inter,sans-serif;line-height:1.55}
+    .page{width:min(880px, calc(100vw - 24px));margin:0 auto;padding:0 0 40px}
+
+    .hero{position:relative;min-height:400px;border-radius:0 0 28px 28px;overflow:hidden;background:radial-gradient(circle at 25% 15%, #155A82 0%, #0B2A42 55%, #05141F 100%)}
+    .hero-inner{position:relative;z-index:2;padding:34px 30px 28px;min-height:400px;display:flex;flex-direction:column;justify-content:space-between}
+    .eyebrow{font-family:'JetBrains Mono', monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+    .mega{font-family:'Barlow Condensed', sans-serif;font-size:clamp(46px, 9vw, 82px);line-height:.9;font-weight:800;text-transform:uppercase;color:var(--gold);max-width:600px;margin-top:12px}
+    .intro{max-width:640px;color:#fff;font-size:18px;line-height:1.45;margin-top:18px}
+    .intro span{color:var(--gold);font-weight:700}
+    .badge{position:absolute;top:26px;right:24px;z-index:3;width:96px;height:96px;border-radius:999px;border:3px solid var(--gold);background:linear-gradient(180deg,#274861,#0B2A42);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+    .badge-core{font-family:'JetBrains Mono', monospace;color:var(--gold);font-size:13px;font-weight:700;text-align:center;line-height:1.2}
+
+    .section{padding:28px 6px 0}
+    .section-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .sec-no{font-family:'JetBrains Mono', monospace;font-size:14px;color:var(--ember);font-weight:700}
+    .sec-title{font-family:'Barlow Condensed', sans-serif;font-size:32px;line-height:1;text-transform:uppercase;color:var(--navy);font-weight:800}
+    .sec-line{height:1px;background:var(--border);flex:1}
+    .card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+    .card-sand{background:var(--sand);border:1px solid var(--border2);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+    .body{font-size:17px;color:var(--navy)}
+    .body b{font-weight:700}
+
+    .problem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .problem-box{border-radius:16px;padding:16px;text-align:center;border:1px solid var(--border)}
+    .problem-box.ok{background:#EFF6EF;border-color:#CFE3CF}
+    .problem-box.bad{background:#FCEBEB;border-color:#F3CFCF}
+    .problem-mark{font-size:26px;font-weight:800}
+    .problem-label{font-family:'JetBrains Mono',monospace;font-size:11.5px;text-transform:uppercase;margin-top:6px;color:var(--navy)}
+
+    .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .feature-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center}
+    .feature-icon{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;color:var(--ember)}
+    .feature-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;margin-top:6px;color:var(--sea);font-weight:700}
+
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .stat-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}
+    .stat-num{font-family:'Barlow Condensed', sans-serif;font-size:34px;line-height:1;color:var(--ember);font-weight:800}
+    .stat-label{font-family:'JetBrains Mono', monospace;font-size:10.5px;text-transform:uppercase;color:var(--sea);font-weight:700;margin-top:6px}
+
+    .zone-row{display:grid;grid-template-columns:90px 1fr 70px;gap:12px;align-items:center;margin:12px 0}
+    .zone-name{font-family:'Barlow Condensed', sans-serif;font-weight:700;font-size:16px;text-transform:uppercase}
+    .zone-track{height:16px;background:var(--sand);border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+    .zone-fill{height:100%;border-radius:999px}
+    .zone-value{font-family:'JetBrains Mono', monospace;font-weight:700;font-size:13px;text-align:right}
+
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .step-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px}
+    .step-no{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:32px;color:var(--gold);-webkit-text-stroke:1.5px var(--navy)}
+    .step-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:19px;margin-top:6px}
+    .step-body{font-size:14px;color:#5b6d79;margin-top:6px}
+
+    .cta{background:var(--navy);border-radius:22px;padding:30px 26px;color:#fff;text-align:center}
+    .cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:30px;color:var(--gold);margin-bottom:10px}
+    .cta-body{font-size:15.5px;color:#d7dee4;max-width:520px;margin:0 auto}
+    .cta-note{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--gold);text-transform:uppercase;margin-top:16px;letter-spacing:.04em}
+
+    .footer{margin-top:26px;background:var(--navy);color:#fff;border-radius:20px;padding:16px 18px;display:flex;justify-content:space-between;gap:14px;font-family:'JetBrains Mono', monospace;font-size:11px;text-transform:uppercase;flex-wrap:wrap}
+
+    @media (max-width: 760px) {
+      .hero,.hero-inner{min-height:380px}
+      .badge{width:78px;height:78px}
+      .mega{font-size:48px}
+      .problem-row,.feature-grid,.stat-row,.steps{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="badge"><div class="badge-core">STRAVA<br>DASHBOARD</div></div>
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">— PRODOTTO · STRAVA DASHBOARD</div>
+          <div class="mega">I TUOI KM<br>DICONO TUTTO</div>
+        </div>
+        <p class="intro">Hai migliaia di chilometri registrati su Strava e <span>zero insight</span>. La Strava Dashboard trasforma il tuo storico in intelligenza ciclistica: zone HR, coach AI, numero di Eddington, top ride — pronta in 24h.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">01</div><div class="sec-title">Il problema</div><div class="sec-line"></div></div>
+      <div class="problem-row">
+        <div class="problem-box ok"><div class="problem-mark">✓</div><div class="problem-label">Dati registrati</div></div>
+        <div class="problem-box bad"><div class="problem-mark">✗</div><div class="problem-label">Analisi reale</div></div>
+        <div class="problem-box bad"><div class="problem-mark">✗</div><div class="problem-label">Decisioni smart</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">02</div><div class="sec-title">Cosa include</div><div class="sec-line"></div></div>
+      <div class="feature-grid">
+        <div class="feature-box"><div class="feature-icon">HR</div><div class="feature-label">Zone HR</div></div>
+        <div class="feature-box"><div class="feature-icon">AI</div><div class="feature-label">Coach AI</div></div>
+        <div class="feature-box"><div class="feature-icon">E</div><div class="feature-label">Eddington</div></div>
+        <div class="feature-box"><div class="feature-icon">TOP</div><div class="feature-label">Top Rides</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">03</div><div class="sec-title">Un esempio reale</div><div class="sec-line"></div></div>
+      <div class="card">
+        <div class="stat-row" style="margin-bottom:20px;">
+          <div class="stat-box"><div class="stat-num">1.049</div><div class="stat-label">Uscite</div></div>
+          <div class="stat-box"><div class="stat-num">68.862</div><div class="stat-label">Km totali</div></div>
+          <div class="stat-box"><div class="stat-num">2.534h</div><div class="stat-label">Ore in sella</div></div>
+          <div class="stat-box"><div class="stat-num">E=109</div><div class="stat-label">Eddington</div></div>
+        </div>
+        <div class="zone-row"><div class="zone-name" style="color:var(--sea)">Z1</div><div class="zone-track"><div class="zone-fill" style="width:6.8%; background:var(--sea)"></div></div><div class="zone-value">6,8%</div></div>
+        <div class="zone-row"><div class="zone-name" style="color:#2E8B57">Z2</div><div class="zone-track"><div class="zone-fill" style="width:53.3%; background:#2E8B57"></div></div><div class="zone-value">53,3%</div></div>
+        <div class="zone-row"><div class="zone-name" style="color:var(--gold)">Z3</div><div class="zone-track"><div class="zone-fill" style="width:32%; background:var(--gold)"></div></div><div class="zone-value">32,0%</div></div>
+        <div class="zone-row"><div class="zone-name" style="color:var(--ember)">Z4</div><div class="zone-track"><div class="zone-fill" style="width:7.8%; background:var(--ember)"></div></div><div class="zone-value">7,8%</div></div>
+        <div class="zone-row"><div class="zone-name" style="color:#791F1F">Z5</div><div class="zone-track"><div class="zone-fill" style="width:0.1%; background:#791F1F"></div></div><div class="zone-value">0,1%</div></div>
+        <p class="body" style="margin-top:16px; font-size:14.5px; color:#5b6d79;">Coach AI su questo storico: <b>LTHR 146 bpm</b>, polarizzazione 62% Z1-Z2 / 38% Z3+ → raccomandazione: più uscite Z2 oltre 3h, 8 ride oltre 110km per portare l'Eddington a 110.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">04</div><div class="sec-title">Come funziona</div><div class="sec-line"></div></div>
+      <div class="steps">
+        <div class="step-box"><div class="step-no">01</div><div class="step-title">Esporta</div><div class="step-body">Scarica il tuo storico completo da Strava: un click, un file zip.</div></div>
+        <div class="step-box"><div class="step-no">02</div><div class="step-title">Invia</div><div class="step-body">Mandi il file. Elaboriamo tutti i tuoi dati.</div></div>
+        <div class="step-box"><div class="step-no">03</div><div class="step-title">Ricevi</div><div class="step-body">La tua dashboard personalizzata, pronta in 24h.</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="cta">
+        <div class="cta-title">Vuoi la tua dashboard?</div>
+        <p class="cta-body">Scarica il tuo storico da Strava, invialo e ricevi la tua dashboard personalizzata in 24h. Dati reali, non medie generiche.</p>
+        <div class="cta-note">5 moduli analisi · 24h consegna · 100% dati tuoi</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>STRAVA DASHBOARD · ZD BIKE</div>
+      <div>DATI REALI · NESSUNA MEDIA GENERICA</div>
+    </footer>
+  </main>
+</body>
+</html>

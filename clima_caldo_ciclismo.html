@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Caldo che Ferma le Pedalate: clima e attività fisica — ZD Bike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0B2A42; --sea:#155A82; --ember:#E15A2C; --gold:#F0B429;
+    --sand:#F4EFE3; --border:#E4DDC9; --border2:#E9E3D3;
+    --shadow:0 18px 45px rgba(11,42,66,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--sand);color:var(--navy);font-family:Inter,sans-serif;line-height:1.55}
+  a{color:var(--ember)}
+  a:hover{color:var(--sea)}
+  .page{width:min(880px, calc(100vw - 24px));margin:0 auto;padding:0 0 40px}
+  .hero{position:relative;min-height:420px;border-radius:0 0 28px 28px;overflow:hidden;background:radial-gradient(circle at 25% 15%, #B8460E 0%, #0B2A42 55%, #05141F 100%)}
+  .hero-inner{position:relative;z-index:2;padding:34px 30px 28px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between}
+  .eyebrow{font-family:'JetBrains Mono', monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .mega{font-family:'Barlow Condensed', sans-serif;font-size:clamp(40px, 8vw, 72px);line-height:.92;font-weight:800;text-transform:uppercase;color:var(--gold);max-width:640px;margin-top:12px}
+  .intro{max-width:640px;color:#fff;font-size:18px;line-height:1.45;margin-top:18px}
+  .intro span{color:var(--gold);font-weight:700}
+  .badge{position:absolute;top:26px;right:24px;z-index:3;width:96px;height:96px;border-radius:999px;border:3px solid var(--gold);background:linear-gradient(180deg,#274861,#0B2A42);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+  .badge-core{font-family:'JetBrains Mono', monospace;color:var(--gold);font-size:13px;font-weight:700;text-align:center;line-height:1.2}
+  .section{padding:28px 6px 0}
+  .section-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .sec-no{font-family:'JetBrains Mono', monospace;font-size:14px;color:var(--ember);font-weight:700}
+  .sec-title{font-family:'Barlow Condensed', sans-serif;font-size:32px;line-height:1;text-transform:uppercase;color:var(--navy);font-weight:800}
+  .sec-line{height:1px;background:var(--border);flex:1}
+  .card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .card-sand{background:var(--sand);border:1px solid var(--border2);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .body{font-size:17px;color:var(--navy)}
+  .body b{font-weight:700}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .stat-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}
+  .stat-num{font-family:'Barlow Condensed', sans-serif;font-size:34px;line-height:1;color:var(--ember);font-weight:800}
+  .stat-label{font-family:'JetBrains Mono', monospace;font-size:11px;text-transform:uppercase;color:var(--sea);font-weight:700;margin-top:6px}
+  .bmi-row{display:flex;align-items:center;gap:14px;margin:14px 0}
+  .bmi-year{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--sea);width:150px;flex:0 0 auto}
+  .bmi-track{flex:1;height:18px;background:var(--sand);border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+  .bmi-fill{height:100%;background:var(--ember);border-radius:999px}
+  .bmi-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;width:64px;text-align:right}
+  .aero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .aero-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}
+  .aero-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sea)}
+  .aero-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;color:var(--navy);margin-top:6px}
+  .risk{border-left:4px solid var(--ember);background:#fff;border:1px solid var(--border);border-left-width:4px;padding:16px 18px;font-size:14.5px;color:#3A4550}
+  .risk b{color:var(--navy)}
+  .duel{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+  .rider{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px;text-align:center}
+  .rider-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:20px}
+  .rider-stat{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sea);margin-top:6px}
+  .rider-watt{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:30px;color:var(--ember);margin-top:8px}
+  .vs{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;color:var(--gold);-webkit-text-stroke:1px var(--navy)}
+  .rtable{width:100%;border-collapse:collapse;font-size:13.5px}
+  .rtable th{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;color:var(--sea);text-align:left;padding:8px 6px;border-bottom:2px solid var(--border)}
+  .rtable td{padding:9px 6px;border-bottom:1px solid var(--border2)}
+  .rtable td.num{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;color:var(--ember)}
+  .rtable tr:last-child td{border-bottom:none}
+  .checklist-like p{margin:0 0 10px}
+  .footer{margin-top:26px;background:var(--navy);color:#fff;border-radius:20px;padding:16px 18px;display:flex;justify-content:space-between;gap:14px;font-family:'JetBrains Mono', monospace;font-size:11px;text-transform:uppercase;flex-wrap:wrap}
+  @media (max-width: 760px) {
+    .hero,.hero-inner{min-height:420px}
+    .badge{width:78px;height:78px}
+    .mega{font-size:42px}
+    .stat-row,.aero-grid{grid-template-columns:1fr 1fr}
+    .duel{grid-template-columns:1fr}
+    .vs{text-align:center}
+    .bmi-year{width:110px}
+  }
+</style>
+</head>
+<body>
+  <div style="background:#0B2A42; padding:18px 24px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="images/logo.png" alt="Logo ZD Bike" style="width:30px; height:30px; border-radius:50%; border:3px solid #F0B429; object-fit:cover;"/>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:17px; letter-spacing:0.02em; color:#fff; text-transform:uppercase;">ZD Bike</div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:11px; letter-spacing:0.08em; color:#F0B429; text-transform:uppercase;">Newsletter N.11</div>
+  </div>
+  <main class="page">
+    <section class="hero">
+      <div class="badge"><div class="badge-core">&gt;27,8°C</div></div>
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">— DATI GLOBALI · CLIMA E ATTIVITÀ FISICA</div>
+          <div class="mega">IL CALDO CHE<br>FERMA LE PEDALATE</div>
+        </div>
+        <p class="intro">Uno studio su <span>156 paesi</span> e 23 anni di dati mostra che oltre i <span>27,8°C</span> di media mensile l'inattività fisica sale in modo misurabile — con proiezioni al 2050 che riguardano da vicino chi si allena e va in bici all'aperto.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">01</div><div class="sec-title">Lo studio: 156 paesi, 23 anni</div><div class="sec-line"></div></div>
+      <div class="card">
+        <p class="body">Pubblicato su <b>The Lancet Global Health</b> (aprile 2026), lo studio di García-Witulski, Rabassa, Melo e Sarmiento incrocia due decenni di dati climatici con le stime OMS sull'inattività fisica adulta, su un panel bilanciato di <b>3.588 osservazioni paese-anno</b> dal 2000 al 2022.</p>
+        <div class="stat-row" style="margin-top:16px;">
+          <div class="stat-box"><div class="stat-num">156</div><div class="stat-label">Paesi analizzati</div></div>
+          <div class="stat-box"><div class="stat-num">25,7%</div><div class="stat-label">Adulti sotto le linee guida OMS</div></div>
+          <div class="stat-box"><div class="stat-num">5,7M</div><div class="stat-label">Persone nei sondaggi di base</div></div>
+        </div>
+        <p class="body" style="margin-top:16px;">Il modello isola l'effetto delle variazioni di temperatura anno su anno all'interno dello stesso paese — non le differenze medie tra un clima e l'altro — controllando per pioggia, nuvolosità, umidità, PM2,5, PIL pro capite e mortalità generale. Per chi pedala all'aperto, questo è il primo tentativo di quantificare quanto il caldo tolga effettivamente attività fisica su scala globale, non solo aneddoticamente.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">02</div><div class="sec-title">La soglia: oltre 27,8°C si rompe l'equilibrio</div><div class="sec-line"></div></div>
+      <div class="card-sand">
+        <p class="body">I ricercatori hanno diviso le temperature mensili in 5 fasce. Solo la più calda mostra un effetto netto e significativo sull'inattività:</p>
+        <div class="bmi-row" style="margin-top:16px;"><div class="bmi-year">&lt;4,2°C (rif.)</div><div class="bmi-track"><div class="bmi-fill" style="width:6%; background:var(--sea)"></div></div><div class="bmi-val">base</div></div>
+        <div class="bmi-row"><div class="bmi-year">4,2–13,4°C</div><div class="bmi-track"><div class="bmi-fill" style="width:10%; background:var(--sea)"></div></div><div class="bmi-val">n.s.</div></div>
+        <div class="bmi-row"><div class="bmi-year">13,4–21,8°C</div><div class="bmi-track"><div class="bmi-fill" style="width:12%; background:var(--sea)"></div></div><div class="bmi-val">n.s.</div></div>
+        <div class="bmi-row"><div class="bmi-year">21,8–27,8°C</div><div class="bmi-track"><div class="bmi-fill" style="width:38%"></div></div><div class="bmi-val">p&lt;0,10</div></div>
+        <div class="bmi-row"><div class="bmi-year">&gt;27,8°C</div><div class="bmi-track"><div class="bmi-fill" style="width:100%"></div></div><div class="bmi-val">+1,44 pp</div></div>
+        <p class="body" style="margin-top:8px; font-size:14.5px; color:#5b6d79;">Ogni mese aggiuntivo sopra questa soglia aumenta la prevalenza di inattività fisica di <b>1,44 punti percentuali</b> a livello globale (IC 95% 0,49–2,39), rispetto alla fascia più fredda di riferimento. n.s. = non significativo.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">03</div><div class="sec-title">Il divario ricco-povero: chi paga di più il caldo</div><div class="sec-line"></div></div>
+      <div class="card">
+        <div class="duel">
+          <div class="rider">
+            <div class="rider-name">Paesi ricchi</div>
+            <div class="rider-stat">Alto reddito</div>
+            <div class="rider-watt">≈0</div>
+            <div class="rider-stat">Effetto quasi nullo</div>
+          </div>
+          <div class="vs">VS</div>
+          <div class="rider">
+            <div class="rider-name">Paesi a reddito basso/medio</div>
+            <div class="rider-stat">LMIC</div>
+            <div class="rider-watt">+1,85 pp</div>
+            <div class="rider-stat">Per mese &gt;27,8°C</div>
+          </div>
+        </div>
+        <p class="body" style="margin-top:16px; text-align:center; font-size:14.5px; color:#5b6d79;">Nei paesi ad alto reddito quasi nessuna fascia di temperatura sposta l'inattività in modo rilevante — probabilmente grazie ad aria condizionata, palestre indoor e infrastrutture ombreggiate. Chi non ha accesso a spazi climatizzati per allenarsi paga il conto più salato: l'effetto del caldo estremo, in questi contesti, è quasi doppio rispetto alla media globale.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">04</div><div class="sec-title">Chi risente di più del caldo</div><div class="sec-line"></div></div>
+      <div class="aero-grid">
+        <div class="aero-box"><div class="aero-num">1,69 pp</div><div class="aero-label">Donne, effetto oltre 27,8°C (vs 1,18 pp uomini)</div></div>
+        <div class="aero-box"><div class="aero-num">2,75 pp</div><div class="aero-label">Paesi a popolazione più anziana</div></div>
+        <div class="aero-box"><div class="aero-num">6,47 pp</div><div class="aero-label">Paesi dal clima storicamente freddo, non abituati al caldo</div></div>
+      </div>
+      <p class="body" style="margin-top:16px;">Il dato più controintuitivo: i paesi con clima medio storicamente più freddo (&lt;15°C) mostrano un crollo di attività fisica 4-5 volte più marcato quando superano la soglia critica, rispetto alla media globale — segno che l'acclimatazione al caldo, non solo il caldo in sé, è decisiva. Per un ciclista, questo significa che un'ondata di calore anomala pesa di più proprio dove non si è allenati a gestirla.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">05</div><div class="sec-title">Proiezioni al 2050: tre scenari</div><div class="sec-line"></div></div>
+      <div class="card-sand">
+        <div class="bmi-row"><div class="bmi-year">SSP1-2.6 (basse emissioni)</div><div class="bmi-track"><div class="bmi-fill" style="width:56%; background:var(--sea)"></div></div><div class="bmi-val">+0,98 pp</div></div>
+        <div class="bmi-row"><div class="bmi-year">SSP2-4.5 (intermedio)</div><div class="bmi-track"><div class="bmi-fill" style="width:70%; background:var(--gold)"></div></div><div class="bmi-val">+1,22 pp</div></div>
+        <div class="bmi-row"><div class="bmi-year">SSP5-8.5 (alte emissioni)</div><div class="bmi-track"><div class="bmi-fill" style="width:100%"></div></div><div class="bmi-val">+1,75 pp</div></div>
+        <p class="body" style="margin-top:8px;">In tutti e tre gli scenari l'aumento è statisticamente significativo (p&lt;0,01). La differenza tra lo scenario più virtuoso e quello più inquinante equivale quasi a raddoppiare l'impatto sull'inattività fisica globale entro il 2050 — con hotspot che superano <b>4 punti percentuali</b> in America Centrale, Caraibi, Africa sub-sahariana orientale e sud-est asiatico equatoriale.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">06</div><div class="sec-title">Mortalità attribuibile per regione (per 100.000 ab.)</div><div class="sec-line"></div></div>
+      <div class="card">
+        <table class="rtable">
+          <tr><th>Regione</th><th>SSP1-2.6</th><th>SSP2-4.5</th><th>SSP5-8.5</th></tr>
+          <tr><td>America Latina e Caraibi</td><td class="num">4,6</td><td class="num">4,6</td><td class="num">12,0</td></tr>
+          <tr><td>Asia orientale e Pacifico</td><td class="num">1,9</td><td class="num">2,1</td><td class="num">3,4</td></tr>
+          <tr><td>Africa sub-sahariana</td><td class="num">6,6</td><td class="num">9,5</td><td class="num">13,0</td></tr>
+          <tr><td>Medio Oriente e Nord Africa</td><td class="num">4,4</td><td class="num">5,4</td><td class="num">7,6</td></tr>
+          <tr><td>Nord America</td><td class="num">2,2</td><td class="num">4,0</td><td class="num">5,8</td></tr>
+          <tr><td>Sud Asia</td><td class="num">3,9</td><td class="num">4,7</td><td class="num">5,1</td></tr>
+          <tr><td>Europa e Asia centrale</td><td class="num">5,6</td><td class="num">7,1</td><td class="num">9,3</td></tr>
+        </table>
+        <p class="body" style="margin-top:16px; font-size:14.5px; color:#5b6d79;">L'Africa sub-sahariana e l'America Latina/Caraibi mostrano gli aumenti di mortalità attribuibile all'inattività fisica più marcati sotto lo scenario ad alte emissioni; Europa e Nord America restano su livelli più contenuti ma comunque in crescita.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">07</div><div class="sec-title">Il conto: morti e produttività perse</div><div class="sec-line"></div></div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-num">0,47–0,70M</div><div class="stat-label">Morti aggiuntive/anno al 2050</div></div>
+        <div class="stat-box"><div class="stat-num">2,40–3,68</div><div class="stat-label">Miliardi $ persi/anno</div></div>
+        <div class="stat-box"><div class="stat-num">54,8%</div><div class="stat-label">Perdite su paesi a reddito medio (SSP5-8.5)</div></div>
+      </div>
+      <p class="body" style="margin-top:16px;">Questo incremento equivale al <b>7,19–10,73%</b> delle morti già attribuite all'inattività fisica nel 2022 (6,52 milioni) e al <b>5,12–7,85%</b> delle perdite di produttività 2022 (46,92 miliardi di dollari). Non è un rischio lontano: è un aggravamento misurabile di un problema di salute pubblica già enorme, calcolato con un approccio a costo di frizione calibrato su PIL e occupazione di ogni paese.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">08</div><div class="sec-title">Cosa c'entra con chi va in bici</div><div class="sec-line"></div></div>
+      <div class="risk">
+        Lo studio misura l'inattività fisica in generale, non il ciclismo nello specifico — ma il meccanismo descritto è esattamente quello che ogni ciclista conosce: <b>sopra una certa soglia di caldo, le "ore termicamente sicure" per allenarsi si comprimono</b>, lo sforzo percepito sale, il rischio cardiovascolare aumenta e le uscite saltano. Gli autori parlano esplicitamente di erosione dell'attività fisica abituale e di riduzione delle finestre sicure per l'esercizio. Chi si allena all'aperto — in strada, in MTB, in gravel — è tra i primi a sentire questo effetto, specie nelle ore centrali della giornata in estate.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="sec-no">09</div><div class="sec-title">Adattarsi: cosa suggeriscono i dati</div><div class="sec-line"></div></div>
+      <div class="card">
+        <p class="body">Gli autori indicano tre priorità di adattamento a livello di politiche pubbliche, che si traducono in altrettante abitudini pratiche per chi pedala:</p>
+        <div class="checklist-like" style="margin-top:14px;">
+          <p class="body"><b>1. Progettazione urbana heat-adaptive.</b> Piste ciclabili ombreggiate, corridoi verdi, fontanelle: dove esistono, le uscite estive restano praticabili più a lungo nella giornata. È un argomento in più per chiedere infrastrutture ciclabili pensate anche per il caldo, non solo per la sicurezza dal traffico.</p>
+          <p class="body"><b>2. Strutture climatizzate accessibili.</b> Lo studio nota che l'assenza quasi totale di effetto nei paesi ricchi è legata anche alla disponibilità di ambienti indoor climatizzati. Uno smart trainer in un ambiente fresco è, nei mesi più caldi, un sostituto a tutti gli effetti dell'uscita su strada — non un ripiego.</p>
+          <p class="body"><b>3. Comunicazione del rischio da caldo.</b> Spostare gli allenamenti chiave alle prime ore del mattino o alla sera, monitorare temperatura e umidità come si monitora la pioggia, e trattare le allerte-caldo con la stessa serietà di un'allerta meteo avversa.</p>
+        </div>
+        <p class="body" style="margin-top:16px; color:#5b6d79; font-size:14.5px;">In sintesi: il caldo estremo non è solo un fastidio da gestire con più borracce — è, su scala globale, il fattore climatico che più di ogni altro sta già spegnendo l'attività fisica delle persone. Allenarsi con intelligenza nelle ore giuste non è solo una scelta di comfort, ma la stessa leva che lo studio individua per intere popolazioni.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>FONTE · GARCÍA-WITULSKI ET AL., THE LANCET GLOBAL HEALTH 2026;14:E500–11</div>
+      <div>PANEL DI 156 PAESI, 2000–2022 · NON È UN PROTOCOLLO MEDICO</div>
+    </footer>
+  </main>
+</body>
+</html>

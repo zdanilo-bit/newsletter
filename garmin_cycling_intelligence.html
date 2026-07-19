@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garmin Cycling Intelligence | Newsletter VO2 Max</title>
+<meta name="description" content="Newsletter visuale sui trend globali del ciclismo Garmin, con grafici su Italia, salita, FTP e VO2 max.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --road: oklch(0.175 0.012 235);
+  --road-2: oklch(0.235 0.014 235);
+  --paper: oklch(0.965 0.011 88);
+  --paper-2: oklch(0.915 0.015 88);
+  --ink: oklch(0.185 0.014 235);
+  --muted: oklch(0.47 0.016 235);
+  --line: oklch(0.78 0.018 88);
+  --lime: oklch(0.79 0.17 125);
+  --lime-soft: oklch(0.9 0.08 125);
+  --amber: oklch(0.76 0.16 70);
+  --coral: oklch(0.68 0.18 28);
+  --cyan: oklch(0.72 0.13 205);
+  --blue: oklch(0.47 0.13 245);
+  --shadow: 0 20px 70px oklch(0.18 0.014 235 / 0.16);
+  --sans: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --display: "Barlow Condensed", "Arial Narrow", var(--sans);
+  --wrap: min(1120px, calc(100vw - 32px));
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, oklch(0.2 0.012 235 / 0.05) 1px, transparent 1px) 0 0 / 80px 80px,
+    var(--paper);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; }
+p, h1, h2, h3 { margin: 0; }
+a { color: inherit; }
+
+.hero {
+  position: relative;
+  min-height: 96vh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  color: oklch(0.965 0.01 88);
+  background: var(--road);
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, oklch(0.12 0.015 235 / 0.93) 0%, oklch(0.12 0.015 235 / 0.68) 42%, oklch(0.12 0.015 235 / 0.22) 78%),
+    linear-gradient(0deg, oklch(0.12 0.015 235 / 0.9) 0%, transparent 56%);
+  z-index: 2;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -28px;
+  background: url("images/ciclisti.jpeg") center / cover no-repeat;
+  filter: blur(20px) saturate(0.92);
+  transform: scale(1.04);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+  opacity: 0.94;
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(34px, 7vw, 92px) 0;
+}
+
+.brand-lockup {
+  position: absolute;
+  z-index: 4;
+  top: clamp(18px, 3vw, 36px);
+  left: max(16px, calc((100vw - 1120px) / 2));
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: oklch(0.96 0.01 88);
+  font-weight: 800;
+}
+
+.brand-lockup img {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  box-shadow: 0 16px 44px oklch(0.08 0.02 235 / 0.36);
+}
+
+.brand-lockup span {
+  display: block;
+  max-width: 140px;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 42px;
+  height: 3px;
+  background: var(--lime);
+}
+
+h1 {
+  max-width: 850px;
+  margin-top: 22px;
+  font-family: var(--display);
+  font-size: clamp(4.2rem, 12vw, 11rem);
+  line-height: 0.82;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 span { display: block; }
+
+.hero-copy {
+  max-width: 660px;
+  margin-top: 28px;
+  font-size: clamp(1.08rem, 1.8vw, 1.38rem);
+  color: oklch(0.91 0.014 88);
+}
+
+.hero-strip {
+  position: relative;
+  z-index: 4;
+  border-top: 1px solid oklch(0.88 0.012 88 / 0.24);
+  background: oklch(0.13 0.015 235 / 0.72);
+}
+
+.hero-strip .wrap {
+  width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.signal {
+  padding: 18px 20px 22px 0;
+  border-right: 1px solid oklch(0.88 0.012 88 / 0.18);
+}
+
+.signal:last-child { border-right: 0; }
+.signal b {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.9;
+  color: var(--lime);
+}
+.signal span {
+  display: block;
+  margin-top: 8px;
+  color: oklch(0.84 0.012 88);
+  font-size: 0.86rem;
+}
+
+.section {
+  width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(64px, 10vw, 124px) 0;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(280px, 1.2fr);
+  gap: clamp(28px, 6vw, 78px);
+  align-items: end;
+  margin-bottom: clamp(36px, 7vw, 70px);
+}
+
+.section-kicker {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: var(--blue);
+}
+
+h2 {
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.lead {
+  max-width: 720px;
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+  color: var(--muted);
+}
+
+.datagrid {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: clamp(22px, 4vw, 44px);
+  align-items: start;
+}
+
+.panel {
+  background: oklch(0.988 0.006 88);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-title {
+  font-family: var(--display);
+  font-size: 1.65rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.unit {
+  font-weight: 800;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.chart { padding: 24px; }
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 120px minmax(120px, 1fr) 82px;
+  gap: 16px;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.bar-label { font-weight: 800; }
+.bar-track {
+  height: 18px;
+  background: var(--paper-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), var(--lime));
+}
+.bar-value {
+  font-family: var(--display);
+  font-size: 1.55rem;
+  text-align: right;
+}
+
+.note {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.stat-wall {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stat {
+  min-height: 165px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  border-radius: 8px;
+  color: oklch(0.96 0.011 88);
+  background: var(--road-2);
+}
+
+.stat:nth-child(2) { background: var(--blue); }
+.stat:nth-child(3) { background: var(--coral); }
+.stat:nth-child(4) { background: oklch(0.32 0.08 125); }
+.stat b {
+  font-family: var(--display);
+  font-size: clamp(2.9rem, 5vw, 4.8rem);
+  line-height: 0.82;
+}
+.stat span { font-weight: 700; }
+
+.method-band {
+  background: var(--road);
+  color: var(--paper);
+}
+
+.method-band .section {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(28px, 6vw, 74px);
+  align-items: start;
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(56px, 8vw, 96px);
+}
+
+.method-band h2 {
+  color: var(--lime);
+}
+
+.method-band .lead {
+  color: oklch(0.84 0.014 88);
+}
+
+.method-list {
+  display: grid;
+  gap: 1px;
+  border: 1px solid oklch(0.88 0.012 88 / 0.18);
+  background: oklch(0.88 0.012 88 / 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.method-item {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 18px;
+  padding: 22px;
+  background: oklch(0.18 0.014 235);
+}
+
+.method-item b {
+  font-family: var(--display);
+  font-size: 2.4rem;
+  line-height: 0.9;
+  color: var(--amber);
+}
+
+.method-item span {
+  color: oklch(0.86 0.012 88);
+  font-weight: 700;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.insight {
+  min-height: 230px;
+  padding: 24px;
+  background: oklch(0.988 0.006 88);
+}
+
+.insight h3 {
+  font-family: var(--display);
+  font-size: 2rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.insight p {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.mini-chart {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.mini-row {
+  display: grid;
+  grid-template-columns: 118px 1fr 64px;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.mini-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.mini-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--coral);
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: clamp(24px, 4vw, 44px);
+  align-items: stretch;
+  margin-top: 34px;
+}
+
+.time-panel {
+  padding: 26px;
+}
+
+.time-panel h3 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.time-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.time-metric {
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--paper-2);
+}
+
+.time-metric b {
+  display: block;
+  font-family: var(--display);
+  font-size: 2.5rem;
+  line-height: 0.9;
+  color: var(--blue);
+}
+
+.time-metric span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.speed-table {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.speed-row {
+  display: grid;
+  grid-template-columns: 1fr 90px;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+}
+
+.speed-row b {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  line-height: 1;
+  text-align: right;
+  color: var(--coral);
+}
+
+.ribbon {
+  background: var(--road);
+  color: var(--paper);
+}
+.ribbon .section { padding-top: clamp(70px, 10vw, 132px); }
+.ribbon h2 { color: var(--lime); }
+.ribbon .lead { color: oklch(0.84 0.015 88); }
+
+.altitude {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(24px, 5vw, 56px);
+  align-items: center;
+}
+
+.mountain-panel {
+  position: relative;
+  min-height: 520px;
+  padding: 28px;
+  border: 1px solid oklch(0.85 0.012 88 / 0.24);
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 70% 20%, oklch(0.72 0.16 70 / 0.18), transparent 28%),
+    oklch(0.205 0.016 235);
+}
+
+.mountain-panel svg {
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: 78%;
+}
+
+.mountain-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 380px;
+}
+.mountain-copy h3 {
+  font-family: var(--display);
+  font-size: clamp(2.3rem, 5vw, 4.6rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.mountain-copy p {
+  margin-top: 18px;
+  color: oklch(0.84 0.012 88);
+}
+
+.ranking {
+  display: grid;
+  gap: 18px;
+}
+.rank-row {
+  display: grid;
+  grid-template-columns: 92px 1fr 90px;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid oklch(0.88 0.01 88 / 0.18);
+}
+.rank-row strong {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  color: var(--lime);
+}
+.rank-row span { color: oklch(0.9 0.011 88); font-weight: 800; }
+.rank-row em {
+  font-style: normal;
+  text-align: right;
+  color: oklch(0.82 0.012 88);
+  font-weight: 700;
+}
+
+.two-up {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 44px);
+}
+
+.power-card {
+  padding: 28px;
+  min-height: 430px;
+}
+
+.power-card h3 {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.gauge {
+  margin: 34px auto 10px;
+  width: min(360px, 100%);
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.chip {
+  padding: 18px;
+  border-radius: 8px;
+  background: var(--paper-2);
+}
+.chip b {
+  display: block;
+  font-family: var(--display);
+  font-size: 3rem;
+  line-height: 0.9;
+}
+.chip span { color: var(--muted); font-size: 0.9rem; font-weight: 700; }
+
+.vo2 {
+  background:
+    linear-gradient(135deg, oklch(0.81 0.16 125 / 0.92), oklch(0.74 0.13 205 / 0.9)),
+    var(--lime);
+}
+.vo2 .section {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(30px, 7vw, 86px);
+  align-items: center;
+}
+.vo2 h2 { color: var(--road); }
+.vo2 .lead { color: oklch(0.22 0.018 235); }
+
+.formula {
+  margin-top: 32px;
+  padding: 22px;
+  border-radius: 8px;
+  background: oklch(0.98 0.01 88 / 0.74);
+  border: 1px solid oklch(0.33 0.04 235 / 0.18);
+  font-weight: 800;
+}
+.formula small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.recovery-photo {
+  margin-top: 28px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid oklch(0.33 0.04 235 / 0.18);
+  background: oklch(0.98 0.01 88 / 0.74);
+  box-shadow: var(--shadow);
+}
+
+.recovery-photo img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.recovery-photo figcaption {
+  padding: 16px 18px 18px;
+  color: oklch(0.25 0.018 235);
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.vo2-chart {
+  min-height: 420px;
+  padding: 30px;
+  background: oklch(0.98 0.01 88 / 0.78);
+  border: 1px solid oklch(0.33 0.04 235 / 0.18);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.vo2-chart h3 {
+  font-family: var(--display);
+  font-size: 2.4rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.product-strip {
+  width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(64px, 9vw, 112px) 0;
+}
+
+.gear-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 34px;
+}
+
+.gear {
+  min-height: 240px;
+  padding: 24px;
+  background: oklch(0.988 0.006 88);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.gear h3 {
+  font-family: var(--display);
+  font-size: 2rem;
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+.gear p { color: var(--muted); margin-top: 12px; font-size: 0.94rem; }
+.gear b {
+  font-family: var(--display);
+  font-size: 2.8rem;
+  color: var(--blue);
+  line-height: 0.9;
+}
+
+footer {
+  background: var(--road);
+  color: var(--paper);
+  padding: 42px 0;
+}
+footer .wrap {
+  width: var(--wrap);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  color: oklch(0.8 0.012 88);
+  font-size: 0.9rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+@media (max-width: 900px) {
+  .hero-strip .wrap,
+  .datagrid,
+  .altitude,
+  .two-up,
+  .method-band .section,
+  .timeline-grid,
+  .vo2 .section,
+  .section-head {
+    grid-template-columns: 1fr;
+  }
+  .hero-strip .wrap,
+  .stat-wall,
+  .insight-grid,
+  .gear-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .signal { border-bottom: 1px solid oklch(0.88 0.012 88 / 0.18); }
+}
+
+@media (max-width: 560px) {
+  body { background-size: 48px 48px; }
+  .hero { min-height: 92vh; }
+  .hero-bg {
+    object-fit: contain;
+    object-position: center 20%;
+  }
+  .brand-lockup {
+    top: 14px;
+    gap: 10px;
+  }
+  .brand-lockup img {
+    width: 56px;
+    height: 56px;
+  }
+  .brand-lockup span { font-size: 0.95rem; }
+  h1 {
+    max-width: 100%;
+    font-size: clamp(3.1rem, 15.6vw, 4.2rem);
+    line-height: 0.88;
+  }
+  .hero-copy {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+  .hero-strip .wrap,
+  .stat-wall,
+  .insight-grid,
+  .time-metrics,
+  .gear-list,
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+  .method-item {
+    grid-template-columns: 72px 1fr;
+    padding: 18px;
+  }
+  .method-item b { font-size: 1.8rem; }
+  .mini-row { grid-template-columns: 92px 1fr 52px; }
+  .bar-row { grid-template-columns: 90px 1fr 64px; gap: 10px; }
+  .bar-value { font-size: 1.25rem; }
+  .panel-header { flex-direction: column; gap: 8px; }
+  .rank-row { grid-template-columns: 62px 1fr 70px; }
+  footer .wrap { display: block; }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <img class="hero-bg" src="images/ciclisti.jpeg" alt="Gruppo di ciclisti ZDPF Bike davanti al lago con biciclette da strada">
+    <div class="brand-lockup">
+      <img src="images/logo.png" alt="Logo ZDPF Bike">
+      <span>ZDPF Bike Intelligence</span>
+    </div>
+    <div class="hero-inner">
+      <div class="eyebrow">ZDPF Bike x Garmin Data</div>
+      <h1><span>La strada</span><span>misura</span><span>tutto</span></h1>
+      <p class="hero-copy">Dai chilometri medi dell'Italia alla resilienza degli over 60, fino al VO2 max: una newsletter visuale per leggere il ciclismo moderno come un laboratorio a cielo aperto.</p>
+    </div>
+    <aside class="hero-strip" aria-label="Indicatori principali">
+      <div class="wrap">
+        <div class="signal"><b>55,89</b><span>km medi per uscita in Italia, primo posto globale</span></div>
+        <div class="signal"><b>142,7</b><span>minuti medi in sella per sessione italiana</span></div>
+        <div class="signal"><b>519</b><span>metri medi di dislivello in Spagna</span></div>
+        <div class="signal"><b>62</b><span>VO2 max medio degli utenti PRO Garmin</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="method-band" aria-labelledby="method-title">
+    <div class="section">
+      <div>
+        <p class="section-kicker" style="color: var(--amber)">Analisi globale 2026</p>
+        <h2 id="method-title">Non solo hardware, ma lettura dei dati</h2>
+      </div>
+      <div>
+        <p class="lead">Il report nasce dall'elaborazione di dataset aggregati degli utenti Garmin Edge a livello globale. L'obiettivo è leggere lo stato dell'arte del ciclismo 2026: distanze, dinamiche demografiche, FTP, VO2 max, sicurezza e abitudini di guida.</p>
+        <div class="method-list" aria-label="Ambiti analizzati nel report">
+          <div class="method-item"><b>01</b><span>Distanze e benchmark geografici: chi pedala più a lungo e dove.</span></div>
+          <div class="method-item"><b>02</b><span>Pivot demografici: il comportamento cambia con età, tempo disponibile e carico di vita.</span></div>
+          <div class="method-item"><b>03</b><span>Performance fisiologica: FTP e VO2 max come indicatori allenanti e predittivi.</span></div>
+          <div class="method-item"><b>04</b><span>Tecnologia Garmin: Edge, Rally e Varia come rete integrata di dati, potenza e sicurezza.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="trend-title">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Trend globali</p>
+        <h2 id="trend-title">Italia in testa, Europa lunga</h2>
+      </div>
+      <p class="lead">La media globale è 46 chilometri per uscita. Sopra quella soglia, il ciclismo europeo diventa una geografia della distanza: Italia, Belgio e Spagna guidano il gruppo con un margine netto.</p>
+    </div>
+
+    <div class="datagrid">
+      <article class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Distanza media per uscita</h3>
+          <span class="unit">chilometri</span>
+        </div>
+        <div class="chart" aria-label="Grafico a barre della distanza media">
+          <div class="bar-row"><div class="bar-label">Italia</div><div class="bar-track"><div class="bar" style="width:100%"></div></div><div class="bar-value">55,89</div></div>
+          <div class="bar-row"><div class="bar-label">Belgio</div><div class="bar-track"><div class="bar" style="width:95.2%"></div></div><div class="bar-value">53,19</div></div>
+          <div class="bar-row"><div class="bar-label">Spagna</div><div class="bar-track"><div class="bar" style="width:94.4%"></div></div><div class="bar-value">52,78</div></div>
+          <div class="bar-row"><div class="bar-label">Globale</div><div class="bar-track"><div class="bar" style="width:82.3%; background: var(--amber)"></div></div><div class="bar-value">46,00</div></div>
+          <p class="note">Il dato italiano non è solo una supremazia numerica: è un segnale culturale. Si esce più a lungo, e si resta in sella più tempo.</p>
+        </div>
+      </article>
+
+      <aside class="stat-wall" aria-label="Statistiche di contesto">
+        <div class="stat"><span>Tempo in sella, Italia</span><b>142,7</b><span>minuti per sessione</span></div>
+        <div class="stat"><span>Media globale</span><b>115</b><span>minuti per sessione</span></div>
+        <div class="stat"><span>Crescita Belgio</span><b>+3,5%</b><span>anno su anno</span></div>
+        <div class="stat"><span>Picco annuale</span><b>agosto</b><span>mese più attivo</span></div>
+      </aside>
+    </div>
+
+    <div class="insight-grid" aria-label="Dati demografici, crescita e sicurezza">
+      <article class="insight">
+        <h3>Il dip dei 30-49 anni</h3>
+        <p>Le fasce centrali registrano poco più di 43 km medi per uscita. Il report interpreta la flessione come effetto del picco di responsabilità professionali e familiari.</p>
+        <div class="mini-chart" aria-label="Confronto distanze per fascia d'età">
+          <div class="mini-row"><span>30-49 anni</span><div class="mini-track"><div class="mini-fill" style="width:89%"></div></div><span>43+ km</span></div>
+          <div class="mini-row"><span>20-29 anni</span><div class="mini-track"><div class="mini-fill" style="width:100%; background: var(--blue)"></div></div><span>48+ km</span></div>
+          <div class="mini-row"><span>60-69 anni</span><div class="mini-track"><div class="mini-fill" style="width:100%; background: var(--lime)"></div></div><span>48+ km</span></div>
+        </div>
+      </article>
+      <article class="insight">
+        <h3>Località in crescita</h3>
+        <p>Nel 2025 rispetto al 2024 crescono Belgio, Lussemburgo e Taiwan. Più ciclisti significa più densità, più traffico condiviso, più bisogno di consapevolezza situazionale.</p>
+        <div class="mini-chart" aria-label="Incrementi di attività anno su anno">
+          <div class="mini-row"><span>Belgio</span><div class="mini-track"><div class="mini-fill" style="width:100%; background: var(--lime)"></div></div><span>+3,5%</span></div>
+          <div class="mini-row"><span>Lussemburgo</span><div class="mini-track"><div class="mini-fill" style="width:57%; background: var(--amber)"></div></div><span>+2,0%</span></div>
+          <div class="mini-row"><span>Taiwan</span><div class="mini-track"><div class="mini-fill" style="width:49%; background: var(--cyan)"></div></div><span>+1,7%</span></div>
+        </div>
+      </article>
+      <article class="insight">
+        <h3>Sicurezza come dato</h3>
+        <p>Varia Vue registra in 4K e rileva automaticamente gli incidenti. Varia RearVue 820 aggiunge radar, tracciamento dei veicoli e luce visibile fino a 2 km.</p>
+        <div class="mini-chart" aria-label="Tecnologie sicurezza Varia">
+          <div class="mini-row"><span>Varia Vue</span><div class="mini-track"><div class="mini-fill" style="width:78%; background: var(--coral)"></div></div><span>4K</span></div>
+          <div class="mini-row"><span>RearVue 820</span><div class="mini-track"><div class="mini-fill" style="width:100%; background: var(--blue)"></div></div><span>2 km</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="timeline-grid" aria-label="Tempo sul sellino e velocità media">
+      <article class="panel time-panel">
+        <h3>Il lungometraggio della pedalata</h3>
+        <p class="note">La durata media globale è 115 minuti: praticamente un film intero trascorso sui pedali. Gli over 70 arrivano a 134,2 minuti, contro i 111,6 minuti della fascia 20-29.</p>
+        <div class="time-metrics">
+          <div class="time-metric"><b>115</b><span>minuti, media globale</span></div>
+          <div class="time-metric"><b>134,2</b><span>minuti, over 70</span></div>
+          <div class="time-metric"><b>111,6</b><span>minuti, 20-29 anni</span></div>
+        </div>
+        <p class="note">Le abitudini temporali mostrano picchi nelle prime ore del mattino e nel tardo pomeriggio; la domenica resta il giorno d'elezione e agosto il mese di massima intensità annuale.</p>
+      </article>
+
+      <article class="panel time-panel">
+        <h3>Velocità e geografia della performance</h3>
+        <p class="note">La velocità media globale è 23,96 km/h. I giovani conservano il primato della velocità pura, ma la classifica geografica riflette anche infrastrutture e topografia.</p>
+        <div class="speed-table" aria-label="Classifica velocità media per località">
+          <div class="speed-row"><span>Emirati Arabi Uniti</span><b>28,56</b></div>
+          <div class="speed-row"><span>Thailandia</span><b>27,05</b></div>
+          <div class="speed-row"><span>Malesia</span><b>26,92</b></div>
+          <div class="speed-row"><span>Media globale</span><b>23,96</b></div>
+        </div>
+        <p class="note">I valori più alti sono collegati a territori spesso pianeggianti e a investimenti in infrastrutture ciclistiche dedicate, che favoriscono andature costanti.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="ribbon">
+    <div class="section">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker" style="color: var(--amber)">Altimetria</p>
+          <h2>La salita non appartiene ai ventenni</h2>
+        </div>
+        <p class="lead">Il dislivello medio globale è 352,9 metri. I ciclisti tra 20 e 29 anni restano i più veloci, ma la fascia 60-69 anni scala in media 366 metri per uscita. L'endurance verticale, nei dati Garmin, matura con il tempo.</p>
+      </div>
+
+      <div class="altitude">
+        <article class="mountain-panel">
+          <div class="mountain-copy">
+            <h3>366 metri</h3>
+            <p>Dislivello medio degli utenti Garmin tra 60 e 69 anni: una quota paragonabile all'altezza dell'Empire State Building.</p>
+          </div>
+          <svg viewBox="0 0 900 520" role="img" aria-label="Profilo montano stilizzato">
+            <path d="M0 520 L0 380 L125 292 L230 352 L354 188 L470 318 L616 120 L760 280 L900 210 L900 520 Z" fill="oklch(0.33 0.07 125)"/>
+            <path d="M0 520 L0 426 L146 365 L275 414 L430 270 L544 395 L704 218 L900 330 L900 520 Z" fill="oklch(0.24 0.04 205)"/>
+            <path d="M354 188 L398 238 L335 232 Z M616 120 L666 180 L588 172 Z" fill="oklch(0.92 0.02 88 / 0.82)"/>
+            <path d="M86 430 C210 376 300 378 418 326 S690 214 842 254" fill="none" stroke="oklch(0.82 0.17 125)" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+        </article>
+        <div class="ranking" aria-label="Classifica dislivello medio per paese">
+          <div class="rank-row"><strong>01</strong><span>Spagna</span><em>519,37 m</em></div>
+          <div class="rank-row"><strong>02</strong><span>Colombia</span><em>511,4 m</em></div>
+          <div class="rank-row"><strong>03</strong><span>Portogallo</span><em>492,8 m</em></div>
+          <p class="lead">Il dato demografico cambia la narrazione: velocità e salita non sono la stessa performance. La prima premia spesso la giovinezza, la seconda premia continuità, tecnica e gestione dello sforzo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="power-title">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Potenza</p>
+        <h2 id="power-title">FTP: il confine dell'élite</h2>
+      </div>
+      <p class="lead">La Functional Threshold Power è la potenza media sostenibile per circa un'ora. Nei dati Garmin diventa il punto in cui una pedalata smette di essere sensazione e diventa programma.</p>
+    </div>
+
+    <div class="two-up">
+      <article class="panel power-card">
+        <h3>Uomini e donne: soglie medie</h3>
+        <svg class="gauge" viewBox="0 0 360 240" role="img" aria-label="Confronto FTP uomini e donne">
+          <path d="M40 190 A140 140 0 0 1 320 190" fill="none" stroke="oklch(0.88 0.018 88)" stroke-width="30" stroke-linecap="round"/>
+          <path d="M40 190 A140 140 0 0 1 262 78" fill="none" stroke="oklch(0.47 0.13 245)" stroke-width="30" stroke-linecap="round"/>
+          <path d="M40 190 A140 140 0 0 1 220 52" fill="none" stroke="oklch(0.79 0.17 125)" stroke-width="16" stroke-linecap="round"/>
+          <text x="180" y="166" text-anchor="middle" font-family="Barlow Condensed" font-size="64" font-weight="700" fill="oklch(0.185 0.014 235)">224 W</text>
+          <text x="180" y="198" text-anchor="middle" font-family="Manrope" font-size="14" font-weight="800" fill="oklch(0.47 0.016 235)">FTP massima media uomini</text>
+          <text x="64" y="222" font-family="Manrope" font-size="13" font-weight="800" fill="oklch(0.47 0.016 235)">188 W donne</text>
+        </svg>
+        <p class="note">Norvegia, Slovacchia e Repubblica Ceca occupano il vertice della potenza media, tra 228 e 234 watt.</p>
+      </article>
+
+      <article class="panel power-card">
+        <h3>Quando il volume cambia la qualità</h3>
+        <div class="comparison">
+          <div class="chip"><b>220</b><span>watt, media utenti attivi</span></div>
+          <div class="chip"><b>243</b><span>watt, élite oltre 225 km/settimana</span></div>
+        </div>
+        <div class="chart">
+          <div class="bar-row"><div class="bar-label">Norvegia</div><div class="bar-track"><div class="bar" style="width:100%"></div></div><div class="bar-value">234</div></div>
+          <div class="bar-row"><div class="bar-label">Slovacchia</div><div class="bar-track"><div class="bar" style="width:98.7%"></div></div><div class="bar-value">231</div></div>
+          <div class="bar-row"><div class="bar-label">Rep. Ceca</div><div class="bar-track"><div class="bar" style="width:97.4%"></div></div><div class="bar-value">228</div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="vo2" aria-labelledby="vo2-title">
+    <div class="section">
+      <div>
+        <p class="section-kicker">Guida tecnica</p>
+        <h2 id="vo2-title">VO2 max, il motore visibile</h2>
+        <p class="lead">Il valore Garmin è relativo: millilitri di ossigeno per chilo al minuto. Per questo il peso corporeo conta: non come giudizio estetico, ma come rapporto tra capacità aerobica e massa da muovere.</p>
+        <div class="formula">VO2 max da dispositivo x peso corporeo = ml/min assoluti <small>Il dato assoluto racconta la capacità aerobica lorda, quello relativo racconta l'efficienza prestazionale.</small></div>
+        <figure class="recovery-photo">
+          <img src="images/riposo.jpg" alt="Ciclista a riposo su un'amaca in giardino dopo l'allenamento">
+          <figcaption>Il dato serve anche qui: recupero, sonno e continuità sono parte dell'allenamento, non il suo contrario.</figcaption>
+        </figure>
+      </div>
+      <article class="vo2-chart">
+        <h3>Dal ciclista medio al PRO</h3>
+        <svg viewBox="0 0 620 360" role="img" aria-label="Confronto VO2 max medio globale e utenti PRO">
+          <line x1="70" y1="296" x2="560" y2="296" stroke="oklch(0.33 0.04 235 / 0.22)" stroke-width="2"/>
+          <line x1="70" y1="72" x2="70" y2="296" stroke="oklch(0.33 0.04 235 / 0.22)" stroke-width="2"/>
+          <rect x="150" y="122" width="118" height="174" rx="8" fill="oklch(0.47 0.13 245)"/>
+          <rect x="374" y="84" width="118" height="212" rx="8" fill="oklch(0.68 0.18 28)"/>
+          <text x="209" y="108" text-anchor="middle" font-family="Barlow Condensed" font-size="64" font-weight="700" fill="oklch(0.185 0.014 235)">51</text>
+          <text x="433" y="70" text-anchor="middle" font-family="Barlow Condensed" font-size="64" font-weight="700" fill="oklch(0.185 0.014 235)">62</text>
+          <text x="209" y="330" text-anchor="middle" font-family="Manrope" font-size="16" font-weight="800" fill="oklch(0.32 0.018 235)">Media Garmin</text>
+          <text x="433" y="330" text-anchor="middle" font-family="Manrope" font-size="16" font-weight="800" fill="oklch(0.32 0.018 235)">Utenti PRO</text>
+          <path d="M270 158 C310 118 338 110 374 106" fill="none" stroke="oklch(0.185 0.014 235)" stroke-width="3" stroke-dasharray="8 8"/>
+          <text x="312" y="92" text-anchor="middle" font-family="Manrope" font-size="14" font-weight="800" fill="oklch(0.32 0.018 235)">+21,6%</text>
+        </svg>
+        <p class="note">Gli utenti PRO percorrono almeno 257 km a settimana. La differenza non è un dettaglio: è l'effetto cumulativo di volume, recupero e programmazione.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="product-strip" aria-labelledby="gear-title">
+    <p class="section-kicker">Ecosistema</p>
+    <h2 id="gear-title">Dati, autonomia, sicurezza</h2>
+    <div class="gear-list">
+      <article class="gear"><div><h3>Edge 1050</h3><p>Display brillante per lettura in piena luce, pensato per uscite intense.</p></div><b>20 h</b></article>
+      <article class="gear"><div><h3>Edge 1040 Solar</h3><p>Power Glass per ultra-endurance e ricarica solare durante la giornata.</p></div><b>35 h</b></article>
+      <article class="gear"><div><h3>Varia Vue</h3><p>Luce posteriore, videocamera 4K, rilevamento incidenti e salvataggio automatico.</p></div><b>4K</b></article>
+      <article class="gear"><div><h3>RearVue 820</h3><p>Radar, tracciamento dei veicoli e luce visibile fino a lunga distanza.</p></div><b>2 km</b></article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="footer-brand"><img src="images/logo.png" alt="Logo ZDPF Bike"> Newsletter visuale ZDPF Bike basata sul documento Garmin fornito.</span>
+    <span>Trend globali, FTP, VO2 max, sicurezza.</span>
+  </div>
+</footer>
+</body>
+</html>

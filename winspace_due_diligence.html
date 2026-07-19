@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>winspace-cycling-due-diligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#0B2A42;
+      --sea:#155A82;
+      --ember:#E15A2C;
+      --gold:#F0B429;
+      --sand:#F4EFE3;
+      --border:#D9D2BE;
+      --paper:#FCFAF3;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--sand);color:var(--navy);font-family:Inter,sans-serif;line-height:1.6;font-size:15.5px}
+    .page{width:min(760px, calc(100vw - 24px));margin:0 auto;padding:44px 0 60px}
+
+    .memo-head{border-bottom:3px solid var(--navy);padding-bottom:18px;margin-bottom:28px;}
+    .memo-kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ember);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .memo-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:38px;line-height:1.05;color:var(--navy);margin:10px 0 8px}
+    .memo-sub{font-size:16.5px;color:#3A4550;max-width:640px}
+    .memo-meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--sea);text-transform:uppercase;letter-spacing:.04em}
+    .memo-meta b{color:var(--navy)}
+
+    h2.sec{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;letter-spacing:.02em;color:var(--navy);border-left:4px solid var(--ember);padding:2px 0 2px 12px;margin:36px 0 14px}
+    p.body{margin:0 0 12px}
+    p.body b{font-weight:700}
+    p.body:last-child{margin-bottom:0}
+
+    table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--paper);border:1px solid var(--border)}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+    thead th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--sea);background:#EFEADA;font-weight:700}
+    tbody tr:last-child td{border-bottom:none}
+    td.num, th.num{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+    td.hl{color:var(--ember);font-weight:700}
+
+    .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:3px}
+    .tag.high{background:#FCEBEB;color:#C0392B}
+    .tag.mid{background:#FFF3E2;color:#B8720E}
+    .tag.low{background:#EFF6EF;color:#2E7D4F}
+
+    .callout{border-left:4px solid var(--sea);background:var(--paper);border:1px solid var(--border);border-left-width:4px;padding:16px 18px;font-size:14.5px;color:#3A4550;margin-top:6px}
+    .callout b{color:var(--navy)}
+
+    .footer{margin-top:40px;border-top:2px solid var(--navy);padding-top:16px;display:flex;justify-content:space-between;gap:14px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;color:#5b6d79;flex-wrap:wrap}
+
+    @media (max-width: 620px) {
+      .memo-title{font-size:30px}
+      table{font-size:13px}
+      th,td{padding:8px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <div class="memo-head">
+      <div class="memo-kicker"><span>ZD Bike · Due Diligence</span><span>N.06 · Finanza</span></div>
+      <h1 class="memo-title">Winspace Cycling: carbonio a prezzo DTC</h1>
+      <p class="memo-sub">Nota di due diligence sul produttore cinese di telai e ruote in carbonio venduti direct-to-consumer, con margine di prezzo del 50-60% sui marchi occidentali premium.</p>
+      <div class="memo-meta">
+        <span>Settore: <b>Ciclismo / Componentistica</b></span>
+        <span>Modello: <b>DTC verticale</b></span>
+        <span>Dati aggiornati: <b>Giugno 2026</b></span>
+      </div>
+    </div>
+
+    <h2 class="sec">01 · Sintesi</h2>
+    <p class="body">Fondata nel 2008 a Xiamen da Stephen Cai, Winspace controlla l'intera catena produttiva del carbonio, dalla stratificazione all'assemblaggio finale. Oltre 200 dipendenti, 5.000+ telai e 10.000+ coppie di ruote l'anno, distribuiti in oltre 200 negozi e 1.300 rivenditori nel mondo. Prezzi bici $3.299–$6.299, ruote Lún $949–oltre $3.000.</p>
+    <p class="body">Il vantaggio di prezzo è reale e strutturale (integrazione verticale, nessun margine di brand terzo), ma l'esposizione a dazi USA/UE e a un deficit di fiducia "Made in China" nei mercati premium restano nodi aperti.</p>
+
+    <h2 class="sec">02 · Mercato e dimensione</h2>
+    <table>
+      <thead><tr><th>Segmento</th><th class="num">Valore 2024</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td>Bici da strada premium</td><td class="num">2,5–6,4 mld $</td><td>CAGR 5–7,5% stimato al 2030</td></tr>
+        <tr><td>Segmento gravel</td><td class="num">1,68 mld $</td><td>CAGR 9,7% al 2033 — il più rapido del settore</td></tr>
+        <tr><td>Canale DTC (USA)</td><td class="num">~23% vendite</td><td>Canale a crescita più rapida</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">03 · Operatività</h2>
+    <table>
+      <thead><tr><th>Metrica</th><th class="num">Valore</th></tr></thead>
+      <tbody>
+        <tr><td>Telai prodotti/anno</td><td class="num">5.000+</td></tr>
+        <tr><td>Ruote prodotte/anno</td><td class="num">10.000+</td></tr>
+        <tr><td>Rivenditori globali</td><td class="num">1.300+</td></tr>
+        <tr><td>Negozi diretti</td><td class="num">200+</td></tr>
+        <tr><td>Ricavi stimati</td><td class="num">$11–100M</td></tr>
+      </tbody>
+    </table>
+    <p class="body" style="margin-top:12px;">Azienda interamente autofinanziata (bootstrapped), nessun investimento VC identificato. Validazione in gara con il team UCI Women's ProTeam "Winspace Orange Seal" (Tour de France Femmes 2025). Nessun richiamo prodotto o cedimento strutturale documentato.</p>
+
+    <h2 class="sec">04 · Esposizione tariffaria</h2>
+    <table>
+      <thead><tr><th>Giurisdizione</th><th class="num">Dazio attuale</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td>USA</td><td class="num hl">40–46%</td><td>+12,5% possibile da indagine su lavoro forzato aperta giugno 2026</td></tr>
+        <tr><td>Unione Europea</td><td class="num hl">48,5%</td><td>Misura antidumping</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><b>Nota:</b> magazzini in USA e Germania mitigano tempi di consegna e in parte i dazi, ma non li eliminano.</div>
+
+    <h2 class="sec">05 · Forze, debolezze, rischi</h2>
+    <table>
+      <thead><tr><th style="width:22%">Categoria</th><th>Dettaglio</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag low">Forze</span></td><td>Integrazione verticale e controllo qualità a raggi X di grado medico; prezzi DTC nettamente competitivi; validazione in gara UCI ProTeam.</td></tr>
+        <tr><td><span class="tag mid">Debolezze</span></td><td>Deficit di fiducia "Made in China" nei mercati premium occidentali; marchi non registrati in USA/UE; servizio clienti e garanzie carenti.</td></tr>
+        <tr><td><span class="tag low">Opportunità</span></td><td>Crescita del segmento gravel; espansione Asia-Pacifico; potenziale sponsorizzazione WorldTour maschile.</td></tr>
+        <tr><td><span class="tag mid">Minacce</span></td><td>Escalation dazi USA/UE; registrazioni di marchio in malafede da terzi; dipendenza da partner OEM per la proprietà intellettuale.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">06 · Red flags</h2>
+    <table>
+      <thead><tr><th style="width:16%">Livello</th><th>Osservazione</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag high">Alto</span></td><td>Esposizione tariffaria: dazi USA/UE mettono sotto pressione redditività e vantaggio di prezzo.</td></tr>
+        <tr><td><span class="tag mid">Moderato-alto</span></td><td>Vulnerabilità dei marchi: "WINSPACE", "LUN" e "HYPER" non risultano registrati presso USPTO o EUIPO — "HYPER" è già registrato da terzi negli USA. Raccomandato deposito immediato nei mercati prioritari.</td></tr>
+        <tr><td><span class="tag mid">Moderato</span></td><td>Servizio clienti: tattiche documentate su spedizioni e garanzie espongono a rischi reputazionali e normativi.</td></tr>
+      </tbody>
+    </table>
+
+    <footer class="footer">
+      <div>Fonti · 41 documenti · winspace.cc · USPTO · EUIPO · report di mercato</div>
+      <div>Società privata · stime di mercato · non è consulenza di investimento</div>
+    </footer>
+
+  </main>
+</body>
+</html>
