@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZD Bike — Archivio Infografiche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @keyframes zdpf-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color:#0B2A42; font-family:'Inter',sans-serif; }
+  .card { transition: border-color .15s ease, transform .15s ease; }
+  .card:hover { border-color:#E15A2C; }
+  .filter-btn { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; letter-spacing:0.04em; text-transform:uppercase; padding:8px 16px; border-radius:20px; cursor:pointer; border:1px solid #C9BFA3; background:transparent; color:#0B2A42; }
+  .filter-btn.active { border-color:#E15A2C; background:#E15A2C; color:#fff; }
+</style>
+</head>
+<body>
+
+<div style="min-height:100vh; background:#fff; color:#0B2A42;">
+
+  <!-- Header (navy) -->
+  <div style="background:#0B2A42; padding:22px 40px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <img src="images/logo.png" alt="Logo ZD Bike" style="width:34px; height:34px; border-radius:50%; border:3px solid #F0B429; object-fit:cover;"/>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:20px; letter-spacing:0.02em; color:#fff; text-transform:uppercase;">ZD Bike</div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace; font-weight:500; font-size:12px; letter-spacing:0.08em; color:#F0B429; text-transform:uppercase;">Archivio Infografiche</div>
+  </div>
+
+  <!-- Hero -->
+  <div style="max-width:760px; margin:0 auto; padding:56px 24px 40px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; letter-spacing:0.1em; color:#F0B429; text-transform:uppercase; margin-bottom:16px;">ZD Bike · Raccolta schede</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; font-size:52px; line-height:1.0; color:#0B2A42; margin:0 0 18px;">Tutte le infografiche<br/>in un posto solo.</h1>
+    <p style="font-size:17px; line-height:1.6; color:#3A4550; max-width:540px; margin:0;">Schede pratiche su nutrizione, allenamento e attrezzatura per chi va in bici. Ogni numero approfondisce un solo dato, con fonte tracciabile.</p>
+  </div>
+
+  <!-- Filters -->
+  <div id="filters" style="max-width:760px; margin:0 auto; padding:0 24px 36px; display:flex; gap:10px; flex-wrap:wrap;"></div>
+
+  <!-- Grid -->
+  <div style="background:#F4EFE3; padding:44px 24px 60px;">
+    <div style="max-width:760px; margin:0 auto;">
+      <div id="grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:22px;"></div>
+      <div id="empty-note" style="display:none; margin-top:32px; padding:26px; border:1px dashed #C9BFA3; border-radius:4px; color:#6E6C62; font-size:14px; text-align:center;">
+        Nessuna scheda in questa categoria per ora.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#0B2A42; padding:22px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:#fff;">ZD Bike</span>
+    <span id="count" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#8FAFC4;"></span>
+  </div>
+
+</div>
+
+<script>
+  var DATA = [
+    {
+      id: 'datteri',
+      category: 'Nutrizione',
+      title: 'Datteri: rifornimento in sella',
+      excerpt: 'Zuccheri semplici, potassio e magnesio: come e quando usare i datteri durante un\u2019uscita, con dosi e finestre di assunzione.',
+      date: 'N.01',
+      number: '01',
+      badge: '10 G',
+      gradient: 'radial-gradient(circle at 30% 20%, #155A82, #0B2A42 65%, #071B2C)',
+      url: 'infografica_datteri_bici.html'
+    },
+    {
+      id: 'garmin',
+      category: 'Dati globali',
+      title: 'La strada misura tutto: Garmin 2026',
+      excerpt: 'Distanze, dislivelli, FTP e VO2 max: uno sguardo sui dati Garmin del ciclismo globale, dall\u2019Italia in testa alle classifiche fino alla soglia dell\u2019\u00e9lite.',
+      date: 'N.02',
+      number: '02',
+      badge: 'VO2 62',
+      gradient: 'radial-gradient(circle at 30% 20%, #E15A2C, #0B2A42 65%, #071B2C)',
+      url: 'garmin_cycling_intelligence.html'
+    },
+    {
+      id: 'taurina',
+      category: 'Nutrizione',
+      title: 'Taurina contro il caldo',
+      excerpt: 'Dose acuta pre-uscita per sostenere termoregolazione e resistenza in ambiente caldo: cosa dicono i dati su tempo a esaurimento, sudorazione e lattato.',
+      date: 'N.03',
+      number: '03',
+      badge: '50MG/KG',
+      gradient: 'radial-gradient(circle at 30% 20%, #B8460E, #5A2005 55%, #1A0A02 100%)',
+      url: 'infografica_taurina.html'
+    },
+    {
+      id: 'tart-cherry',
+      category: 'Nutrizione',
+      title: 'Tart Cherry per ciclisti',
+      excerpt: 'Antiossidanti e antinfiammatori del Montmorency cherry per accelerare il ritorno di forza e potenza dopo giorni consecutivi duri.',
+      date: 'N.04',
+      number: '04',
+      badge: '30 ML',
+      gradient: 'radial-gradient(circle at 30% 20%, #6E1030, #3B0B1D 55%, #1A0510 100%)',
+      url: 'infografica_tart_cherry.html'
+    },
+    {
+      id: 'bending-spoons',
+      category: 'Finanza',
+      title: 'Bending Spoons: crea valore o lo estrae?',
+      excerpt: 'Debito, acquisizioni, tagli, utili, crescita: un case study sul meccanismo contestato dietro le acquisizioni del gruppo, tra creazione di valore duratura e monetizzazione spinta.',
+      date: 'N.05',
+      number: '05',
+      badge: '700\u2013800M\u20ac',
+      gradient: 'radial-gradient(circle at 30% 20%, #155A82, #0B2A42 60%, #071B2C 100%)',
+      url: 'bending_spoons_punti_oscuri.html',
+      hideFromAll: true
+    },
+    {
+      id: 'winspace',
+      category: 'Dati globali',
+      title: 'Winspace Cycling: carbonio a prezzo DTC',
+      excerpt: 'Due diligence sul marchio cinese di bici e ruote in carbonio: integrazione verticale, TAM del mercato gravel, dazi USA/UE e vulnerabilità sui marchi non registrati.',
+      date: 'N.06',
+      number: '06',
+      badge: '-50/60%',
+      gradient: 'radial-gradient(circle at 25% 15%, #1B4F70, #0B2A42 55%, #05141F 100%)',
+      url: 'winspace_due_diligence.html'
+    },
+    {
+      id: 'strava-analisi',
+      category: 'Dati globali',
+      title: 'Strava Dashboard',
+      excerpt: 'Trasforma il tuo storico Strava in intelligenza ciclistica: zone HR, coach AI, numero di Eddington, top ride. Pronta in 24h.',
+      date: 'N.07',
+      number: '07',
+      badge: 'E=109',
+      gradient: 'radial-gradient(circle at 25% 15%, #155A82, #0B2A42 55%, #05141F 100%)',
+      url: 'analisi_dati_strava.html'
+    },
+    {
+      id: 'fisica-ciclismo',
+      category: 'Allenamento',
+      title: 'Fisica del Ciclismo',
+      excerpt: 'A 40 km/h in piano, il 90% dei tuoi watt combatte l\u2019aria: ripartizione delle resistenze, effetto scia nel gruppo e la formula della potenza.',
+      date: 'N.08',
+      number: '08',
+      badge: '90% AERO',
+      gradient: 'radial-gradient(ellipse at 80% 50%, #155A82, #0B2A42 60%, #05141F 100%)',
+      url: 'fisica_ciclismo_zdpf.html'
+    },
+    {
+      id: 'zona2-soglia',
+      category: 'Allenamento',
+      title: 'Zona 2: sotto la prima soglia',
+      excerpt: 'Non è una percentuale di FC max: è la condizione metabolica appena sotto VT1/LT1. Perché le percentuali ingannano e cosa succede nelle uscite lunghe.',
+      date: 'N.09',
+      number: '09',
+      badge: 'VT1/LT1',
+      gradient: 'radial-gradient(circle at 25% 15%, #155A82, #0B2A42 55%, #05141F 100%)',
+      url: 'zona2_prima_soglia.html'
+    },
+    {
+      id: 'peso-potenza',
+      category: 'Allenamento',
+      title: 'Perché i piccoli vincono in salita',
+      excerpt: 'Rapporto W/kg, trend storico del BMI nei Grandi Giri e il duello Pogačar-Ganna sull\u2019Alpe d\u2019Huez: cosa dice davvero la fisica sul peso in bici.',
+      date: 'N.10',
+      number: '10',
+      badge: 'W/KG',
+      gradient: 'radial-gradient(circle at 25% 15%, #155A82, #0B2A42 55%, #05141F 100%)',
+      url: 'peso_potenza_ciclismo.html'
+    },
+    {
+      id: 'clima-caldo',
+      category: 'Dati globali',
+      title: 'Il caldo che ferma le pedalate',
+      excerpt: 'Studio su 156 paesi (Lancet Global Health 2026): oltre 27,8°C l\u2019inattività fisica sale, con proiezioni al 2050 su morti e produttività perse. Cosa significa per chi si allena all\u2019aperto.',
+      date: 'N.11',
+      number: '11',
+      badge: '>27,8°C',
+      gradient: 'radial-gradient(circle at 25% 15%, #B8460E, #0B2A42 55%, #05141F 100%)',
+      url: 'clima_caldo_ciclismo.html'
+    },
+    {
+      id: 'tour-de-france-montepremi',
+      category: 'Finanza',
+      title: 'Tour de France 2026: il montepremi',
+      excerpt: 'Come si dividono i premi in denaro della Grande Boucle: maglia gialla, tappe, classifiche a squadre e la ripartizione tra corridori e staff.',
+      date: 'N.12',
+      number: '12',
+      badge: '€',
+      gradient: 'radial-gradient(circle at 25% 15%, #FC5200, #181b1e 55%, #111315 100%)',
+      url: 'tour_de_france_2026_montepremi.html'
+    }
+  ];
+
+  var activeCategory = 'Tutte';
+
+  function render() {
+    var cats = ['Tutte'];
+    DATA.forEach(function(n){ if (cats.indexOf(n.category) === -1) cats.push(n.category); });
+
+    var filtersEl = document.getElementById('filters');
+    filtersEl.innerHTML = '';
+    cats.forEach(function(c){
+      var btn = document.createElement('button');
+      btn.className = 'filter-btn' + (c === activeCategory ? ' active' : '');
+      btn.textContent = c;
+      btn.onclick = function(){ activeCategory = c; render(); };
+      filtersEl.appendChild(btn);
+    });
+
+    var visible = activeCategory === 'Tutte'
+      ? DATA.filter(function(n){ return !n.hideFromAll; })
+      : DATA.filter(function(n){ return n.category === activeCategory; });
+
+    var gridEl = document.getElementById('grid');
+    gridEl.innerHTML = '';
+    visible.forEach(function(n){
+      var a = document.createElement('a');
+      a.className = 'card';
+      a.href = n.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.style.cssText = 'display:flex; flex-direction:column; text-decoration:none; color:inherit; background:#fff; border:1px solid #E4DCC8; border-radius:4px; overflow:hidden; animation:zdpf-in 0.5s ease both;';
+      a.innerHTML =
+        '<div style="height:120px; background:' + n.gradient + '; position:relative; display:flex; align-items:flex-start; justify-content:flex-end; padding:14px;">' +
+          '<div style="width:54px; height:54px; border-radius:50%; border:3px solid #F0B429; background:rgba(11,42,66,0.35); display:flex; align-items:center; justify-content:center; font-family:\'JetBrains Mono\',monospace; font-weight:700; font-size:11px; color:#F0B429; text-align:center; line-height:1.1;">' + n.badge + '</div>' +
+          '<div style="position:absolute; bottom:12px; left:14px; font-family:\'JetBrains Mono\',monospace; font-weight:700; font-size:13px; color:#E15A2C;">' + n.number + '</div>' +
+        '</div>' +
+        '<div style="padding:20px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1;">' +
+          '<div style="font-family:\'JetBrains Mono\',monospace; font-weight:700; font-size:11px; letter-spacing:0.08em; color:#155A82; text-transform:uppercase;">' + n.category + ' · ' + n.date + '</div>' +
+          '<div style="font-family:\'Barlow Condensed\',sans-serif; font-weight:800; text-transform:uppercase; font-size:22px; line-height:1.12; color:#0B2A42;">' + n.title + '</div>' +
+          '<div style="font-size:14px; line-height:1.5; color:#3A4550; flex:1;">' + n.excerpt + '</div>' +
+          '<div style="font-family:\'JetBrains Mono\',monospace; font-weight:700; font-size:12px; color:#E15A2C; text-transform:uppercase; display:flex; align-items:center; gap:6px; margin-top:6px;">Leggi la scheda <span>→</span></div>' +
+        '</div>';
+      gridEl.appendChild(a);
+    });
+
+    document.getElementById('empty-note').style.display = visible.length === 0 ? 'block' : 'none';
+    document.getElementById('count').textContent = DATA.length + ' schede pubblicate';
+  }
+
+  render();
+</script>
+
+</body>
+</html>
