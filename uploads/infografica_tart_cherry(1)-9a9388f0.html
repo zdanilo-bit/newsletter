@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tart Cherry: recupero in sella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2A42;
+    --sea:#155A82;
+    --ember:#E15A2C;
+    --gold:#F0B429;
+    --sand:#F4EFE3;
+    --ink:#0B2A42;
+    --cherry:#9A1B3E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; background:#fff;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:60vh;
+    overflow:hidden;
+    background: radial-gradient(circle at 30% 20%, #6E1030 0%, #3B0B1D 55%, #1A0510 100%);
+  }
+  .hero-top{
+    position:relative; z-index:2;
+    padding:26px 118px 0 28px;
+  }
+  .hero-bottom{
+    position:relative; z-index:2;
+    padding:60px 28px 40px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.16em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:8px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:2px; background:var(--gold); display:inline-block;
+  }
+  .hero .mega{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-size:46px;
+    line-height:0.92;
+    letter-spacing:-0.005em;
+    text-shadow:0 4px 22px rgba(0,0,0,0.6);
+  }
+  .hero h1{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    color:#fff;
+    font-size:30px;
+    line-height:1.05;
+    letter-spacing:-0.005em;
+    text-shadow:0 2px 14px rgba(0,0,0,0.55);
+  }
+  .hero h1 span{color:var(--gold);}
+  .hero p{
+    color:rgba(255,255,255,0.88);
+    font-size:15px;
+    max-width:440px;
+    margin-top:14px;
+    line-height:1.5;
+    text-shadow:0 1px 8px rgba(0,0,0,0.5);
+  }
+
+  .hero-badge{
+    position:absolute; top:18px; right:18px; z-index:3;
+    width:98px; height:98px;
+  }
+  .badge-photo-wrap{
+    width:100%; height:100%;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid var(--gold);
+    box-shadow:0 4px 14px rgba(0,0,0,0.45);
+    background: radial-gradient(circle at 35% 30%, #C4285A 0%, #6E1030 70%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .badge-photo-wrap span{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    color:#fff;
+    font-size:34px;
+  }
+  .badge-tag{
+    position:absolute;
+    bottom:-8px; left:-16px;
+    width:50px; height:auto;
+    transform:rotate(-13deg);
+    filter:drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+  }
+
+  /* ELEVATION DIVIDER */
+  .profile{
+    background:var(--navy);
+    padding:0 0 6px;
+  }
+  .profile svg{display:block; width:100%; height:auto;}
+  .profile-labels{
+    display:flex;
+    justify-content:space-between;
+    padding:0 24px 22px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:rgba(255,255,255,0.55);
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    margin-top:-10px;
+  }
+  .profile-labels span{color:var(--gold); font-weight:700;}
+
+  /* SECTION generic */
+  section{padding:40px 28px;}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:22px;}
+  .section-head .num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--ember);
+    font-weight:700;
+    font-size:13px;
+  }
+  .section-head h2{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    font-size:28px;
+    letter-spacing:.01em;
+    color:var(--navy);
+  }
+  .section-head .rule{flex:1; height:1px; background:#DDD6C4;}
+
+  /* CARDS */
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .card{
+    background:var(--sand);
+    border:1px solid #E4DDC9;
+    border-radius:2px;
+    padding:18px 18px 16px;
+  }
+  .card .qty{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--sea);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:2px;
+  }
+  .card .kcal{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    font-size:34px;
+    color:var(--ember);
+    line-height:1;
+  }
+  .card .kcal small{font-size:14px; font-weight:600; color:var(--navy);}
+
+  table.data{width:100%; border-collapse:collapse; margin-top:22px; font-size:13.5px;}
+  table.data th{
+    text-align:left;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--sea);
+    padding-bottom:8px;
+    border-bottom:2px solid var(--navy);
+  }
+  table.data td{
+    padding:9px 4px;
+    border-bottom:1px solid #E9E3D3;
+  }
+  table.data tr:last-child td{border-bottom:none;}
+  table.data td.val{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    color:var(--navy);
+    text-align:right;
+  }
+
+  /* TIMELINE */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:6px; top:6px; bottom:6px;
+    width:2px;
+    background:repeating-linear-gradient(180deg, var(--ember) 0 6px, transparent 6px 12px);
+  }
+  .moment{position:relative; padding-bottom:26px;}
+  .moment:last-child{padding-bottom:0;}
+  .moment::before{
+    content:"";
+    position:absolute; left:-26px; top:2px;
+    width:13px; height:13px;
+    background:var(--gold);
+    border:2px solid var(--navy);
+    border-radius:50%;
+  }
+  .moment .when{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--ember);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    font-weight:700;
+    margin-bottom:3px;
+  }
+  .moment h3{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:20px;
+    font-weight:700;
+    color:var(--navy);
+    text-transform:uppercase;
+    margin-bottom:3px;
+  }
+  .moment p{font-size:13.5px; line-height:1.5; color:#3A4550; max-width:480px;}
+
+  /* CHECKLIST */
+  .checklist{list-style:none;}
+  .checklist li{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:12px 0;
+    border-bottom:1px solid #E9E3D3;
+    font-size:14px;
+    line-height:1.5;
+  }
+  .checklist li:last-child{border-bottom:none;}
+  .checklist .check{
+    flex:none;
+    width:18px; height:18px;
+    margin-top:2px;
+    border:2px solid var(--ember);
+    position:relative;
+  }
+  .checklist .check::after{
+    content:"";
+    position:absolute; left:3px; top:0px;
+    width:5px; height:9px;
+    border:solid var(--ember);
+    border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+  .checklist b{color:var(--navy);}
+
+  footer{
+    background:var(--navy);
+    color:rgba(255,255,255,0.5);
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:20px 28px;
+    display:flex;
+    justify-content:space-between;
+  }
+  footer b{color:var(--gold);}
+
+  @media (max-width:480px){
+    .hero-badge{width:76px; height:76px; top:14px; right:14px;}
+    .badge-tag{width:40px; bottom:-6px; left:-12px;}
+    .hero-top{padding:20px 96px 0 22px;}
+    .hero .mega{font-size:36px;}
+    .hero h1{font-size:24px;}
+    .cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-badge">
+      <div class="badge-photo-wrap"><span>TC</span></div>
+      <svg class="badge-tag" viewBox="0 0 140 70" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24,29 C10,20 10,45 24,41" stroke="#F4EFE3" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M10,35 L34,10 H124 a8,8 0 0 1 8,8 V52 a8,8 0 0 1 -8,8 H34 Z" fill="#F0B429" stroke="#0B2A42" stroke-width="2.5"/>
+        <circle cx="24" cy="35" r="6.5" fill="#0B2A42"/>
+        <circle cx="24" cy="35" r="3" fill="#F4EFE3"/>
+        <text x="82" y="43" font-family="'JetBrains Mono', monospace" font-size="22" font-weight="700" fill="#0B2A42" text-anchor="middle">30 ML</text>
+      </svg>
+    </div>
+
+    <div class="hero-top">
+      <div class="eyebrow">ZDPF Bike · Nutrizione in sella</div>
+      <div class="mega">Tart Cherry<br>per ciclisti</div>
+    </div>
+
+    <div class="hero-bottom">
+      <h1>Recupero <span>a rilascio</span> mirato.</h1>
+      <p>Montmorency cherry: antiossidanti e antinfiammatori per accelerare il ritorno di forza e potenza dopo giorni consecutivi duri. La scheda tecnica di Dr Jeff Rothschild per usarla bene in bici.</p>
+      <p style="margin-top:10px; font-size:12.5px; color:rgba(255,255,255,0.65); border-left:2px solid var(--gold); padding-left:10px;"><b style="color:var(--gold);">Montmorency</b> = varietà di ciliegia acida (Prunus cerasus), non la sweet cherry da tavola. Molto più ricca di antociani — è la varietà usata in tutti gli studi citati.</p>
+    </div>
+  </div>
+
+  <div class="profile">
+    <svg viewBox="0 0 760 90" preserveAspectRatio="none">
+      <polyline points="0,70 90,55 180,60 260,20 340,35 420,15 500,40 580,25 660,50 760,30"
+        fill="none" stroke="#F0B429" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="260" cy="20" r="5" fill="#E15A2C"/>
+      <circle cx="420" cy="15" r="5" fill="#E15A2C"/>
+      <circle cx="580" cy="25" r="5" fill="#E15A2C"/>
+    </svg>
+    <div class="profile-labels">
+      <span>T-96H</span>
+      <span>T-48H · PRE-CARICO</span>
+      <span>GARA / BLOCCO DURO</span>
+      <span>T+48H · RECUPERO</span>
+      <span>FUNZIONE OK</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>Le dosi</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="qty">Dose singola</div>
+        <div class="kcal">30<small>ml, x2/die</small></div>
+      </div>
+      <div class="card">
+        <div class="qty">Pre-carico</div>
+        <div class="kcal">4<small>giorni prima</small></div>
+      </div>
+    </div>
+    <table class="data">
+      <tr><th>Cosa fa</th><th></th><td class="val" style="border:none"></td></tr>
+      <tr><td>Stress ossidativo</td><td class="val">riduce</td></tr>
+      <tr><td>Infiammazione (IL-6 e affini)</td><td class="val">riduce</td></tr>
+      <tr><td>Creatina chinasi (CK)</td><td class="val">nessun effetto</td></tr>
+      <tr><td>Recupero funzionale (forza/potenza)</td><td class="val">accelera</td></tr>
+      <tr><td>Biodisponibilità ossido nitrico</td><td class="val">protegge</td></tr>
+    </table>
+  </section>
+
+  <section style="background:var(--sand); padding-top:36px; padding-bottom:44px;">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>Quando usarlo</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="timeline">
+      <div class="moment">
+        <div class="when">T-4 giorni · Pre-carico</div>
+        <h3>Preparazione</h3>
+        <p>30 ml due volte al giorno di concentrato Montmorency, per arrivare a giorni consecutivi duri con meno stress ossidativo e infiammatorio accumulato.</p>
+      </div>
+      <div class="moment">
+        <div class="when">Giorno gara / blocco duro</div>
+        <h3>Sostegno performance</h3>
+        <p>I metaboliti polifenolici proteggono la biodisponibilità dell'ossido nitrico, sostenendo flusso sanguigno e ossigenazione muscolare durante lo sforzo.</p>
+      </div>
+      <div class="moment">
+        <div class="when">T+2-3 giorni · Post-sforzo</div>
+        <h3>Recupero funzionale</h3>
+        <p>Non riduce la CK (il danno strutturale resta), ma accelera il ritorno di forza e potenza. Il dolore muscolare può persistere: è la funzione a tornare prima.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>Da sapere</h2>
+      <div class="rule"></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="check"></span><span><b>Montmorency, non dolce:</b> serve la varietà tart (Prunus cerasus), molto più ricca di antociani della sweet cherry da tavola.</span></li>
+      <li><span class="check"></span><span><b>Non in fase di build:</b> l'infiammazione da allenamento è lo stimolo per l'adattamento. Riservalo a blocchi con giorni consecutivi duri o gare a tappe.</span></li>
+      <li><span class="check"></span><span><b>Non è solo post-gara:</b> ha evidenza anche pre-sforzo, grazie alla protezione dell'ossido nitrico che sostiene flusso e ossigenazione.</span></li>
+      <li><span class="check"></span><span><b>Meno studiato nelle donne:</b> effetti direzionalmente simili ma più contenuti, forse per l'azione antiossidante endogena degli estrogeni.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>ZDPF Bike</span>
+    <span><b>Fonte:</b> Dr Jeff Rothschild, Knowledge Is Watt</span>
+  </footer>
+
+</div>
+</body>
+</html>
