@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZD Bike | La qualità del telaio si misura, non si legge sul prezzo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #10192b;
+    --navy-2: #1b273f;
+    --gold: #c9a227;
+    --ember: #d9622b;
+    --sand: #f3ecd9;
+    --sand-dim: #cfc7ae;
+    --line: rgba(243,236,217,0.14);
+    --green: #4f9d69;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--navy);
+    color: var(--sand);
+    font-family: 'Inter', sans-serif;
+    line-height:1.5;
+  }
+  .wrap{ max-width: 860px; margin:0 auto; padding: 0 24px; }
+
+  /* MASTHEAD */
+  header.masthead{
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 40px 0 28px;
+  }
+  .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ember);
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .kicker span:last-child{ color: var(--sand-dim); }
+  h1.title{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(38px, 6vw, 62px);
+    line-height: 0.98;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--sand);
+  }
+  h1.title em{
+    font-style: normal;
+    color: var(--gold);
+  }
+  .dek{
+    font-size: 17px;
+    color: var(--sand-dim);
+    max-width: 620px;
+    margin-top: 14px;
+  }
+
+  /* SECTION GENERIC */
+  section{ padding: 44px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  h2.h{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 34px);
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+  }
+  p.lead{ font-size: 15.5px; color: var(--sand-dim); max-width: 640px; }
+  .callout{
+    border-left: 3px solid var(--ember);
+    background: rgba(217,98,43,0.08);
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-size: 14.5px;
+    color: var(--sand);
+  }
+  .callout b{ color: var(--gold); }
+
+  /* THE PROCESS / 5 PARAMETRI */
+  .params{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .param-card{
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 18px;
+  }
+  .param-num{
+    font-family:'JetBrains Mono', monospace;
+    color: var(--ember);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .param-card h3{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 6px;
+  }
+  .param-card p{ font-size: 13.5px; color: var(--sand-dim); }
+
+  /* DATA TABLES */
+  table{ width:100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  thead th{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--gold);
+  }
+  tbody td{
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+    color: var(--sand);
+  }
+  tbody tr:hover{ background: rgba(201,162,39,0.05); }
+  td.num, th.num{ font-family:'JetBrains Mono', monospace; color: var(--sand-dim); }
+  .badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(79,157,105,0.15);
+    color: var(--green);
+    border: 1px solid rgba(79,157,105,0.4);
+  }
+  .badge.gold{ background: rgba(201,162,39,0.15); color: var(--gold); border-color: rgba(201,162,39,0.4); }
+
+  .stat-strip{
+    display:flex;
+    gap: 24px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .stat{
+    flex: 1 1 140px;
+    border-top: 2px solid var(--ember);
+    padding-top: 10px;
+  }
+  .stat .n{
+    font-family:'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--sand);
+  }
+  .stat .l{ font-size: 12px; color: var(--sand-dim); margin-top: 4px; }
+
+  /* CANNONDALE FOCUS */
+  .focus-box{
+    margin-top: 22px;
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    padding: 22px;
+  }
+  .focus-box h3{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .focus-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .focus-item .k{ font-size:11px; color: var(--sand-dim); text-transform:uppercase; letter-spacing:0.05em; font-family:'JetBrains Mono',monospace;}
+  .focus-item .v{ font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:700; color:var(--sand); }
+
+  /* CHECKLIST */
+  .checklist{ margin-top: 22px; list-style:none; }
+  .checklist li{
+    display:flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+  }
+  .checklist li::before{
+    content: "→";
+    color: var(--ember);
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* LINK LIST */
+  .sources{ margin-top: 18px; }
+  .source-group{ margin-bottom: 18px; }
+  .source-group h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .source-group a{
+    display:block;
+    font-size: 13.5px;
+    color: var(--sand-dim);
+    text-decoration: none;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .source-group a:hover{ color: var(--ember); }
+
+  footer{
+    padding: 34px 0 44px;
+    text-align:center;
+  }
+  footer .fm{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-size: 14px;
+  }
+  footer .fs{
+    font-size: 12px;
+    color: var(--sand-dim);
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker">
+      <span>ZD BIKE — TECNICA</span>
+      <span>N. 07 · LUGLIO 2026</span>
+    </div>
+    <h1 class="title">Il telaio non mente,<br>ma il <em>prezzo</em> sì</h1>
+    <p class="dek">Cosa dicono davvero i banchi prova tedeschi su rigidità, peso e aerodinamica. Con i numeri, non le sensazioni.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="eyebrow">Il mistero</div>
+    <h2 class="h">Cosa stai comprando, quando compri carbonio</h2>
+    <p class="lead">Quando compri un telaio non vedi mai cosa c'è dentro. Non vedi il modulo della fibra (alto, intermedio, standard), non vedi come sono stati orientati gli strati di carbonio, non vedi se ci sono vuoti nella laminazione vicino al movimento centrale — il punto che incassa i carichi più alti. La scheda tecnica dice "carbonio high-modulus", ma è un'affermazione del produttore su se stesso. Nessuno all'esterno la verifica prima che tu paghi.</p>
+
+    <div class="eyebrow" style="margin-top:28px;">Cosa c'è davvero nel prezzo</div>
+    <p class="lead">Quando spendi 15.000 € per una bici completa, quel prezzo copre il telaio ma anche il gruppo (spesso il più caro sul mercato, Dura-Ace o Red AXS), le ruote in carbonio, il cockpit integrato — e indirettamente il team World Tour sponsorizzato, gli stipendi dei corridori che la pedalano in TV, il marketing, la rete di negozi. Lo vedi bene nei dati Canyon: lo stesso identico telaio CFR costa 3.500 € in meno passando da gruppo Dura-Ace a Ultegra, a parità di aerodinamica misurata al banco. Il telaio — la parte che nessuno può ispezionare dall'esterno — è solo una voce dentro un prezzo che racconta anche altro.</p>
+
+    <div class="eyebrow" style="margin-top:28px;">Di chi ti puoi fidare</div>
+    <p class="lead">La domanda vera non è quale bici sia più bella o più blasonata, ma: di chi ti fidi quando nessuno può aprire il telaio e verificarlo da solo? Qui entrano i test indipendenti. Non ti dicono cosa c'è dentro il laminato — quello resta segreto industriale — ma misurano quello che il laminato <i>produce</i>: rigidità reale, peso reale, resistenza a fatica su migliaia di cicli di carico. Se una bici da 4.000 € regge la fatica del telaio come una da 15.000 €, quella prestazione misurata è l'unica prova concreta che hai — indipendentemente da quanto sia "alto" il modulo dichiarato in scheda tecnica.</p>
+
+    <div class="callout">
+      <b>TOUR Magazin, EFBE Prüftechnik, Zedler Institut, Cyclingnews Labs</b>: sono le uniche fonti che pagano di tasca propria il banco prova, pubblicano il protocollo per intero, e non fanno vedere i risultati al brand prima che escano. Non risolvono il mistero di cosa c'è dentro al tubo — ma ti dicono se quel tubo, qualunque cosa contenga, si comporta come deve.
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Il carbonio è un processo, non un materiale</div>
+    <h2 class="h">Perché due telai identici sulla carta si comportano diverso</h2>
+    <p class="lead">Due telai con stessa fibra e stesso schema di laminazione possono uscire dallo stampo con qualità radicalmente diverse a seconda di come è stato eseguito il processo: posizionamento degli strati, pressione in cottura, resina in eccesso, vuoti nelle zone critiche. Tutti difetti invisibili. Un telaio laminato male può essere verniciato benissimo.</p>
+    <div class="callout">
+      La maggior parte dei telai, di quasi tutti i marchi, esce dagli <b>stessi stabilimenti asiatici</b>. Il prezzo del brand blasonato paga R&D, sponsorizzazioni, rete vendita — non necessariamente un telaio migliore.
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Cosa si può misurare</div>
+    <h2 class="h">5 parametri, zero opinioni</h2>
+    <div class="params">
+      <div class="param-card">
+        <div class="param-num">01 / RIGIDITÀ</div>
+        <h3>Rigidità specifica</h3>
+        <p>Rapporto rigidità/peso su movimento centrale e sterzo. Carico noto + deformazione al banco.</p>
+      </div>
+      <div class="param-card">
+        <div class="param-num">02 / PESO</div>
+        <h3>Peso reale</h3>
+        <p>Dichiarato vs effettivo, taglia corretta. Prima riga di verifica, la più semplice.</p>
+      </div>
+      <div class="param-card">
+        <div class="param-num">03 / LAMINAZIONE</div>
+        <h3>Qualità interna</h3>
+        <p>Vuoti, grinze, resina in eccesso. Ultrasuoni, termografia, TAC industriale — o sezionamento.</p>
+      </div>
+      <div class="param-card">
+        <div class="param-num">04 / FATICA</div>
+        <h3>Resistenza a fatica</h3>
+        <p>ISO 4210 è il minimo legale, la superano quasi tutti. I protocolli seri sono EFBE e Zedler.</p>
+      </div>
+      <div class="param-card">
+        <div class="param-num">05 / GEOMETRIA</div>
+        <h3>Precisione</h3>
+        <p>Allineamento, tolleranze sedi calotte e movimento centrale. Storto costa uguale.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Best of Test 2025 · Tour Magazin — 13 Race-Allrounder</div>
+    <h2 class="h">Voto 1,5 a pari merito, migliaia di euro di differenza</h2>
+    <p class="lead">Il confronto principale mette in fila 13 tra le migliori bici da competizione al mondo. Nessuna sotto voto 2, tre a pari merito in vetta. Il più economico del lotto costa 7.299 €, il più caro più del doppio.</p>
+    <table>
+      <thead>
+        <tr><th>Modello</th><th class="num">Voto</th><th class="num">Peso</th><th class="num">Prezzo</th><th class="num">Aero</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Canyon Aeroad CFR AXS <span class="badge gold">Miglior prezzo tra i 1°</span></td><td class="num">1,5</td><td class="num">7,1 kg</td><td class="num">8.999 €</td><td class="num">204 W</td></tr>
+        <tr><td>Scott Foil RC Ultimate</td><td class="num">1,5</td><td class="num">6,94 kg</td><td class="num">15.999 €</td><td class="num">203 W</td></tr>
+        <tr><td>Specialized S-Works Tarmac SL8</td><td class="num">1,5</td><td class="num">6,6 kg <span class="badge">Il più leggero dei tre</span></td><td class="num">13.499 €</td><td class="num">209 W</td></tr>
+        <tr><td>Cannondale SuperSix EVO Lab71</td><td class="num">—</td><td class="num">6,89 kg</td><td class="num">15.500 €</td><td class="num">205 W</td></tr>
+        <tr><td>Storck Aerfast.5 Pro <span class="badge">Record aero</span></td><td class="num">—</td><td class="num">più pesante del lotto</td><td class="num">~9.000 €</td><td class="num">198 W</td></tr>
+        <tr><td>Pinarello Dogma F</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Factor Ostro VAM</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Giant Propel Advanced SL <span class="badge">Rigidità record</span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Trek Madone SLR 9 AXS</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">216 W</td></tr>
+        <tr><td>Rose XLite Unltd Dura Ace Di2 <span class="badge">Tedesca, top club</span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Cube Litening Aero C:68 SLX <span class="badge">Tedesca</span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Stevens Arcalis <span class="badge">Tedesca</span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Van Rysel RCR Pro <span class="badge gold">Entry del lotto</span></td><td class="num">—</td><td class="num">—</td><td class="num">7.299 €</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color:var(--sand-dim); margin-top:8px; font-family:'JetBrains Mono',monospace;">Voto pubblicato solo per i modelli con nota individuale disponibile in forma testuale; gli altri 10 fanno parte dello stesso test 13-bici (tutti sotto voto 2,0) con dati completi solo nella tabella immagine dell'edizione TOUR — trattali come "presenti nel test, nota nella fascia 1,5-1,9" salvo diversa indicazione.</p>
+    <div class="stat-strip">
+      <div class="stat"><div class="n">7.000 €</div><div class="l">Differenza Canyon vs Scott, voto identico</div></div>
+      <div class="stat"><div class="n">7.299 €</div><div class="l">Il più economico dei 13 (Van Rysel RCR Pro)</div></div>
+      <div class="stat"><div class="n">9</div><div class="l">Proprietà testate per la nota finale</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Fascia Ultegra · Sotto i 7.000 €</div>
+    <h2 class="h">Canyon Aeroad CF SLX 8 Di2 — la scorciatoia intelligente</h2>
+    <p class="lead">Stesso identico telaio del CFR da 9.999 €, gruppo Ultegra Di2 al posto di Dura-Ace/Red AXS. Il risultato aerodinamico non cambia di un watt.</p>
+    <table>
+      <thead>
+        <tr><th>Modello</th><th class="num">Gruppo</th><th class="num">Peso</th><th class="num">Prezzo</th><th class="num">Aero</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Canyon Aeroad CFR Di2</td><td class="num">Dura-Ace Di2</td><td class="num">7,07 kg</td><td class="num">9.999 €</td><td class="num">204 W</td></tr>
+        <tr><td>Canyon Aeroad CF SLX 8 Di2 <span class="badge gold">Ultegra</span></td><td class="num">Ultegra Di2</td><td class="num">7,45 kg</td><td class="num">6.499 €</td><td class="num">204 W</td></tr>
+        <tr><td>Canyon Aeroad CF SLX 7 eTap</td><td class="num">SRAM Rival AXS</td><td class="num">7,86 kg</td><td class="num">4.199 €</td><td class="num">206 W</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      Passare da Dura-Ace a Ultegra su questo telaio costa <b>3.500 € in meno</b> e non toglie un solo watt in aerodinamica — solo ~380 g di peso in più. È il caso da manuale di "pacchetto giusto" citato nella checklist.
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Banco a vento · GST Immenstaad</div>
+    <h2 class="h">La classifica aero non segue il prezzo</h2>
+    <p class="lead">Il dato più scomodo: un modello Decathlon a basso costo è più vicino ai top di gamma da 15.000 € di quanto suggerisca il listino.</p>
+    <table>
+      <thead>
+        <tr><th>Modello</th><th class="num">Watt @ 45 km/h</th><th class="num">Fascia prezzo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Storck Aerfast.5 Pro</td><td class="num">197 W*</td><td class="num">~9.000 €</td></tr>
+        <tr><td>Colnago Y1Rs</td><td class="num">199 W</td><td class="num">—</td></tr>
+        <tr><td>Van Rysel RCR-F</td><td class="num">200 W</td><td class="num">—</td></tr>
+        <tr><td>Cervélo S5</td><td class="num">202 W</td><td class="num">—</td></tr>
+        <tr><td>Scott Foil RC Ultimate</td><td class="num">203 W</td><td class="num">15.999 €</td></tr>
+        <tr><td>Canyon Aeroad CFR</td><td class="num">204 W</td><td class="num">8.999 €</td></tr>
+        <tr><td>Cannondale SuperSix EVO Hi-Mod</td><td class="num">205–207 W</td><td class="num">~9.000 €</td></tr>
+        <tr><td>Van Rysel RCR-R <span class="badge">Allrounder economico</span></td><td class="num">207 W</td><td class="num">~3.500 €</td></tr>
+        <tr><td>Van Rysel RCR Pro <span class="badge">Entry level</span></td><td class="num">214 W</td><td class="num">~2.000 €</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color:var(--sand-dim); margin-top:10px; font-family:'JetBrains Mono',monospace;">*misurato con trasmissione singola, non pienamente comparabile 1:1</p>
+    <div class="callout">
+      <b>Storck Aerfast.5</b> (~9.000 €) è aerodinamicamente alla pari di Colnago Y1Rs e Cervélo S5, bici che costano quasi il doppio.
+    </div>
+  </section>
+
+  <section>
+    <div class="focus-box">
+      <h3>Focus · Cannondale SuperSix EVO Hi-Mod 2</h3>
+      <p class="lead" style="margin-bottom:0;">Dati TOUR-Test — non il Lab71, ma la versione Hi-Mod (la fascia della Rapha HM).</p>
+      <div class="focus-grid">
+        <div class="focus-item"><div class="k">Aero @ 45km/h</div><div class="v">205–207 W</div></div>
+        <div class="focus-item"><div class="k">Peso completo</div><div class="v">~7,1 kg</div></div>
+        <div class="focus-item"><div class="k">Prezzo indicativo</div><div class="v">~8.999 €</div></div>
+        <div class="focus-item"><div class="k">Vs Lab71</div><div class="v">−6.500 €</div></div>
+      </div>
+      <p class="lead">Con 207 W il SuperSix Hi-Mod rientra tra le bici di serie più veloci al mondo, agganciandosi a specialisti aero come Scott Foil o Stevens Arcalis — nonostante forme meno estreme. Il punto debole rilevato è la rigidità anteriore, non ai vertici per via dell'orientamento leggero del telaio. Il punto di forza resta il comfort, tra i migliori della categoria grazie alla combinazione reggisella flessibile e tubo sella affusolato verso il movimento centrale.</p>
+      <div class="callout">
+        Il Lab71 costa <b>15.500 €</b> contro i circa <b>8.999 €</b> dell'Hi-Mod 2 — un salto di 6.500 € per un guadagno di peso marginale (poche centinaia di grammi), non per una laminazione misurabilmente diversa.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Conferma incrociata · Cyclingnews Labs, UK</div>
+    <h2 class="h">Un secondo banco, gruppo editoriale diverso, stessa storia</h2>
+    <p class="lead">Cyclingnews (Future plc, Regno Unito) testa alla Silverstone Sports Engineering Hub — zero legami societari con TOUR/BIKE/RennRad (gruppo Delius Klasing). Pubblicano il margine d'errore statistico di ogni dato, cosa che quasi nessuno fa: ±0,33 W solo telaio, ±1,73 W con ciclista in sella.</p>
+    <div class="callout">
+      <b>Attenzione al confronto:</b> TOUR misura a 45 km/h, Cyclingnews a 40 km/h. I watt assoluti delle due tabelle <b>non si sommano né si confrontano</b> — ha senso guardare solo la classifica relativa tra i modelli, non il numero isolato.
+    </div>
+    <table>
+      <thead>
+        <tr><th>Modello</th><th class="num">Watt @ 40km/h (bici+rider)</th><th class="num">Margine d'errore</th><th class="num">Prezzo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cervélo S5 <span class="badge gold">1° con rider</span></td><td class="num">273,12 W</td><td class="num">±1,73 W</td><td class="num">12.000 £</td></tr>
+        <tr><td>Colnago Y1Rs (bici di Pogačar)</td><td class="num">276,78 W</td><td class="num">±1,73 W</td><td class="num">12.600 £</td></tr>
+        <tr><td>Scott Foil RC <span class="badge">Stesso modello in entrambi i test</span></td><td class="num">281,54 W</td><td class="num">±1,73 W</td><td class="num">8.899 £</td></tr>
+        <tr><td>Van Rysel RCR-F</td><td class="num">3° podio possibile</td><td class="num">±1,73 W</td><td class="num">10.000 £</td></tr>
+        <tr><td>Bianchi Oltre RC <span class="badge">Ultimo del lotto</span></td><td class="num">285,24 W</td><td class="num">±1,73 W</td><td class="num">11.649 £</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      Il segnale più utile non è il singolo numero, è la <b>convergenza tra le due fonti</b>: Cervélo S5 e Colnago Y1Rs risultano ai vertici sia nel banco tedesco sia in quello inglese, con metodologie e interessi commerciali completamente separati. Quando due fonti indipendenti concordano, il dato pesa di più di quanto peserebbe da sola una singola rivista.
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Chi ha davvero un vantaggio</div>
+    <h2 class="h">Dove i grandi marchi non bluffano</h2>
+    <p class="lead">Non è un pareggio totale tra brand economici e blasonati. I vantaggi reali dei grandi produttori stanno altrove rispetto a dove li cerca chi compra:</p>
+    <ul class="checklist">
+      <li><b>Controllo statistico del processo</b> — fare diecimila telai uguali, non uno solo buono</li>
+      <li><b>Ingegneria e validazione</b> — più cicli di prototipazione, più margine per correggere errori</li>
+      <li><b>Garanzia e assistenza</b> — un telaio che si rompe dopo tre anni vale diverso se l'azienda risponde</li>
+      <li><b>Tracciabilità di lotto</b> — utile in caso di richiamo</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">Checklist</div>
+    <h2 class="h">Cosa fare prima di comprare</h2>
+    <ul class="checklist">
+      <li>Cerca <b>test indipendenti</b>, non recensioni — un protocollo di fatica certificato da terzi vale più di dieci articoli entusiastici</li>
+      <li>Leggi le <b>condizioni di garanzia</b> — lunga, trasferibile, con sostituzione in caso di incidente è il segnale più credibile che esista</li>
+      <li>Verifica <b>peso reale e allineamento</b> all'acquisto, o falli controllare da un meccanico</li>
+      <li>Diffida del marketing basato solo su <b>rigidità e peso</b> — i parametri più facili da ottimizzare tagliando i margini di sicurezza</li>
+      <li>Una certificazione <b>Tri-Test EFBE</b> su un brand economico vale più della sola conformità ISO 4210 di un brand blasonato</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">Fonti</div>
+    <h2 class="h">Dove verificare tu stesso</h2>
+    <div class="sources">
+      <div class="source-group">
+        <h4>Tour Magazin — banco prova di riferimento del settore</h4>
+        <a href="https://www.tour-magazin.de/rennraeder/fahrertyp/profi-rennsport/top-3-wettkampf-rennraeder-die-besten-renner-aus-2025/">Top 3 Wettkampf-Rennräder 2025 (Canyon/Scott/Specialized)</a>
+        <a href="https://www.tour-magazin.de/rennraeder/aero/17-wettkampfrennrader-bis-7000-euro-im-test/">17 bici da competizione fino a 7.000 € (Van Rysel/Storck)</a>
+        <a href="https://www.tour-magazin.de/rennraeder/aero/cannondale-supersix-evo-hi-mod-2-im-tour-test/">Cannondale SuperSix EVO Hi-Mod 2</a>
+        <a href="https://www.tour-magazin.de/rennraeder/marathonbike-endurance-rennrad/die-10-leichtesten-rennrader-im-tour-test/">I 10 telai più leggeri nel TOUR-Test</a>
+        <a href="https://www.tour-magazin.de/rennraeder/aero/die-besten-wettkampf-rennrader-13-einser-renner-im-test/">I 13 Race-Allrounder a confronto (test completo)</a>
+        <a href="https://www.tour-magazin.de/rennraeder/aero/canyon-aeroad-cf-slx-8-di2-im-test-wettkampfrader-unter-7000-euro/">Canyon Aeroad CF SLX 8 Di2 Ultegra — sotto i 7.000 €</a>
+        <a href="https://www.tour-magazin.de/rennraeder/aero/cannondale-supersix-evo-lab71-das-wettkampf-rennrad-im-test/">Cannondale SuperSix EVO Lab71 (riferimento top di gamma)</a>
+      </div>
+      <div class="source-group">
+        <h4>RennRad & BIKE Magazin (stesso gruppo editoriale)</h4>
+        <a href="https://www.radsport-rennrad.de">radsport-rennrad.de</a>
+        <a href="https://www.bike-magazin.de/fahrraeder/rennraeder">bike-magazin.de/fahrraeder/rennraeder</a>
+      </div>
+      <div class="source-group">
+        <h4>Cyclingnews Labs (UK, gruppo Future — indipendente da TOUR/BIKE)</h4>
+        <a href="https://www.cyclingnews.com/features/wind-tunnel-tested-12-aero-bikes-2025/">Wind tunnel test 2025 — 12 bici aero a confronto (Silverstone)</a>
+        <a href="https://www.cyclingnews.com/features/wind-tunnel-tested-11-superbikes-go-head-to-head/">Wind tunnel test 2024 — 11 superbike allrounder</a>
+        <a href="https://www.cyclingnews.com/features/cyclingnews-labs-a-complete-guide-to-all-our-industry-leading-in-depth-tech-tests/">Guida completa a tutti i test Cyclingnews Labs</a>
+      </div>
+      <div class="source-group">
+        <h4>Istituti di certificazione indipendenti</h4>
+        <a href="https://www.efbe.de">EFBE Prüftechnik — protocollo Tri-Test (efbe.de)</a>
+        <a href="https://www.zedler.de">Zedler Institut — fornitore banchi prova TOUR/BIKE (zedler.de)</a>
+      </div>
+      <div class="source-group">
+        <h4>Fonte primaria</h4>
+        <a href="https://www.bikeitalia.it/2026/07/17/qualita-telaio-bici-carbonio/">Bikeitalia — Come si misura la qualità di un telaio in carbonio? (17/07/2026)</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="fm">ZD Bike</div>
+  <div class="fs">Numeri al banco, non narrazione. Prossimo numero: nutrizione in gara.</div>
+</footer>
+
+</body>
+</html>
