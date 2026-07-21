@@ -19,6 +19,8 @@ Il progetto nasce come modo per **semplificare e rendere visive informazioni** c
 | 09 | Zona 2: sotto la prima soglia | Allenamento | `zona2_prima_soglia.html` |
 | 10 | Perché i piccoli vincono in salita (peso/potenza) | Allenamento | `peso_potenza_ciclismo.html` |
 | 11 | Il caldo che ferma le pedalate | Dati globali | `clima_caldo_ciclismo.html` |
+| 12 | Tour de France 2026: il montepremi | Finanza | `tour_de_france_2026_montepremi.html` |
+| 13 | La qualità del telaio si misura, non si legge sul prezzo | Dati globali | `qualita_telaio_carbonio.html` |
 
 ## Struttura
 
