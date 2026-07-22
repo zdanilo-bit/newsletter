@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DZ AI Coach · Luglio 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0B2A42;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #F4EFE3;
+  min-height: 100vh;
+}
+.wrap { max-width: 520px; margin: 0 auto; padding-bottom: 40px; }
+
+/* ── HEADER ── */
+.hero {
+  background: #0B2A42;
+  padding: 28px 20px 0;
+  text-align: center;
+  border-bottom: 4px solid #E15A2C;
+}
+.ey {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .16em; color: #F0B429;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.ti {
+  font-family: 'Barlow Condensed', Impact, Arial, sans-serif;
+  font-size: 72px; font-weight: 900;
+  text-transform: uppercase; color: #F0B429;
+  line-height: .95; letter-spacing: .02em;
+}
+.co {
+  font-family: 'Barlow Condensed', Impact, Arial, sans-serif;
+  font-size: 22px; font-weight: 800;
+  text-transform: uppercase; color: #E15A2C;
+  letter-spacing: .1em; margin-top: 4px;
+}
+.su {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: rgba(255,255,255,.3);
+  letter-spacing: .08em; text-transform: uppercase;
+  margin: 9px 0 14px;
+}
+
+/* ── STATS STRIP ── */
+.ss {
+  display: flex; justify-content: center; gap: 28px;
+  padding: 14px 20px 13px;
+  border-bottom: 1px solid #1a3850;
+}
+.sv { text-align: center; }
+.sv-n {
+  font-family: 'Barlow Condensed', Impact, Arial, sans-serif;
+  font-size: 28px; font-weight: 900; line-height: 1;
+  color: #F0B429; display: block;
+}
+.sv-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: #2a4860; margin-top: 3px; display: block;
+}
+
+/* ── KM BAR ── */
+.km-bar { display: flex; width: 100%; height: 5px; }
+
+/* ── CALENDAR ── */
+.cal-pad { padding: 14px 14px 10px; }
+.dow-row {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 4px; margin-bottom: 5px;
+}
+.dow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: #2a4860; text-align: center; padding: 2px 0;
+}
+.day-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.day-cell {
+  border-radius: 9px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 58px; padding: 4px 2px;
+  position: relative;
+}
+.day-cell.other { opacity: 0; pointer-events: none; }
+.day-cell.empty { background: transparent; }
+.day-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,.13); line-height: 1;
+}
+
+/* Activity cells */
+.day-cell.has-act {
+  text-decoration: none; color: inherit;
+  background: #0d2235; border: 1px solid #1a3850;
+  transition: all .15s; cursor: pointer;
+}
+.day-cell.has-act:hover {
+  background: #162d40; border-color: #2a5070;
+  transform: scale(1.06); text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,.4);
+}
+.day-cell.has-act .day-num { color: rgba(255,255,255,.65); }
+
+/* Color variants */
+.day-cell.best { background: #1a2808; border: 1px solid #4a8820; }
+.day-cell.best:hover { background: #253910; border-color: #6aaa30; }
+.day-cell.target { background: #0d2018; border: 1px solid #2a5838; }
+.day-cell.target:hover { background: #152a20; border-color: #3a7848; }
+.day-cell.regular { background: #0d1e2e; border: 1px solid #1a3860; }
+.day-cell.regular:hover { background: #162840; border-color: #2a5090; }
+.day-cell.low { background: #1a0d0a; border: 1px solid #5a2020; }
+.day-cell.low:hover { background: #261410; border-color: #8a3020; }
+/* Giro lungo weekend */
+.day-cell.we { background: #170d28; border: 1px solid #4a2070; cursor: default; }
+.act-dist { font-family: 'JetBrains Mono', monospace; font-size: 6.5px; color: rgba(255,255,255,.35); margin-top: 1px; }
+.act-temp { font-family: 'JetBrains Mono', monospace; font-size: 6px; color: rgba(255,255,255,.2); margin-top: 0; }
+
+.act-time {
+  font-family: 'Barlow Condensed', Impact, Arial, sans-serif;
+  font-size: 15px; font-weight: 900; line-height: 1; margin-top: 2px;
+}
+.act-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; margin-top: 2px;
+}
+.act-rpm {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6.5px; color: rgba(255,255,255,.3); margin-top: 1px;
+}
+.act-fc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6px; color: rgba(255,255,255,.2); margin-top: 0;
+}
+.file-dot {
+  position: absolute; top: 5px; right: 6px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #E15A2C; opacity: .7;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex; justify-content: center; gap: 14px;
+  padding: 10px 0 4px; flex-wrap: wrap;
+}
+.leg {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: rgba(255,255,255,.28);
+}
+.leg-dot { width: 9px; height: 9px; border-radius: 3px; }
+
+/* ── FILE LIST ── */
+.filelist {
+  background: #060f18; margin: 12px 14px 0;
+  border: 1px solid #1a3850; border-radius: 8px; overflow: hidden;
+}
+.filelist-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: #b04800;
+  padding: 10px 14px 8px; border-bottom: 1px solid #1a3850;
+}
+.file-row {
+  display: flex; align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid #0d2235;
+  text-decoration: none;
+  transition: background .12s;
+}
+.file-row:last-child { border-bottom: none; }
+.file-row:hover { background: #0d2235; }
+.file-date {
+  font-family: 'Barlow Condensed', Impact, Arial, sans-serif;
+  font-size: 18px; font-weight: 800; text-transform: uppercase;
+  line-height: 1; width: 100px; flex-shrink: 0;
+}
+.file-meta { flex: 1; }
+.file-time {
+  font-family: 'Barlow Condensed', Impact, Arial, sans-serif;
+  font-size: 20px; font-weight: 900; line-height: 1;
+}
+.file-detail {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px; color: rgba(255,255,255,.3);
+  margin-top: 2px; letter-spacing: .04em;
+}
+.file-verdict {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; padding: 3px 8px; border-radius: 4px;
+}
+.file-arr {
+  font-size: 16px; color: rgba(255,255,255,.3); margin-left: 10px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: #060f18; padding: 12px 20px;
+  display: flex; justify-content: space-between;
+  align-items: center; border-top: 1px solid #1a3850;
+  margin-top: 20px;
+}
+.footer-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; color: #2a4860;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.footer-r {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; color: #E15A2C;
+  font-weight: 700; text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hero">
+  <div class="ey">— ZDPF Bike · DZ AI Coach</div>
+  <div class="ti">LUGLIO<br>'26</div>
+  <div class="co">Microciclo Fiumicino · W2</div>
+  <div class="su">Calendario uscite · 7 giri · Palidoro Braccianese</div>
+</div>
+
+<!-- KM BAR -->
+<div class="km-bar">
+  <div style="flex:0 0 10.6%;background:#2d5c3a"></div>
+  <div style="flex:0 0 24.7%;background:#b04800"></div>
+  <div style="flex:0 0 12.1%;background:#1e4060"></div>
+  <div style="flex:0 0 21.2%;background:#4a2870"></div>
+  <div style="flex:1;background:#1a3850"></div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="ss">
+  <div class="sv"><span class="sv-n">7</span><span class="sv-l">uscite</span></div>
+  <div class="sv"><span class="sv-n" style="color:#E15A2C">41:39</span><span class="sv-l">best Palidoro</span></div>
+  <div class="sv"><span class="sv-n">42:35</span><span class="sv-l">media Palidoro</span></div>
+  <div class="sv"><span class="sv-n" style="color:#5aba7a">8</span><span class="sv-l">PR luglio</span></div>
+</div>
+
+<!-- CALENDAR -->
+<div class="cal-pad">
+  <div class="dow-row">
+    <div class="dow">Lu</div><div class="dow">Ma</div><div class="dow">Me</div>
+    <div class="dow">Gi</div><div class="dow">Ve</div><div class="dow">Sa</div><div class="dow">Do</div>
+  </div>
+  <div class="day-grid">
+
+    <!-- Week 1: 1-5 (offset: Me=2) -->
+    <div class="day-cell other"></div>
+    <div class="day-cell other"></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">1</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">2</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">3</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">4</span></div>
+    <!-- 05 luglio — GIRO LUNGO (Sab) -->
+    <a class="day-cell has-act we" href="debrief_05lug.html">
+      <div class="file-dot" style="background:#8040b0"></div>
+      <span class="day-num">5</span>
+      <div class="act-time" style="color:#8040b0;font-size:12px">94.6km</div>
+      <div class="act-tag" style="color:#6030a0">D+773m</div>
+      <div class="act-dist">RE 160 · 8 PR</div>
+      <div class="act-temp">—°C</div>
+    </a>
+
+    <!-- Week 2: 6-12 -->
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">6</span></div>
+
+    <!-- 7 luglio -->
+    <a class="day-cell has-act low" href="debrief_07lug.html">
+      <div class="file-dot"></div>
+      <span class="day-num">7</span>
+      <div class="act-time" style="color:#8a3020">44:20</div>
+      <div class="act-tag" style="color:#8a3020">BASSO</div>
+      <div class="act-rpm">76.7 rpm</div>
+      <div class="act-fc">140.6 bpm</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">8</span></div>
+
+    <!-- 9 luglio — BEST -->
+    <a class="day-cell has-act best" href="debrief_09lug.html">
+      <div class="file-dot"></div>
+      <span class="day-num">9</span>
+      <div class="act-time" style="color:#E15A2C">41:39</div>
+      <div class="act-tag" style="color:#6aaa30">★ BEST</div>
+      <div class="act-rpm">79.1 rpm</div>
+      <div class="act-fc">146.9 bpm</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">10</span></div>
+
+    <!-- 11 luglio — GIRO LUNGO (Sab) -->
+    <a class="day-cell has-act we" href="debrief_11lug.html">
+      <div class="file-dot" style="background:#8040b0"></div>
+      <span class="day-num">11</span>
+      <div class="act-time" style="color:#8040b0;font-size:12px">86.7km</div>
+      <div class="act-tag" style="color:#6030a0">D+742m</div>
+      <div class="act-dist">RE 128</div>
+      <div class="act-temp">—°C</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">12</span></div>
+
+    <!-- Week 3: 13-19 -->
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">13</span></div>
+
+    <!-- 14 luglio — FILE -->
+    <a class="day-cell has-act regular" href="debrief_14lug.html">
+      <div class="file-dot"></div>
+      <span class="day-num">14</span>
+      <div class="act-time" style="color:#5a7890">42:58</div>
+      <div class="act-rpm">79.2 rpm</div>
+      <div class="act-fc">146.6 bpm</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">15</span></div>
+
+    <!-- 16 luglio — FILE — BASSO -->
+    <a class="day-cell has-act low" href="debrief_16lug.html">
+      <div class="file-dot"></div>
+      <span class="day-num">16</span>
+      <div class="act-time" style="color:#8a3020">44:35</div>
+      <div class="act-tag" style="color:#8a3020">BASSO</div>
+      <div class="act-rpm">78.2 rpm</div>
+      <div class="act-fc">137.5 bpm</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">17</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">18</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">19</span></div>
+
+    <!-- Week 4: 20-26 -->
+    <!-- 20 luglio — FILE -->
+    <a class="day-cell has-act regular" href="debrief_20lug.html">
+      <div class="file-dot"></div>
+      <span class="day-num">20</span>
+      <div class="act-time" style="color:#5a7890">42:03</div>
+      <div class="act-rpm">79.3 rpm</div>
+      <div class="act-fc">141.4 bpm</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">21</span></div>
+
+    <!-- 22 luglio — FILE — FC TARGET -->
+    <a class="day-cell has-act target" href="debrief_22lug.html">
+      <div class="file-dot"></div>
+      <span class="day-num">22</span>
+      <div class="act-time" style="color:#5aba7a">42:17</div>
+      <div class="act-tag" style="color:#3a7848">FC OK</div>
+      <div class="act-rpm">79.8 rpm</div>
+      <div class="act-fc">150.2 bpm</div>
+    </a>
+
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">23</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">24</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">25</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">26</span></div>
+
+    <!-- Week 5: 27-31 -->
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">27</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">28</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">29</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">30</span></div>
+    <div class="day-cell empty"><span class="day-num" style="color:rgba(255,255,255,.09)">31</span></div>
+    <div class="day-cell other"></div>
+    <div class="day-cell other"></div>
+
+  </div>
+
+  <div class="legend" style="margin-top:12px">
+    <div class="leg"><div class="leg-dot" style="background:#4a8820"></div>BEST</div>
+    <div class="leg"><div class="leg-dot" style="background:#2a5838"></div>FC TARGET</div>
+    <div class="leg"><div class="leg-dot" style="background:#1a3860"></div>REGOLARE</div>
+    <div class="leg"><div class="leg-dot" style="background:#5a2020"></div>BASSO</div>
+    <div class="leg"><div style="width:5px;height:5px;border-radius:50%;background:#E15A2C;opacity:.7;flex-shrink:0"></div>FILE DEBRIEF</div>
+    <div class="leg"><div class="leg-dot" style="background:#4a2070"></div>GIRO LUNGO</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">ZDPF Bike &nbsp;·&nbsp; DZ AI Coach &nbsp;·&nbsp; Luglio 2026</div>
+  <div class="footer-r">W2 · Fiumicino</div>
+</div>
+
+</div><!-- /wrap -->
+</body>
+</html>

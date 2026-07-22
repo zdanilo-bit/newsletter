@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debriefing 16 Luglio 2026 — DZ AI Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:  #0B2A42;
+    --sea:   #155A82;
+    --ember: #E15A2C;
+    --gold:  #F0B429;
+    --sand:  #F4EFE3;
+    --border:#E4DDC9;
+    --green: #2A6B42;
+    --red:   #B83030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    font-family: 'Inter', sans-serif;
+    max-width: 480px;
+    margin: 0 auto;
+    color: var(--navy);
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: var(--navy);
+    padding: 28px 20px 0;
+    text-align: center;
+    border-bottom: 3px solid var(--ember);
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: .02em;
+  }
+  .coach-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ember);
+    letter-spacing: .08em;
+    margin-top: 4px;
+  }
+  .hero-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .08em;
+    margin: 10px 0 0;
+    text-transform: uppercase;
+  }
+
+  /* meteo strip */
+  .meteo-strip {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 8px 0 14px;
+    border-bottom: none;
+  }
+  .meteo-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,.3);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .meteo-item span { color: rgba(255,255,255,.6); }
+
+  /* km bar */
+  .km-bar { display: flex; width: 100%; height: 6px; }
+  .km-seg { height: 100%; }
+
+  /* ── GLOBAL STATS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background: var(--sand);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-cell {
+    padding: 14px 6px 12px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    display: block;
+  }
+  .stat-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sea);
+    margin-top: 4px;
+    display: block;
+  }
+  .c-ember { color: var(--ember); }
+  .c-green { color: var(--green); }
+  .c-sea   { color: var(--sea); }
+  .c-navy  { color: var(--navy); }
+  .c-red   { color: var(--red); }
+
+  /* ── ALERT ── */
+  .alert-ritardo {
+    background: #1a0800;
+    border-left: 4px solid var(--ember);
+    padding: 12px 16px;
+    border-bottom: 1px solid #3a1400;
+  }
+  .alert-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ember);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .alert-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #7a4020;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* effort comparison */
+  .effort-bar-wrap {
+    background: #12223a;
+    padding: 10px 16px 12px;
+    border-bottom: 1px solid #1a3850;
+  }
+  .effort-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #3a5870;
+    margin-bottom: 8px;
+  }
+  .effort-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  .effort-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #4a6880;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .effort-track {
+    flex: 1;
+    height: 8px;
+    background: #0d2235;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .effort-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  .effort-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── BLOCCHI ── */
+  .block {
+    background: var(--sand);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .block-accent {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+  }
+  .block-inner { padding: 14px 14px 12px 20px; }
+
+  .block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+  .block-nome {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+  .block-km {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--sea);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .block-meteo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    color: #a09080;
+    margin-top: 3px;
+  }
+  .verdict {
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 4px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .v-warn  { background: #fff3e0; color: #9a5010; border: 1px solid #e0a060; }
+  .v-miss  { background: #fdecea; color: var(--red); border: 1px solid #e08080; }
+  .v-ok    { background: #e8f5ec; color: var(--green); border: 1px solid #70b880; }
+  .v-sea   { background: #e6f0f8; color: var(--sea); border: 1px solid #80aed0; }
+  .v-best  { background: #e8f5ec; color: var(--green); border: 1px solid #70b880; font-weight:800; }
+
+  /* rows */
+  .rows { margin-bottom: 10px; }
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 6px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row-lbl {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: #7a7060;
+    flex: 1;
+  }
+  .row-piano {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #b0a898;
+    white-space: nowrap;
+  }
+  .row-fatto {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: right;
+  }
+  .ok   { color: var(--green); }
+  .miss { color: var(--red); }
+  .warn { color: #b06020; }
+
+  /* badge */
+  .target-badge {
+    display: inline-block;
+    background: #fdecea;
+    border: 1px solid #d07070;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    padding: 4px 10px;
+    margin: 6px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  /* coach note */
+  .coach-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: #3a3028;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+    font-style: italic;
+  }
+  .coach-note strong {
+    font-style: normal;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .coach-note .ko { color: var(--red); font-style: normal; font-weight: 700; }
+  .coach-note .ok-txt { color: var(--green); font-style: normal; font-weight: 700; }
+
+  /* ── STORICO ── */
+  .storico {
+    background: #0d2235;
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid #1a3850;
+  }
+  .storico-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #b04800;
+    margin-bottom: 12px;
+  }
+  .storico-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .storico-col {
+    text-align: center;
+    padding: 0 2px;
+    border-right: 1px solid #1a3850;
+  }
+  .storico-col:last-child { border-right: none; }
+  .st-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #4a6880;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .st-time {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .st-rpm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #4a6880;
+  }
+  .st-fc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #3a5060;
+    margin-top: 1px;
+  }
+  .st-best .st-time { color: var(--ember); font-size: 20px; }
+  .st-best .st-rpm  { color: var(--ember); }
+  .st-today .st-time { color: #e05050; }
+  .st-today .st-rpm  { color: #e05050; }
+  .st-old .st-time   { color: #3a5870; }
+  .st-mid .st-time   { color: #5a7890; }
+
+  /* ── CONCLUSIONI ── */
+  .conclusioni {
+    background: var(--navy);
+    padding: 20px 20px 8px;
+  }
+  .sez-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .sez-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ember);
+  }
+  .sez-titolo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    letter-spacing: .06em;
+    flex: 1;
+  }
+  .sez-line { flex:1; height:1px; background:#1a3850; }
+
+  .concl-item {
+    padding: 14px 0 14px 16px;
+    border-left: 3px solid;
+    margin-bottom: 12px;
+  }
+  .concl-item.c1 { border-color: var(--ember); }
+  .concl-item.c2 { border-color: var(--ember); }
+  .concl-item.c3 { border-color: var(--gold); }
+  .concl-item.c4 { border-color: var(--sea); }
+  .concl-head {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 6px;
+  }
+  .c1 .concl-head { color: var(--ember); }
+  .c2 .concl-head { color: var(--ember); }
+  .c3 .concl-head { color: var(--gold); }
+  .c4 .concl-head { color: #5a90b8; }
+  .concl-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.45);
+  }
+  .concl-body strong { color: rgba(255,255,255,.75); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #060f18;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #1a3850;
+  }
+  .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #2a4860;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ember);
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="hero">
+  <div class="eyebrow">— ZDPF BIKE · ANALISI USCITA</div>
+  <div class="hero-title">DEBRIEFING</div>
+  <div class="coach-label">DZ AI COACH</div>
+  <a href="https://zaker13856.github.io/STRAVA/dz-cycling-lab/" style="display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.4);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;">dz-cycling-lab &rarr;</a>
+  <div class="hero-sub">16 LUGLIO 2026 &nbsp;·&nbsp; PASSO | PIANO GIRO &nbsp;·&nbsp; 66.4 KM</div>
+  <div class="meteo-strip">
+    <div class="meteo-item">TEMP <span>24–28°C</span></div>
+    <div class="meteo-item">VENTO <span>SSE 12–19 km/h</span></div>
+    <div class="meteo-item">PARTENZA <span>06:52</span></div>
+  </div>
+</div>
+
+<!-- km bar -->
+<div class="km-bar">
+  <div class="km-seg" style="width:10.6%;background:#2d5c3a"></div>
+  <div class="km-seg" style="width:24.7%;background:#b04800"></div>
+  <div class="km-seg" style="width:12.1%;background:#1e4060"></div>
+  <div class="km-seg" style="width:21.2%;background:#4a2870"></div>
+  <div class="km-seg" style="width:31.4%;background:#1a3850"></div>
+</div>
+
+<!-- ── GLOBAL STATS ── -->
+<div class="stats-grid">
+  <div class="stat-cell">
+    <span class="stat-val c-ember">80.0</span>
+    <span class="stat-lbl">rpm medio</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-val c-red">93</span>
+    <span class="stat-lbl">rel. effort</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-val c-sea">66.4</span>
+    <span class="stat-lbl">km totali</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-val c-navy" style="font-size:22px">26.6</span>
+    <span class="stat-lbl">km/h moving</span>
+  </div>
+</div>
+
+<!-- ── ALERT RITARDO ── -->
+<div class="alert-ritardo">
+  <div class="alert-title">&#9888; PARTENZA 06:52 — RITARDO 52 MINUTI. TERZA VOLTA.</div>
+  <div class="alert-body">Temperatura ideale 24°C alle 07:00 — sprecata. Rientro alle 09:30 con 28°C e vento SSE in rinforzo.</div>
+</div>
+
+<!-- ── EFFORT COMPARISON ── -->
+<div class="effort-bar-wrap">
+  <div class="effort-label">— Relative effort · confronto luglio 2026</div>
+  <div class="effort-row">
+    <div class="effort-date">09/07</div>
+    <div class="effort-track"><div class="effort-fill" style="width:88%;background:#E15A2C"></div></div>
+    <div class="effort-num" style="color:#E15A2C">141</div>
+  </div>
+  <div class="effort-row">
+    <div class="effort-date">11/07</div>
+    <div class="effort-track"><div class="effort-fill" style="width:88%;background:#4a7090"></div></div>
+    <div class="effort-num" style="color:#4a7090">141</div>
+  </div>
+  <div class="effort-row">
+    <div class="effort-date">14/07</div>
+    <div class="effort-track"><div class="effort-fill" style="width:100%;background:#4a7090"></div></div>
+    <div class="effort-num" style="color:#4a7090">159</div>
+  </div>
+  <div class="effort-row">
+    <div class="effort-date">16/07</div>
+    <div class="effort-track"><div class="effort-fill" style="width:58%;background:#B83030"></div></div>
+    <div class="effort-num" style="color:#B83030">93</div>
+  </div>
+</div>
+
+<!-- ── BLOCCO 1: WARM UP ── -->
+<div class="block">
+  <div class="block-accent" style="background:#2a6b42"></div>
+  <div class="block-inner">
+    <div class="block-header">
+      <div>
+        <div class="block-nome">Warm Up</div>
+        <div class="block-km">km 0 → 7</div>
+        <div class="block-meteo">24°C &middot; vento SSE 12 km/h laterale</div>
+      </div>
+      <span class="verdict v-sea">REGOLARE</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <span class="row-lbl">Cadenza</span>
+        <span class="row-piano">piano: 78 rpm</span>
+        <span class="row-fatto ok">79.2 rpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Frequenza cardiaca</span>
+        <span class="row-piano">piano: &lt;135 bpm</span>
+        <span class="row-fatto ok">~128 bpm</span>
+      </div>
+    </div>
+    <div class="coach-note">
+      Il riscaldamento è stato l'unica cosa eseguita correttamente.
+      FC sotto controllo, cadenza quasi sul target, temperatura ancora fresca (24°C).
+      <strong>Da qui in poi è stato tutto in discesa.</strong> Nel senso sbagliato del termine.
+    </div>
+  </div>
+</div>
+
+<!-- ── BLOCCO 2: PALIDORO ── -->
+<div class="block">
+  <div class="block-accent" style="background:#E15A2C"></div>
+  <div class="block-inner">
+    <div class="block-header">
+      <div>
+        <div class="block-nome">Palidoro Braccianese</div>
+        <div class="block-km">km 7 → 24 &nbsp;·&nbsp; 16.3 km &nbsp;·&nbsp; D+ 281m</div>
+        <div class="block-meteo">24–25°C &middot; vento SSE parzialmente favorevole verso nord</div>
+      </div>
+      <span class="verdict v-miss">MANCATO −2:56</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <span class="row-lbl">Tempo</span>
+        <span class="row-piano">piano: &lt;41:39</span>
+        <span class="row-fatto miss">44:35</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Cadenza</span>
+        <span class="row-piano">piano: 80 rpm</span>
+        <span class="row-fatto warn">78.2 rpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Frequenza cardiaca</span>
+        <span class="row-piano">piano: 145–150 bpm</span>
+        <span class="row-fatto miss">137.5 bpm</span>
+      </div>
+    </div>
+    <div class="target-badge">TARGET &lt; 41:39 — mancato di 2 min 56 sec · PEGGIOR TEMPO LUGLIO</div>
+    <div class="coach-note">
+      44:35. Il tuo peggior Palidoro del microciclo luglio — peggio persino del 07/07 di apertura.
+      FC 137.5 bpm: <span class="ko">non hai mai sfiorato la zona di lavoro</span> (145–150).
+      Il vento SSE questa mattina era parzialmente favorevole su Palidoro (direzione nord-est).
+      Le condizioni erano le migliori del mese.
+      <strong>Non è mancata la forma. È mancata l'intenzione di spingere.</strong>
+      Hai pedalato come se stessi andando a prendere il pane.
+    </div>
+  </div>
+</div>
+
+<!-- ── BLOCCO 3: PIANO ── -->
+<div class="block">
+  <div class="block-accent" style="background:#155A82"></div>
+  <div class="block-inner">
+    <div class="block-header">
+      <div>
+        <div class="block-nome">Piano</div>
+        <div class="block-km">km 24 → 32</div>
+        <div class="block-meteo">25–26°C &middot; vento SSE 12–15 km/h</div>
+      </div>
+      <span class="verdict v-warn">ALTERATO</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <span class="row-lbl">Cadenza</span>
+        <span class="row-piano">piano: 80 rpm</span>
+        <span class="row-fatto ok">~80 rpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Frequenza cardiaca</span>
+        <span class="row-piano">piano: &lt;140 bpm</span>
+        <span class="row-fatto ok">~125 bpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Sosta non pianificata</span>
+        <span class="row-piano">piano: 0 min</span>
+        <span class="row-fatto miss">7 min 36 sec</span>
+      </div>
+    </div>
+    <div class="coach-note">
+      Cadenza ok, FC ok — ma <span class="ko">7 minuti e 36 secondi di sosta</span>
+      nel tratto di recupero non erano previsti.
+      Non è una questione fisiologica: è interrotto il flusso dell'allenamento.
+      Ogni stop spezza il continuum aerobico che stai costruendo.
+    </div>
+  </div>
+</div>
+
+<!-- ── BLOCCO 4: ANGUILLARA ── -->
+<div class="block">
+  <div class="block-accent" style="background:#6a3a9e"></div>
+  <div class="block-inner">
+    <div class="block-header">
+      <div>
+        <div class="block-nome">Anguillara · Vigna di Valle</div>
+        <div class="block-km">km 32 → 46</div>
+        <div class="block-meteo">26–27°C &middot; vento SSE 15–19 km/h &middot; controvento in discesa</div>
+      </div>
+      <span class="verdict v-sea">REGOLARE</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <span class="row-lbl">FC Strappo Vigna di Valle</span>
+        <span class="row-piano">piano: 145–152 bpm</span>
+        <span class="row-fatto ok">152.3 bpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">FC Vigna Valle superiore</span>
+        <span class="row-piano">piano: &lt;155 bpm</span>
+        <span class="row-fatto ok">150.7 bpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Cadenza sulle salite brevi</span>
+        <span class="row-piano">piano: 78+ rpm</span>
+        <span class="row-fatto warn">69–75 rpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Climb finale Tragliatella</span>
+        <span class="row-piano">piano: 78+ rpm</span>
+        <span class="row-fatto ok">80.3 rpm</span>
+      </div>
+    </div>
+    <div class="coach-note">
+      Per la prima volta nessuna esplosione: niente 180 bpm come il 14/07.
+      <span class="ok-txt">Il blocco Anguillara è stato gestito.</span>
+      Problema tecnico ricorrente: cadenza che crolla a 69–75 rpm sulle salite brevi.
+      Sulle salite lunghe (Tragliatella) riesci a tenere 80.3 rpm.
+      <strong>Sulle rampe brevi il colpo di pedale si accorcia</strong> — lavoro specifico da fare.
+      Il vento SSE a 15–19 km/h era controvento nelle discese: ha tamponato le velocità ma non ha inciso sull'intensità di salita.
+    </div>
+  </div>
+</div>
+
+<!-- ── BLOCCO 5: RIENTRO ── -->
+<div class="block">
+  <div class="block-accent" style="background:#3a5a3a"></div>
+  <div class="block-inner">
+    <div class="block-header">
+      <div>
+        <div class="block-nome">Rientro</div>
+        <div class="block-km">km 46 → 66</div>
+        <div class="block-meteo">27–28°C &middot; vento SSE 15–19 km/h &middot; parzialmente contrario verso Passoscuro</div>
+      </div>
+      <span class="verdict v-miss">MANCATO</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <span class="row-lbl">Cadenza SP15 / Braccianese</span>
+        <span class="row-piano">piano: 78 rpm</span>
+        <span class="row-fatto miss">70.3–70.5 rpm</span>
+      </div>
+      <div class="row">
+        <span class="row-lbl">Frequenza cardiaca</span>
+        <span class="row-piano">piano: &lt;148 bpm</span>
+        <span class="row-fatto warn">129.1 bpm</span>
+      </div>
+    </div>
+    <div class="coach-note">
+      <strong>70 rpm per 20 km di pianura.</strong>
+      Il vento SSE parzialmente contrario verso Passoscuro può giustificare
+      una velocità più bassa — <span class="ko">non giustifica 8 rpm sotto il target.</span>
+      Quando la FC scende in Z1, la cadenza non si impone da sola:
+      va comandata. La testa si è spenta prima delle gambe.
+      Questo è l'indicatore più chiaro di fatica mentale, non fisica.
+    </div>
+  </div>
+</div>
+
+<!-- ── STORICO PALIDORO ── -->
+<div class="storico">
+  <div class="storico-title">— Palidoro Braccianese · luglio 2026 · trend</div>
+  <div class="storico-grid">
+    <div class="storico-col st-old">
+      <div class="st-date">07/07</div>
+      <div class="st-time">44:20</div>
+      <div class="st-rpm">76.7 rpm</div>
+      <div class="st-fc">140.6 bpm</div>
+    </div>
+    <div class="storico-col st-best">
+      <div class="st-date">09/07 ★</div>
+      <div class="st-time">41:39</div>
+      <div class="st-rpm">79.1 rpm</div>
+      <div class="st-fc" style="color:#b04800">146.9 bpm</div>
+    </div>
+    <div class="storico-col st-mid">
+      <div class="st-date">11/07</div>
+      <div class="st-time">42:31</div>
+      <div class="st-rpm">77.5 rpm</div>
+      <div class="st-fc">141.2 bpm</div>
+    </div>
+    <div class="storico-col st-mid">
+      <div class="st-date">14/07</div>
+      <div class="st-time">42:58</div>
+      <div class="st-rpm">79.2 rpm</div>
+      <div class="st-fc">146.6 bpm</div>
+    </div>
+    <div class="storico-col st-today">
+      <div class="st-date">16/07</div>
+      <div class="st-time">44:35</div>
+      <div class="st-rpm">78.2 rpm</div>
+      <div class="st-fc" style="color:#904040">137.5 bpm</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONCLUSIONI ── -->
+<div class="conclusioni">
+  <div class="sez-head">
+    <span class="sez-num">—</span>
+    <span class="sez-titolo">Verdetto finale</span>
+    <span class="sez-line"></span>
+  </div>
+
+  <div class="concl-item c1">
+    <div class="concl-head">Palidoro in regressione: tornato al punto di partenza</div>
+    <div class="concl-body">
+      09/07 ➜ 41:39 (best). Oggi ➜ 44:35 — il peggior tempo di luglio.
+      <strong>Tre uscite consecutive in peggioramento dopo il best del 09.</strong>
+      Non è un problema di forma: è un problema di intensità non imposta.
+      FC 137.5 bpm su Palidoro significa che non hai mai provato davvero a spingere.
+    </div>
+  </div>
+
+  <div class="concl-item c2">
+    <div class="concl-head">Relative effort 93: uscita di scarico non dichiarata</div>
+    <div class="concl-body">
+      14/07 = 159. Oggi = 93. <strong>Calo del 41% di effort in 48 ore.</strong>
+      Se era recovery, andava pianificato come tale e dichiarato.
+      Se era allenamento produttivo, non è stato eseguito.
+      Le temperature mattutine (24°C alle 07:00, vento SSE moderato) erano le migliori del mese —
+      le condizioni non c'entrano.
+    </div>
+  </div>
+
+  <div class="concl-item c3">
+    <div class="concl-head">Ritardo: 52 minuti, terza volta consecutiva</div>
+    <div class="concl-body">
+      Non è più un imprevisto — è un pattern.
+      <strong>Ogni 52 minuti di ritardo = rientro con 4°C in più e vento SSE in crescita.</strong>
+      Oggi le 06:00 avrebbero dato 24°C e 12 km/h.
+      Alle 09:30 erano 28°C e 19 km/h parzialmente contrari.
+      La finestra mattutina va rispettata come un appuntamento di gara.
+    </div>
+  </div>
+
+  <div class="concl-item c4">
+    <div class="concl-head">Prossima uscita: decidere prima cosa vuoi fare</div>
+    <div class="concl-body">
+      <strong>Opzione A — recovery dichiarato:</strong> 06:00, Z1/Z2 bassa, cadenza 75+ rpm, nessun obiettivo cronometrico su Palidoro.<br>
+      <strong>Opzione B — allenamento produttivo:</strong> 06:00, FC 145–150 su Palidoro, target sub-42:00 come step realistico. Cadenza 80 costante incluso il rientro.<br>
+      Entrambe sono legittime. <strong>Quello che non funziona è presentarsi alle 06:52 senza aver scelto niente.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA DASHBOARD ── -->
+<div style="background:#060f18;padding:28px 20px 24px;border-top:1px solid #0d2235;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+              letter-spacing:.12em;text-transform:uppercase;color:#155A82;margin-bottom:10px;">
+    — DZ Cycling AI Lab
+  </div>
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;
+              text-transform:uppercase;color:#e8e8e8;line-height:1.1;margin-bottom:6px;">
+    Zone HR · Coach AI · Eddington<br>
+    <span style="color:#F0B429;">Tutti i tuoi dati Strava.</span>
+  </div>
+  <div style="font-family:'Inter',sans-serif;font-size:12px;color:#3a5870;
+              line-height:1.5;margin-bottom:20px;">
+    Dashboard personale aggiornata ad ogni uscita.
+  </div>
+  <a href="https://zaker13856.github.io/STRAVA/dz-cycling-lab/"
+     style="display:flex;align-items:center;justify-content:space-between;
+            background:#0B2A42;border:1px solid #155A82;border-radius:6px;
+            padding:16px 20px;text-decoration:none;">
+    <div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;
+                  text-transform:uppercase;color:#E15A2C;letter-spacing:.04em;">
+        &#9889; Apri la Dashboard
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;
+                  color:#2a4860;margin-top:3px;letter-spacing:.06em;">
+        zaker13856.github.io/STRAVA/dz-cycling-lab
+      </div>
+    </div>
+    <div style="font-size:22px;color:#E15A2C;font-weight:900;">&rarr;</div>
+  </a>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <div class="footer-left">ZDPF Bike &nbsp;·&nbsp; DZ AI Coach &nbsp;·&nbsp; W2 2026</div>
+  <div class="footer-right">Strava · Garmin</div>
+</div>
+
+</body>
+</html>
