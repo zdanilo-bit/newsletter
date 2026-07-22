@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DZ AI Coach · Passo Oscuro · 26 Lug 2026</title>
+<style>*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0B2A42;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#F4EFE3;min-height:100vh}
+.wrap{max-width:540px;margin:0 auto;padding-bottom:40px}
+.hero{background:#0B2A42;padding:28px 20px 0;text-align:center;border-bottom:4px solid #E15A2C}
+.ey{font-family:'Courier New',monospace;font-size:9px;font-weight:700;letter-spacing:.16em;color:#F0B429;text-transform:uppercase;margin-bottom:6px}
+.ti{font-family:Impact,'Arial Black',Arial,sans-serif;font-size:52px;font-weight:900;text-transform:uppercase;line-height:.95;color:#F4EFE3}
+.co{font-family:Impact,'Arial Black',Arial,sans-serif;font-size:19px;font-weight:900;text-transform:uppercase;color:#E15A2C;letter-spacing:.1em;margin-top:4px}
+.su{font-family:'Courier New',monospace;font-size:9px;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin:9px 0 14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;background:#F4EFE3;border-bottom:1px solid #E4DDC9}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:#F4EFE3;border-bottom:1px solid #E4DDC9}
+.gc{padding:13px 6px 11px;text-align:center;border-right:1px solid #E4DDC9}.gc:last-child{border-right:none}
+.gv{font-family:Impact,'Arial Black',Arial,sans-serif;font-size:26px;font-weight:900;line-height:1;display:block}
+.gl{font-family:'Courier New',monospace;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#155A82;margin-top:3px;display:block}
+.blk{background:#F4EFE3;border-bottom:1px solid #E4DDC9;position:relative;overflow:hidden}
+.acc{position:absolute;left:0;top:0;bottom:0;width:5px}
+.bi{padding:14px 16px 12px 22px}
+.bn{font-family:Impact,'Arial Black',Arial,sans-serif;font-size:16px;font-weight:900;text-transform:uppercase;color:#0B2A42;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+.bsub{font-family:'Courier New',monospace;font-size:8px;color:#155A82;text-transform:uppercase;margin-top:-4px;margin-bottom:9px}
+.row{display:flex;align-items:baseline;justify-content:space-between;padding:5px 0;border-bottom:1px solid #E4DDC9;gap:6px}
+.row:last-child{border-bottom:none}
+.rl{font-size:10px;color:#7a7060;flex:1}
+.rp{font-family:'Courier New',monospace;font-size:8px;color:#b0a898;white-space:nowrap}
+.rf{font-family:'Courier New',monospace;font-size:12px;font-weight:700;white-space:nowrap;min-width:80px;text-align:right}
+.tgt{background:#0B2A42;border-bottom:1px solid #1a3850}
+.tgt-h{font-family:'Courier New',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#F0B429;padding:12px 16px 0}
+.tgt-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1a3850;margin:10px 0 0}
+.tgt-cell{background:#0d1e2e;padding:12px 14px}
+.tgt-v{font-family:Impact,'Arial Black',Arial,sans-serif;font-size:28px;font-weight:900;line-height:1;display:block}
+.tgt-l{font-family:'Courier New',monospace;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.35);margin-top:3px;display:block}
+.tgt-d{font-family:'Courier New',monospace;font-size:7.5px;color:rgba(255,255,255,.25);margin-top:5px}
+.coach{background:#F4EFE3;border-bottom:1px solid #E4DDC9}
+.coach-h{font-family:'Courier New',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E15A2C;padding:12px 16px 0}
+.coach-body{padding:10px 16px 14px;font-size:11px;line-height:1.65;color:#3a3028}
+.coach-body strong{color:#0B2A42}
+.route{background:#060f18;border-bottom:1px solid #1a3850;padding:12px 16px}
+.route-l{font-family:'Courier New',monospace;font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#E15A2C;margin-bottom:8px}
+.route-stops{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.rs{font-family:Impact,'Arial Black',Arial,sans-serif;font-size:14px;font-weight:900;text-transform:uppercase;color:#F4EFE3}
+.ra{font-family:'Courier New',monospace;font-size:10px;color:rgba(255,255,255,.25)}
+.note{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-left:4px solid;border-bottom:1px solid rgba(0,0,0,.1);background:#F4EFE3}
+.delta{font-family:'Courier New',monospace;font-size:8px;font-weight:700;color:#2A6B42}
+.ft{background:#060f18;padding:11px 20px;display:flex;justify-content:space-between;border-top:1px solid #1a3850}
+.fl{font-family:'Courier New',monospace;font-size:8px;color:#2a4860;text-transform:uppercase;letter-spacing:.05em}
+.fr{font-family:'Courier New',monospace;font-size:8px;color:#E15A2C;font-weight:700;text-transform:uppercase}</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="ey">— ZDPF Bike · DZ AI Coach · Pre-Uscita</div>
+  <div class="ti">PASSO<br>OSCURO</div>
+  <div class="co">Domenica 26 Luglio 2026</div>
+  <div class="su">Giro del Lago · Manziana · Sasso · ~106 km · D+981m</div>
+</div>
+
+<!-- ROUTE -->
+<div class="route">
+  <div class="route-l">— percorso</div>
+  <div class="route-stops">
+    <span class="rs">Passo Oscuro</span>
+    <span class="ra">→</span>
+    <span class="rs">Lago</span>
+    <span class="ra">→</span>
+    <span class="rs">Vicarello</span>
+    <span class="ra">→</span>
+    <span class="rs">Manziana</span>
+    <span class="ra">→</span>
+    <span class="rs">Sasso</span>
+    <span class="ra">→</span>
+    <span class="rs">Passo Oscuro</span>
+  </div>
+</div>
+
+<!-- RIFERIMENTO 21 GIU -->
+<div class="g4">
+  <div class="gc"><span class="gv" style="color:#155A82">106</span><span class="gl">km</span></div>
+  <div class="gc"><span class="gv" style="color:#2A6B42">981</span><span class="gl">m D+</span></div>
+  <div class="gc"><span class="gv" style="color:#0B2A42">3h55'</span><span class="gl">moving</span></div>
+  <div class="gc"><span class="gv" style="color:#c08820">129</span><span class="gl">FC media giu</span></div>
+</div>
+
+<!-- TARGET DOMENICA -->
+<div class="tgt">
+  <div class="tgt-h">— target domenica · aggiornati su forma luglio</div>
+  <div class="tgt-grid">
+    <div class="tgt-cell">
+      <span class="tgt-v" style="color:#2A6B42">Z1–Z2</span>
+      <span class="tgt-l">FC media giro</span>
+      <span class="tgt-d">128–134 bpm · coerente con 05/11 lug</span>
+    </div>
+    <div class="tgt-cell">
+      <span class="tgt-v" style="color:#F0B429">80+</span>
+      <span class="tgt-l">rpm target</span>
+      <span class="tgt-d">era 75–76 a giugno → ora baseline 79–80</span>
+    </div>
+    <div class="tgt-cell">
+      <span class="tgt-v" style="color:#E15A2C">≤155</span>
+      <span class="tgt-l">FC Vicarello</span>
+      <span class="tgt-d">a giugno 160 bpm → margine migliorato</span>
+    </div>
+    <div class="tgt-cell">
+      <span class="tgt-v" style="color:#c070e0">80%+</span>
+      <span class="tgt-l">Z1–Z2 distribuzione</span>
+      <span class="tgt-d">non forzare Sasso — è dopo 80+ km</span>
+    </div>
+  </div>
+</div>
+
+<!-- SEGMENTI CHIAVE -->
+<div class="blk">
+  <div class="acc" style="background:#E15A2C"></div>
+  <div class="bi">
+    <div class="bn">Segmenti chiave</div>
+    <div class="bsub">Riferimento 21 giugno · target domenica aggiornato</div>
+    <div class="row">
+      <span class="rl">Vicarello Climb 680m</span>
+      <span class="rp">giu: 2'04" · FC 160</span>
+      <span class="rf" style="color:#E15A2C">FC ≤155</span>
+    </div>
+    <div class="row">
+      <span class="rl">Vicarello Completa 829m</span>
+      <span class="rp">giu: 2'22" · FC 158</span>
+      <span class="rf" style="color:#E15A2C">FC ≤155</span>
+    </div>
+    <div class="row">
+      <span class="rl">Vicarello Sprint 1.09km</span>
+      <span class="rp">giu: 2'50" · FC 152</span>
+      <span class="rf" style="color:#2A6B42">FC &lt;150</span>
+    </div>
+    <div class="row">
+      <span class="rl">Manziana</span>
+      <span class="rp">gestire — non svuotarsi</span>
+      <span class="rf" style="color:#c08820">Z2 max</span>
+    </div>
+    <div class="row">
+      <span class="rl">Sasso ⚠</span>
+      <span class="rp">dopo 80+ km — incognita luglio</span>
+      <span class="rf" style="color:#c070e0">cadenza &gt;78</span>
+    </div>
+  </div>
+</div>
+
+<!-- FORMA LUGLIO vs GIUGNO -->
+<div class="blk">
+  <div class="acc" style="background:#2A6B42"></div>
+  <div class="bi">
+    <div class="bn">Forma luglio vs giugno</div>
+    <div class="bsub">Cosa è cambiato in un mese</div>
+    <div class="row">
+      <span class="rl">Cadenza media in piano</span>
+      <span class="rp">giu: 75–76 rpm</span>
+      <span class="rf" style="color:#2A6B42">79–80 rpm <span class="delta">▲+4</span></span>
+    </div>
+    <div class="row">
+      <span class="rl">FC a ritmo sostenuto</span>
+      <span class="rp">Palidoro best: 41:39</span>
+      <span class="rf" style="color:#2A6B42">146–150 bpm</span>
+    </div>
+    <div class="row">
+      <span class="rl">Volume giri lunghi</span>
+      <span class="rp">05 lug 94.6km · 11 lug 86.7km</span>
+      <span class="rf" style="color:#155A82">gambe ok</span>
+    </div>
+    <div class="row">
+      <span class="rl">Cadenza finale (strappi)</span>
+      <span class="rp">11 lug rientro: 77.5 rpm</span>
+      <span class="rf" style="color:#c08820">Sasso: da monitorare</span>
+    </div>
+  </div>
+</div>
+
+<!-- COACH -->
+<div class="coach">
+  <div class="coach-h">— DZ AI Coach · Note domenica</div>
+  <div class="coach-body">
+    <strong>Non è la stessa uscita di giugno.</strong> Arrivi con un mese di ciclo Fiumicino in corpo — cadenza più alta, aerobica solida, ma anche accumulo da luglio. Il giro del Lago è lungo (106km, D+981m) e ha Sasso come ultima insidia dopo già 80+ km.<br><br>
+    <strong>Vicarello: il test della forma.</strong> A giugno eri a FC 160 sul Climb. Ora con la forma luglio FC ≤155 è raggiungibile — ma non forzarlo. Se entri a 156–158, non è un problema: è comunque miglioramento.<br><br>
+    <strong>Cadenza: obiettivo 80+ rpm per tutto il giro.</strong> A giugno eri a 75–76. Ora il tuo baseline è 79–80: tienilo. Su Sasso la cadenza tenderà a cadere — tieni il pedale rotondo anche se perdi velocità.<br><br>
+    <strong>Negative split come a giugno: segnale di gestione corretta.</strong> Se arrivi a Sasso con ancora benzina, il giro è riuscito. <strong>Temperatura: aggiungere dato.</strong>
+  </div>
+</div>
+
+<div class="note" style="border-color:#F0B429">
+  <span style="font-size:15px">🌡</span>
+  <span style="font-size:10.5px;line-height:1.55;color:#3a3028">
+    <strong>Temperatura domenica: —°C</strong> &nbsp;·&nbsp; Bici: Cannondale SuperSix EVO Hi-Mod &nbsp;·&nbsp; Partenza: —:—
+  </span>
+</div>
+
+<div class="ft">
+  <div class="fl">ZDPF Bike · DZ AI Coach · Pre-Uscita</div>
+  <div class="fr">● 26 LUG 2026 · Domenica</div>
+</div>
+
+</div>
+</body>
+</html>

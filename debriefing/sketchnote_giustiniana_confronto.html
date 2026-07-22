@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salita Giustiniana — Cronologia PR 2022–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #F5F0EB;
+  display: flex;
+  justify-content: center;
+  padding: 40px 24px;
+  min-height: 100vh;
+}
+.sk {
+  font-family: 'Caveat', cursive;
+  background: #F5F0EB;
+  padding: 32px 36px 36px;
+  border-radius: 6px;
+  color: #1A1A1A;
+  width: 100%;
+  max-width: 960px;
+}
+.sk-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 6px;
+}
+.oline { border-bottom: 3px solid #F4830A; display: inline; }
+.sk-sub {
+  font-size: 17px;
+  color: #666;
+  margin: 0 0 22px;
+}
+.sk-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 26px;
+}
+.sk-pill {
+  border: 2px solid #1A1A1A;
+  border-radius: 255px 8px 225px 8px/8px 225px 8px 255px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sk-pill-val { font-size: 26px; font-weight: 700; line-height: 1; }
+.sk-pill-lbl { font-size: 14px; color: #777; }
+.sk-pill-o { border-color: #F4830A; }
+.sk-pill-o .sk-pill-val { color: #F4830A; }
+.sk-pill-gold { border-color: #D4A017; }
+.sk-pill-gold .sk-pill-val { color: #D4A017; }
+.sk-pill-green { border-color: #2a9d4e; }
+.sk-pill-green .sk-pill-val { color: #2a9d4e; }
+
+.sk-box {
+  border: 2.5px solid #1A1A1A;
+  border-radius: 12px 255px 12px 225px/225px 12px 255px 12px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+.sk-box-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sk-badge {
+  background: #F4830A;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 9px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.sk-badge-green {
+  background: #2a9d4e;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 9px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.sk-badge-gold {
+  background: #D4A017;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 9px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* TABELLA CONFRONTO */
+.crono-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 17px;
+}
+.crono-table thead tr {
+  border-bottom: 2px solid #F4830A;
+}
+.crono-table thead th {
+  padding: 6px 8px 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #F4830A;
+  text-align: left;
+}
+.crono-table thead th.col-gold {
+  color: #D4A017;
+}
+.crono-table thead th.col-best {
+  color: #F4830A;
+}
+.crono-table thead th:not(:first-child) {
+  text-align: center;
+}
+.crono-table tbody tr {
+  border-bottom: 1px dashed #ccc;
+}
+.crono-table tbody tr:last-child {
+  border-bottom: none;
+}
+.crono-table tbody td {
+  padding: 8px 8px;
+  vertical-align: middle;
+}
+.crono-table tbody td:not(:first-child) {
+  text-align: center;
+}
+.td-seg {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.3;
+}
+.td-seg small {
+  display: block;
+  font-size: 13px;
+  color: #999;
+}
+.td-muted { color: #bbb; font-size: 17px; }
+.td-normal { color: #888; font-size: 17px; }
+.td-good { font-size: 18px; color: #1A1A1A; }
+.td-best {
+  font-weight: 700;
+  font-size: 19px;
+  color: #F4830A;
+}
+.td-gold {
+  font-weight: 700;
+  font-size: 19px;
+  color: #D4A017;
+}
+.td-delta-pos {
+  color: #cc3333;
+  font-size: 16px;
+}
+.td-delta-neg {
+  color: #2a9d4e;
+  font-weight: 700;
+  font-size: 16px;
+}
+.td-delta-gap {
+  color: #F4830A;
+  font-weight: 700;
+  font-size: 16px;
+}
+.td-delta-tiny {
+  color: #888;
+  font-size: 15px;
+}
+.row-gold td { background: rgba(212,160,23,0.06); }
+.row-best td { background: rgba(244,131,10,0.06); }
+
+/* GAP AL RECORD */
+.gap-box {
+  margin-top: 10px;
+  border-top: 1px dashed #F4830A;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.gap-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: #F4830A;
+  line-height: 1;
+}
+.gap-text {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* 3 colonne */
+.sk-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.sk-mini {
+  border: 2px solid #1A1A1A;
+  border-radius: 8px 225px 8px 255px/255px 8px 225px 8px;
+  padding: 13px 14px;
+}
+.sk-mini-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #F4830A;
+  border-bottom: 2px solid #F4830A;
+  padding-bottom: 3px;
+  margin: 0 0 9px;
+}
+
+/* barre comparative */
+.bar-wrap {
+  margin: 6px 0;
+  font-size: 15px;
+}
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.bar-track {
+  background: #e0dbd5;
+  border-radius: 3px;
+  height: 14px;
+  overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 3px; }
+.bar-gold    { background: #D4A017; }
+.bar-muted   { background: #ccc; }
+.bar-mid     { background: #aaa; }
+.bar-orange  { background: #F4830A; }
+
+.big-delta {
+  font-size: 42px;
+  font-weight: 700;
+  color: #2a9d4e;
+  line-height: 1;
+}
+.big-delta-lbl { font-size: 15px; color: #777; }
+
+.hr-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 16px;
+}
+.hr-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px dashed #eee;
+}
+.hr-item:last-child { border-bottom: none; }
+
+.medal-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 5px 0;
+}
+.mdot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid #1A1A1A;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+}
+.m-gold   { background: #D4A017; color: #fff; border-color: #D4A017; }
+.m-silver { background: #9e9e9e; color: #fff; border-color: #9e9e9e; }
+.m-bronze { background: #CD7F32; color: #fff; border-color: #CD7F32; }
+.m-dash   { background: #eee; color: #888; border-color: #ccc; }
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 14px 0 10px;
+}
+.tl-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+.tl-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2.5px solid #1A1A1A;
+  background: #F5F0EB;
+  z-index: 1;
+}
+.tl-dot.gold  { background: #D4A017; border-color: #D4A017; }
+.tl-dot.orange{ background: #F4830A; border-color: #F4830A; }
+.tl-line {
+  flex: 1;
+  height: 2px;
+  background: #ccc;
+  margin-top: -8px;
+}
+.tl-label {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+  text-align: center;
+}
+.tl-time {
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.footer {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #bbb;
+  text-align: right;
+  border-top: 1px dashed #ccc;
+  padding-top: 8px;
+}
+</style>
+</head>
+<body>
+<div class="sk">
+
+  <!-- HEADER -->
+  <div style="margin-bottom:20px">
+    <div class="sk-title">
+      Salita <span class="oline">Giustiniana</span> — Cronologia PR
+    </div>
+    <div class="sk-sub">
+      4 uscite &nbsp;&middot;&nbsp; maggio 2022 → giugno 2026 &nbsp;&middot;&nbsp; Cannondale SuperSix EVO &nbsp;&middot;&nbsp; CRONOSCALATA 9 km +197 m
+    </div>
+  </div>
+
+  <!-- PILLS -->
+  <div class="sk-stats">
+    <div class="sk-pill sk-pill-gold"><span class="sk-pill-val">19'25"</span><span class="sk-pill-lbl">🥇 record ORO</span></div>
+    <div class="sk-pill sk-pill-o"><span class="sk-pill-val">20'22"</span><span class="sk-pill-lbl">🥉 best 2026</span></div>
+    <div class="sk-pill sk-pill-o"><span class="sk-pill-val">57"</span><span class="sk-pill-lbl">gap al PR</span></div>
+    <div class="sk-pill sk-pill-green"><span class="sk-pill-val">−1'38"</span><span class="sk-pill-lbl">stagione 2026</span></div>
+    <div class="sk-pill"><span class="sk-pill-val">175</span><span class="sk-pill-lbl">FC max (ORO)</span></div>
+    <div class="sk-pill"><span class="sk-pill-val">78</span><span class="sk-pill-lbl">rpm (23 giu)</span></div>
+  </div>
+
+  <!-- TABELLA 4 USCITE -->
+  <div class="sk-box">
+    <div class="sk-box-title">
+      &#9654; Cronoscalata Giustiniana — 4 uscite a confronto
+      <span class="sk-badge-gold">ORO: 05/05/2022</span>
+      <span class="sk-badge">GAP: 57" al PR</span>
+    </div>
+
+    <table class="crono-table">
+      <thead>
+        <tr>
+          <th>Metrica</th>
+          <th class="col-gold">05/05/2022 🥇</th>
+          <th>20/05/2026</th>
+          <th>04/06/2026</th>
+          <th class="col-best">23/06/2026 🥉</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-gold">
+          <td class="td-seg">CRONOSCALATA<small>9050 m &nbsp;+197 m</small></td>
+          <td class="td-gold">19'25"</td>
+          <td class="td-muted">22'00"</td>
+          <td class="td-normal">21'25"</td>
+          <td class="td-best">20'22"</td>
+        </tr>
+        <tr>
+          <td class="td-seg">Gap vs ORO<small>rispetto a 19'25"</small></td>
+          <td class="td-gold">—</td>
+          <td class="td-delta-pos">+2'35"</td>
+          <td class="td-delta-pos">+2'00"</td>
+          <td class="td-delta-gap">+0'57"</td>
+        </tr>
+        <tr>
+          <td class="td-seg">FC media<small>bpm</small></td>
+          <td class="td-gold">175 bpm</td>
+          <td class="td-muted">150 bpm</td>
+          <td class="td-normal">160 bpm</td>
+          <td class="td-best">158 bpm</td>
+        </tr>
+        <tr>
+          <td class="td-seg">Cadenza<small>rpm</small></td>
+          <td class="td-gold">77 rpm</td>
+          <td class="td-muted">69 rpm</td>
+          <td class="td-normal">76 rpm</td>
+          <td class="td-best">78 rpm</td>
+        </tr>
+        <tr>
+          <td class="td-seg">PR ottenuto</td>
+          <td class="td-gold">🥇 ORO</td>
+          <td class="td-muted">🥈 Arg</td>
+          <td class="td-muted">—</td>
+          <td class="td-best">🥉 Bronzo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- GAP AL RECORD -->
+    <div class="gap-box">
+      <div>
+        <div class="gap-number">−57"</div>
+        <div style="font-size:15px;color:#bbb">mancano al PR assoluto</div>
+      </div>
+      <div class="gap-text">
+        Il 23 giugno hai percorso la salita in <strong>20'22"</strong><br>
+        Il record assoluto (maggio 2022) &egrave; <strong>19'25"</strong><br>
+        In stagione 2026 hai gi&agrave; guadagnato <strong>1'38"</strong><br>
+        &rarr; La traiettoria porta dritto al record
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 COLONNE -->
+  <div class="sk-3col">
+
+    <!-- BARRE VISIVE -->
+    <div class="sk-mini">
+      <div class="sk-mini-title">Tempo sulla CRONO (4 uscite)</div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="color:#D4A017;font-weight:700">2022 ORO</span><span style="color:#D4A017;font-weight:700">19'25"</span></div>
+        <div class="bar-track"><div class="bar-fill bar-gold" style="width:88.3%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="color:#bbb">20 mag</span><span style="color:#bbb">22'00"</span></div>
+        <div class="bar-track"><div class="bar-fill bar-muted" style="width:100%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="color:#888">04 giu</span><span style="color:#888">21'25"</span></div>
+        <div class="bar-track"><div class="bar-fill bar-mid" style="width:97.3%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="font-weight:700">23 giu</span><span style="color:#F4830A;font-weight:700">20'22"</span></div>
+        <div class="bar-track"><div class="bar-fill bar-orange" style="width:92.6%"></div></div>
+      </div>
+      <div style="margin-top:10px;border-top:1px dashed #ccc;padding-top:8px">
+        <div class="big-delta">−1'38"</div>
+        <div class="big-delta-lbl">guadagnati in stagione 2026</div>
+      </div>
+    </div>
+
+    <!-- FC & CADENZA -->
+    <div class="sk-mini">
+      <div class="sk-mini-title">FC &amp; Cadenza</div>
+      <div class="hr-row">
+        <div class="hr-item">
+          <span style="color:#D4A017;font-weight:700">2022 🥇</span>
+          <span><strong style="color:#D4A017">175 bpm</strong> &nbsp; 77 rpm</span>
+        </div>
+        <div class="hr-item">
+          <span style="color:#bbb">20 mag</span>
+          <span style="color:#bbb">150 bpm &nbsp; 69 rpm</span>
+        </div>
+        <div class="hr-item">
+          <span style="color:#888">04 giu</span>
+          <span style="color:#888">160 bpm &nbsp; 76 rpm</span>
+        </div>
+        <div class="hr-item">
+          <span style="color:#F4830A;font-weight:700">23 giu 🥉</span>
+          <span><strong style="color:#F4830A">158 bpm</strong> &nbsp; 78 rpm</span>
+        </div>
+      </div>
+      <div style="font-size:14px;color:#888;margin-top:10px;border-top:1px dashed #ccc;padding-top:8px;line-height:1.5">
+        Nota: nel 2022 FC 175 = sforzo massimale.<br>
+        Oggi 158 bpm a 20'22" → ancora margine<br>
+        Obiettivo cadenza: &gt;83 rpm
+      </div>
+    </div>
+
+    <!-- ANALISI GAP -->
+    <div class="sk-mini">
+      <div class="sk-mini-title">Rompere il PR</div>
+      <div style="font-size:16px;line-height:1.7;margin-bottom:10px">
+        <div><span style="color:#D4A017;font-weight:700">19'25"</span> &larr; bersaglio</div>
+        <div><span style="color:#F4830A;font-weight:700">20'22"</span> &larr; best 2026</div>
+        <div style="color:#2a9d4e;font-weight:700;font-size:18px">Gap: 57 secondi</div>
+      </div>
+      <div style="font-size:14px;color:#666;line-height:1.6;border-top:1px dashed #ccc;padding-top:8px">
+        A +4.7% di velocit&agrave; in pi&ugrave;<br>
+        oppure: ~3 W/kg → ~4 W/kg<br>
+        FC ORO era 175 (+17 su oggi)<br>
+        <span style="color:#F4830A">→ il motore pu&ograve; ancora spingere</span>
+      </div>
+      <div style="font-size:15px;color:#F4830A;font-style:italic;margin-top:8px">
+        Stagione 2026: −98 s in 3 uscite
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROGRESSIONE STAGIONALE 2026 -->
+  <div class="sk-box" style="margin-bottom:0">
+    <div class="sk-box-title">
+      Progressione stagionale 2026
+      <span class="sk-badge-green">−98 secondi in 5 settimane</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;font-size:16px">
+
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#888;margin-bottom:6px;border-bottom:1px dashed #ccc;padding-bottom:3px">
+          20 mag → 04 giu<br><span style="color:#bbb;font-weight:400;font-size:13px">22'00" → 21'25" = −35"</span>
+        </div>
+        <div style="color:#aaa">FC: 150 → 160 bpm</div>
+        <div style="color:#aaa">Cad: 69 → 76 rpm <span style="color:#3366cc">+7</span></div>
+        <div style="font-size:14px;color:#888;margin-top:4px">ripresa forma + ritmo</div>
+      </div>
+
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#F4830A;margin-bottom:6px;border-bottom:1px dashed #F4830A;padding-bottom:3px">
+          04 giu → 23 giu<br><span style="color:#888;font-weight:400;font-size:13px">21'25" → 20'22" = −63"</span>
+        </div>
+        <div>FC: 160 → 158 bpm <span style="color:#2a9d4e">−2</span></div>
+        <div>Cad: 76 → 78 rpm <span style="color:#3366cc">+2</span></div>
+        <div style="font-size:14px;color:#2a9d4e;margin-top:4px">migliore efficienza aerobica</div>
+      </div>
+
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#D4A017;margin-bottom:6px;border-bottom:1px dashed #D4A017;padding-bottom:3px">
+          Prossima volta<br><span style="color:#888;font-weight:400;font-size:13px">obiettivo: &lt;20'00"</span>
+        </div>
+        <div style="color:#D4A017;font-weight:700">Target: 19'25"</div>
+        <div style="color:#888">FC: spingere a ~170+</div>
+        <div style="font-size:14px;color:#F4830A;margin-top:4px">→ 57" da recuperare</div>
+      </div>
+
+    </div>
+    <div style="font-size:15px;color:#2a9d4e;margin-top:10px;font-style:italic;border-top:1px dashed #2a9d4e;padding-top:8px">
+      &#9650; Traiettoria 2026: −35"→ −63" → prossimo obiettivo &lt;20' per abbattere il record di 4 anni fa
+    </div>
+  </div>
+
+  <div class="footer">
+    Strava API &nbsp;&middot;&nbsp; Garmin FCmax 182 bpm &nbsp;&middot;&nbsp; Attività: 7093578888 (05/05/2022) &nbsp;&middot;&nbsp; 18580965104 (20/05) &nbsp;&middot;&nbsp; 18783956225 (04/06) &nbsp;&middot;&nbsp; 19038978864 (23/06/2026)
+  </div>
+
+</div>
+</body>
+</html>

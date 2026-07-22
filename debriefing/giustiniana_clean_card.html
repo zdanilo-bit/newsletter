@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giustiniana — PR Analisi 2022–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #EBEBEB;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 44px 24px;
+  color: #1A1A1A;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 980px;
+}
+
+/* HEADER */
+.header { margin-bottom: 30px; }
+
+.title {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+  color: #1A1A1A;
+}
+
+.title .accent { color: #FC4C02; }
+
+.subtitle {
+  font-size: 13px;
+  color: #999;
+  margin-top: 7px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* SECTION LABEL */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #aaa;
+  margin-bottom: 11px;
+  margin-top: 6px;
+}
+
+/* HERO STAT CARDS */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-bottom: 26px;
+}
+
+.hero-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 18px 18px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.hero-card.t-gold  { border-top: 3px solid #D4A017; }
+.hero-card.t-orange { border-top: 3px solid #FC4C02; }
+.hero-card.t-green  { border-top: 3px solid #2a9d4e; }
+.hero-card.t-dark   { border-top: 3px solid #1A1A1A; }
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #bbb;
+  margin-bottom: 9px;
+}
+
+.hero-value {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.5px;
+}
+
+.hero-sub {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 7px;
+  font-weight: 500;
+}
+
+.c-gold   { color: #D4A017; }
+.c-orange { color: #FC4C02; }
+.c-green  { color: #2a9d4e; }
+.c-muted  { color: #ccc; }
+.c-mid    { color: #888; }
+
+/* 4 USCITE CARDS */
+.rides-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-bottom: 18px;
+}
+
+.ride-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.ride-card.hl-gold   { border: 1.5px solid #D4A017; box-shadow: 0 2px 20px rgba(212,160,23,0.16); }
+.ride-card.hl-orange { border: 1.5px solid #FC4C02; box-shadow: 0 2px 20px rgba(252,76,2,0.13); }
+
+.ride-head {
+  padding: 13px 16px 10px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.ride-head.bg-gold   { background: #FFFDF0; }
+.ride-head.bg-orange { background: #FFF6F2; }
+.ride-head.bg-gray   { background: #F8F8F8; }
+
+.ride-date {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #999;
+}
+
+.ride-date.gold   { color: #B8860B; }
+.ride-date.orange { color: #FC4C02; }
+
+.ride-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
+.b-gold   { background: #FFF3C0; color: #9A6E00; }
+.b-silver { background: #F2F2F2; color: #777; }
+.b-bronze { background: #FFEEE0; color: #A0522D; }
+.b-none   { background: #F5F5F5; color: #bbb; }
+
+.ride-body { padding: 16px; }
+
+.ride-time {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ride-gap {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.ride-metric {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #bbb;
+  padding: 5px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.ride-metric:last-child { border-bottom: none; }
+
+.ride-metric-val {
+  font-weight: 600;
+  color: #555;
+}
+
+/* GAP HERO */
+.gap-hero {
+  background: #FC4C02;
+  border-radius: 16px;
+  padding: 28px 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 18px;
+}
+
+.gap-big {
+  font-size: 72px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -3px;
+  flex-shrink: 0;
+}
+
+.gap-desc {
+  color: rgba(255,255,255,0.88);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.gap-desc strong { color: #fff; }
+
+/* BARRE TEMPI */
+.bars-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 26px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  margin-bottom: 18px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 13px;
+}
+.bar-row:last-child { margin-bottom: 0; }
+
+.bar-who {
+  font-size: 12px;
+  font-weight: 600;
+  width: 96px;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 9px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.3s;
+}
+
+.bar-val {
+  font-size: 14px;
+  font-weight: 700;
+  width: 72px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* STEPS PROGRESSIONE */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+  margin-bottom: 18px;
+}
+
+.step-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 18px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.step-arrow {
+  font-size: 11px;
+  color: #bbb;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 10px;
+}
+
+.step-delta {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.step-detail {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.7;
+  border-top: 1px solid #f5f5f5;
+  padding-top: 10px;
+}
+
+/* DUE COLONNE */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin-bottom: 18px;
+}
+
+.analysis-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FC4C02;
+  margin-bottom: 16px;
+  padding-bottom: 11px;
+  border-bottom: 2px solid #FC4C02;
+}
+
+.fc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 13px;
+}
+.fc-row:last-child { border-bottom: none; }
+
+.fc-who { color: #999; font-weight: 500; }
+.fc-data { font-weight: 600; color: #444; }
+
+.inline-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.pill-label { font-size: 12px; color: #888; font-weight: 600; }
+.pill-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+
+/* FOOTER */
+.footer {
+  font-size: 11px;
+  color: #bbb;
+  text-align: right;
+  border-top: 1px solid #ddd;
+  padding-top: 14px;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="title">Giustiniana — <span class="accent">Cronoscalata</span></div>
+    <div class="subtitle">9050 m · +197 m · PR Timeline · Maggio 2022 → Giugno 2026 · Cannondale SuperSix EVO Hi-Mod</div>
+  </div>
+
+  <!-- HERO STATS -->
+  <div class="hero-grid">
+    <div class="hero-card t-gold">
+      <div class="hero-label">Record ORO</div>
+      <div class="hero-value c-gold">19'25"</div>
+      <div class="hero-sub">05 maggio 2022</div>
+    </div>
+    <div class="hero-card t-orange">
+      <div class="hero-label">Best stagione 2026</div>
+      <div class="hero-value c-orange">20'22"</div>
+      <div class="hero-sub">23 giugno · Bronzo</div>
+    </div>
+    <div class="hero-card t-orange">
+      <div class="hero-label">Gap al record</div>
+      <div class="hero-value c-orange">57"</div>
+      <div class="hero-sub">da abbattere</div>
+    </div>
+    <div class="hero-card t-green">
+      <div class="hero-label">Progresso 2026</div>
+      <div class="hero-value c-green">−98"</div>
+      <div class="hero-sub">3 uscite · 5 settimane</div>
+    </div>
+  </div>
+
+  <!-- 4 USCITE -->
+  <div class="section-label">Le 4 uscite a confronto — Segment CRONOSCALATA GIUSTINIANA</div>
+  <div class="rides-grid">
+
+    <div class="ride-card hl-gold">
+      <div class="ride-head bg-gold">
+        <div class="ride-date gold">05 / 05 / 2022</div>
+        <div class="ride-badge b-gold">ORO — Record assoluto</div>
+      </div>
+      <div class="ride-body">
+        <div class="ride-time c-gold">19'25"</div>
+        <div class="ride-gap" style="color:#B8860B;">Miglior tempo di sempre</div>
+        <div class="ride-metric"><span>FC media</span><span class="ride-metric-val" style="color:#D4A017;">175 bpm</span></div>
+        <div class="ride-metric"><span>Cadenza</span><span class="ride-metric-val">77 rpm</span></div>
+        <div class="ride-metric"><span>% FCmax</span><span class="ride-metric-val" style="color:#D4A017;">96%</span></div>
+        <div class="ride-metric"><span>Zona FC</span><span class="ride-metric-val" style="color:#ED6445;font-weight:700;">Z4 Threshold</span></div>
+      </div>
+    </div>
+
+    <div class="ride-card">
+      <div class="ride-head bg-gray">
+        <div class="ride-date">20 / 05 / 2026</div>
+        <div class="ride-badge b-silver">Argento (al momento)</div>
+      </div>
+      <div class="ride-body">
+        <div class="ride-time c-muted">22'00"</div>
+        <div class="ride-gap" style="color:#cc3333;">+2'35" vs ORO</div>
+        <div class="ride-metric"><span>FC media</span><span class="ride-metric-val">150 bpm</span></div>
+        <div class="ride-metric"><span>Cadenza</span><span class="ride-metric-val">69 rpm</span></div>
+        <div class="ride-metric"><span>% FCmax</span><span class="ride-metric-val">82%</span></div>
+        <div class="ride-metric"><span>Zona FC</span><span class="ride-metric-val" style="color:#F6AD55;font-weight:700;">Z3 Tempo</span></div>
+      </div>
+    </div>
+
+    <div class="ride-card">
+      <div class="ride-head bg-gray">
+        <div class="ride-date">04 / 06 / 2026</div>
+        <div class="ride-badge b-none">Nessun PR</div>
+      </div>
+      <div class="ride-body">
+        <div class="ride-time c-mid">21'25"</div>
+        <div class="ride-gap" style="color:#cc3333;">+2'00" vs ORO</div>
+        <div class="ride-metric"><span>FC media</span><span class="ride-metric-val">160 bpm</span></div>
+        <div class="ride-metric"><span>Cadenza</span><span class="ride-metric-val">76 rpm</span></div>
+        <div class="ride-metric"><span>% FCmax</span><span class="ride-metric-val">88%</span></div>
+        <div class="ride-metric"><span>Zona FC</span><span class="ride-metric-val" style="color:#F6AD55;font-weight:700;">Z3 Tempo</span></div>
+      </div>
+    </div>
+
+    <div class="ride-card hl-orange">
+      <div class="ride-head bg-orange">
+        <div class="ride-date orange">23 / 06 / 2026</div>
+        <div class="ride-badge b-bronze">Bronzo · Best 2026</div>
+      </div>
+      <div class="ride-body">
+        <div class="ride-time c-orange">20'22"</div>
+        <div class="ride-gap" style="color:#FC4C02;">+0'57" vs ORO</div>
+        <div class="ride-metric"><span>FC media</span><span class="ride-metric-val" style="color:#FC4C02;">158 bpm</span></div>
+        <div class="ride-metric"><span>Cadenza</span><span class="ride-metric-val">78 rpm</span></div>
+        <div class="ride-metric"><span>% FCmax</span><span class="ride-metric-val">87%</span></div>
+        <div class="ride-metric"><span>Zona FC</span><span class="ride-metric-val" style="color:#F6AD55;font-weight:700;">Z3 Tempo</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GAP HERO BAR -->
+  <div class="gap-hero">
+    <div class="gap-big">57"</div>
+    <div class="gap-desc">
+      Il <strong>23 giugno</strong> hai percorso la salita in <strong>20'22"</strong> — Bronzo di segmento<br>
+      Il record assoluto è <strong>19'25"</strong> del <strong>5 maggio 2022</strong><br>
+      In stagione 2026 hai già guadagnato <strong>1'38"</strong> in sole 3 uscite<br>
+      → La traiettoria porta dritto al record
+    </div>
+  </div>
+
+  <!-- BARRE TEMPI -->
+  <div class="section-label">Andamento dei tempi — tutti riferiti al più lento (22'00" = 100%)</div>
+  <div class="bars-card">
+    <div class="bar-row">
+      <div class="bar-who c-gold" style="font-weight:700;">2022 ORO</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:88.3%;background:#D4A017;"></div>
+      </div>
+      <div class="bar-val c-gold">19'25"</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-who c-muted">20 mag 2026</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100%;background:#e0e0e0;"></div>
+      </div>
+      <div class="bar-val c-muted">22'00"</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-who c-mid">04 giu 2026</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:97.3%;background:#bbb;"></div>
+      </div>
+      <div class="bar-val c-mid">21'25"</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-who c-orange" style="font-weight:700;">23 giu 2026</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:92.6%;background:#FC4C02;"></div>
+      </div>
+      <div class="bar-val c-orange">20'22"</div>
+    </div>
+  </div>
+
+  <!-- ZONE STRAVA UFFICIALI -->
+  <div class="section-label">Zone ufficiali Strava — FCmax 182 bpm &nbsp;·&nbsp; FTP 224 W (certificato)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:18px;">
+
+    <!-- Zone FC -->
+    <div class="analysis-card">
+      <div class="card-title">Zone frequenza cardiaca</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:6px;height:36px;border-radius:3px;background:#63B3ED;flex-shrink:0;"></div>
+          <div style="flex:1;"><div style="font-size:11px;color:#bbb;">Z1 Recovery</div><div style="font-size:13px;font-weight:700;color:#1A1A1A;">0–119 bpm</div></div>
+          <div style="font-size:11px;color:#bbb;text-align:right;">—</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:6px;height:36px;border-radius:3px;background:#48BB78;flex-shrink:0;"></div>
+          <div style="flex:1;"><div style="font-size:11px;color:#bbb;">Z2 Endurance</div><div style="font-size:13px;font-weight:700;color:#1A1A1A;">120–148 bpm</div></div>
+          <div style="font-size:11px;color:#bbb;text-align:right;">—</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:#FFFBF0;border-radius:8px;padding:4px 6px;">
+          <div style="width:6px;height:36px;border-radius:3px;background:#F6AD55;flex-shrink:0;"></div>
+          <div style="flex:1;"><div style="font-size:11px;color:#B7791F;font-weight:600;">Z3 Tempo</div><div style="font-size:13px;font-weight:700;color:#1A1A1A;">149–163 bpm</div></div>
+          <div style="font-size:11px;font-weight:700;color:#F6AD55;text-align:right;">20/05 · 04/06 · 23/06</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:#FFF8F5;border-radius:8px;padding:4px 6px;">
+          <div style="width:6px;height:36px;border-radius:3px;background:#ED6445;flex-shrink:0;"></div>
+          <div style="flex:1;"><div style="font-size:11px;color:#C05621;font-weight:600;">Z4 Threshold</div><div style="font-size:13px;font-weight:700;color:#1A1A1A;">164–178 bpm</div></div>
+          <div style="font-size:11px;font-weight:700;color:#ED6445;text-align:right;">ORO 2022</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:6px;height:36px;border-radius:3px;background:#C53030;flex-shrink:0;"></div>
+          <div style="flex:1;"><div style="font-size:11px;color:#bbb;">Z5 Anaerobic</div><div style="font-size:13px;font-weight:700;color:#1A1A1A;">179+ bpm</div></div>
+          <div style="font-size:11px;color:#bbb;text-align:right;">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone Potenza -->
+    <div class="analysis-card">
+      <div class="card-title">Zone potenza &nbsp;·&nbsp; FTP 224 W certificato</div>
+      <div style="background:#FFF5F2;border:1px solid #FFCBB0;border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#aaa;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">FTP Strava</div>
+          <div style="font-size:28px;font-weight:800;color:#FC4C02;letter-spacing:-1px;line-height:1;">224 W</div>
+        </div>
+        <div style="text-align:right;font-size:12px;color:#999;line-height:1.6;">
+          Record ORO<br>
+          <strong style="color:#FC4C02;">~260 W = 116% FTP</strong><br>
+          Zona VO2max (Z5)
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5;"><span style="color:#888;">Z1 Recovery</span><span style="font-weight:600;">0–123 W</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5;"><span style="color:#888;">Z2 Endurance</span><span style="font-weight:600;">124–168 W</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5;"><span style="color:#888;">Z3 Tempo</span><span style="font-weight:600;">169–202 W</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5;background:#FFFBF5;padding:4px 6px;border-radius:4px;"><span style="color:#888;">Z4 Threshold</span><span style="font-weight:700;color:#FC4C02;">203–235 W &nbsp;← 23/06</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5;background:#FFF5F2;padding:4px 6px;border-radius:4px;"><span style="color:#ED6445;font-weight:600;">Z5 VO2max</span><span style="font-weight:700;color:#ED6445;">236–269 W &nbsp;← ORO</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5;"><span style="color:#888;">Z6 Anaerobic</span><span style="font-weight:600;">270–336 W</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;"><span style="color:#888;">Z7 Neuromuscular</span><span style="font-weight:600;">337+ W</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESSIONE 2026 -->
+  <div class="section-label">Progressione stagionale 2026</div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-arrow">20 mag → 04 giu</div>
+      <div class="step-delta c-green">−35"</div>
+      <div class="step-detail">
+        FC: 150 → 160 bpm (+10)<br>
+        Cad: 69 → 76 rpm (+7)<br>
+        Ripresa della forma + ritmo gamba
+      </div>
+    </div>
+    <div class="step-card" style="border-left: 3px solid #FC4C02;">
+      <div class="step-arrow" style="color:#FC4C02;">04 giu → 23 giu</div>
+      <div class="step-delta c-orange">−63"</div>
+      <div class="step-detail">
+        FC: 160 → 158 bpm (−2)<br>
+        Cad: 76 → 78 rpm (+2)<br>
+        Migliore efficienza aerobica
+      </div>
+    </div>
+    <div class="step-card" style="border-left: 3px solid #D4A017; background:#FFFDF5;">
+      <div class="step-arrow" style="color:#D4A017;">Prossima uscita</div>
+      <div class="step-delta c-gold">19'25"</div>
+      <div class="step-detail">
+        Target: battere l'ORO 2022<br>
+        FC: spingere a 170+ bpm<br>
+        → 57" da recuperare
+      </div>
+    </div>
+  </div>
+
+  <!-- FC & ANALISI -->
+  <div class="two-col">
+
+    <div class="analysis-card">
+      <div class="card-title">FC &amp; Cadenza — confronto uscite</div>
+      <div class="fc-row">
+        <span class="fc-who" style="color:#D4A017;font-weight:700;">2022 — ORO</span>
+        <span class="fc-data" style="color:#D4A017;">175 bpm &nbsp;·&nbsp; 77 rpm</span>
+      </div>
+      <div class="fc-row">
+        <span class="fc-who">20 mag 2026</span>
+        <span class="fc-data" style="color:#ccc;">150 bpm &nbsp;·&nbsp; 69 rpm</span>
+      </div>
+      <div class="fc-row">
+        <span class="fc-who">04 giu 2026</span>
+        <span class="fc-data" style="color:#888;">160 bpm &nbsp;·&nbsp; 76 rpm</span>
+      </div>
+      <div class="fc-row">
+        <span class="fc-who" style="color:#FC4C02;font-weight:700;">23 giu 2026</span>
+        <span class="fc-data" style="color:#FC4C02;">158 bpm &nbsp;·&nbsp; 78 rpm</span>
+      </div>
+      <div style="margin-top:14px;font-size:12px;color:#aaa;line-height:1.7;border-top:1px solid #f5f5f5;padding-top:13px;">
+        Nel 2022 FC 175 = 96% FCmax — sforzo massimale.<br>
+        Il 23 giu 158 bpm a 20'22" → c'è ancora margine cardiaco.<br>
+        <span style="color:#FC4C02;font-weight:600;">Obiettivo cadenza: &gt;83 rpm per il record</span>
+      </div>
+    </div>
+
+    <div class="analysis-card">
+      <div class="card-title">Rompere il PR</div>
+      <div class="inline-pill" style="background:#FFFDF0;border:1px solid #EDD98A;">
+        <span class="pill-label">Bersaglio</span>
+        <span class="pill-value c-gold">19'25"</span>
+      </div>
+      <div class="inline-pill" style="background:#FFF5F2;border:1px solid #FFCBB0;">
+        <span class="pill-label">Best 2026</span>
+        <span class="pill-value c-orange">20'22"</span>
+      </div>
+      <div style="font-size:13px;color:#777;line-height:1.8;padding:13px 15px;background:#F8F8F8;border-radius:10px;margin-top:4px;">
+        Serve <strong style="color:#1A1A1A;">+4.7% di velocità</strong> in più<br>
+        Potenza stimata: <strong style="color:#ED6445;">~260 W — Z5 VO2max</strong><br>
+        FTP certificato Strava: <strong style="color:#1A1A1A;">224 W</strong> → 116% FTP<br>
+        FC target: <strong style="color:#1A1A1A;">170+ bpm</strong> (Z4 Threshold)<br>
+        <span style="color:#FC4C02;font-weight:700;">Stagione 2026: −98" in 3 uscite →</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Strava API &nbsp;·&nbsp; Garmin FCmax 182 bpm &nbsp;·&nbsp;
+    Attività: 7093578888 (05/05/2022) · 18580965104 (20/05) · 18783956225 (04/06) · 19038978864 (23/06/2026)
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passoscuro · 21 Giugno 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #EBEBEB;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 44px 24px;
+  color: #1A1A1A;
+}
+
+.wrap { width: 100%; max-width: 980px; }
+
+.header { margin-bottom: 30px; }
+.title {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+}
+.title .accent { color: #FC4C02; }
+.subtitle {
+  font-size: 13px;
+  color: #999;
+  margin-top: 7px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #aaa;
+  margin-bottom: 11px;
+  margin-top: 6px;
+}
+
+.hero-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 16px 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+}
+.hero-card.t-gold   { border-top: 3px solid #D4A017; }
+.hero-card.t-orange { border-top: 3px solid #FC4C02; }
+.hero-card.t-green  { border-top: 3px solid #2a9d4e; }
+.hero-card.t-dark   { border-top: 3px solid #555; }
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+.hero-value {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.hero-sub { font-size: 12px; color: #bbb; margin-top: 6px; font-weight: 500; }
+
+.c-gold   { color: #D4A017; }
+.c-orange { color: #FC4C02; }
+.c-green  { color: #2a9d4e; }
+.c-muted  { color: #ccc; }
+.c-mid    { color: #888; }
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FC4C02;
+  margin-bottom: 16px;
+  padding-bottom: 11px;
+  border-bottom: 2px solid #FC4C02;
+}
+
+.fc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 13px;
+}
+.fc-row:last-child { border-bottom: none; }
+.fc-who  { color: #999; font-weight: 500; }
+.fc-data { font-weight: 600; color: #444; }
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 13px;
+}
+.bar-row:last-child { margin-bottom: 0; }
+
+.bar-who {
+  font-size: 12px;
+  font-weight: 600;
+  width: 70px;
+  flex-shrink: 0;
+}
+.bar-track {
+  flex: 1;
+  height: 9px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 5px; }
+.bar-val {
+  font-size: 14px;
+  font-weight: 700;
+  width: 76px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.medal-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.medal-item:last-child { border-bottom: none; }
+
+.medal-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.medal-count {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.medal-label { font-size: 12px; color: #bbb; font-weight: 500; }
+
+.obj-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 13px;
+}
+.obj-item:last-child { border-bottom: none; }
+
+.obj-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FC4C02;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.obj-text { color: #555; line-height: 1.5; }
+.obj-text strong { color: #1A1A1A; }
+
+.footer {
+  font-size: 11px;
+  color: #bbb;
+  text-align: right;
+  border-top: 1px solid #ddd;
+  padding-top: 14px;
+  margin-top: 6px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="title">Passoscuro &rarr; Lago &rarr; Manziana &rarr; <span class="accent">Sasso</span> &rarr; Passoscuro</div>
+    <div class="subtitle">21 Giugno 2026 &nbsp;&middot;&nbsp; Cannondale SuperSix EVO Hi-Mod &nbsp;&middot;&nbsp; Ultegra 2&times; &nbsp;&middot;&nbsp; FCmax 182 bpm</div>
+  </div>
+
+  <!-- HERO STATS 4+4 -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:26px;">
+    <div class="hero-card t-dark">
+      <div class="hero-label">Distanza</div>
+      <div class="hero-value">106</div>
+      <div class="hero-sub">km</div>
+    </div>
+    <div class="hero-card t-dark">
+      <div class="hero-label">Dislivello</div>
+      <div class="hero-value">+981</div>
+      <div class="hero-sub">m D+</div>
+    </div>
+    <div class="hero-card t-dark">
+      <div class="hero-label">Moving time</div>
+      <div class="hero-value">3h55'</div>
+      <div class="hero-sub">in movimento</div>
+    </div>
+    <div class="hero-card t-dark">
+      <div class="hero-label">Velocità media</div>
+      <div class="hero-value">27.0</div>
+      <div class="hero-sub">km/h</div>
+    </div>
+    <div class="hero-card t-dark">
+      <div class="hero-label">FC media</div>
+      <div class="hero-value">129</div>
+      <div class="hero-sub">bpm &nbsp;&middot;&nbsp; Z1–Z2</div>
+    </div>
+    <div class="hero-card t-dark">
+      <div class="hero-label">Cadenza media</div>
+      <div class="hero-value">76</div>
+      <div class="hero-sub">rpm &nbsp; &uarr; vs 73</div>
+    </div>
+    <div class="hero-card t-orange">
+      <div class="hero-label">PR totali</div>
+      <div class="hero-value c-orange">11</div>
+      <div class="hero-sub">segmenti</div>
+    </div>
+    <div class="hero-card t-gold" style="background:#FFFDF5;">
+      <div class="hero-label" style="color:#B8860B;">ORO Vicarello</div>
+      <div class="hero-value c-gold">&times;3</div>
+      <div class="hero-sub" style="color:#B8860B;">dato della settimana</div>
+    </div>
+  </div>
+
+  <!-- VICARELLO: CONFRONTO 13 vs 21 GIUGNO -->
+  <div class="section-label">Il dato della settimana — Vicarello: pi&ugrave; veloce, meno battiti</div>
+  <div class="card" style="margin-bottom:18px;">
+
+    <div style="display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:start;">
+
+      <!-- 13 giugno -->
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#bbb;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #e8e8e8;">13 Giugno 2026</div>
+        <div class="fc-row">
+          <span class="fc-who">Climb 680m</span>
+          <span class="fc-data" style="color:#aaa;">2'12" &nbsp;&middot;&nbsp; FC 167</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-who">Completa 829m</span>
+          <span class="fc-data" style="color:#aaa;">2'32" &nbsp;&middot;&nbsp; FC 165</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-who">Sprint 1.09km</span>
+          <span class="fc-data" style="color:#aaa;">2'57" &nbsp;&middot;&nbsp; FC 162</span>
+        </div>
+      </div>
+
+      <!-- Freccia -->
+      <div style="display:flex;align-items:center;justify-content:center;padding-top:44px;">
+        <div style="font-size:24px;color:#FC4C02;font-weight:800;">&rarr;</div>
+      </div>
+
+      <!-- 21 giugno -->
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#FC4C02;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #FC4C02;">21 Giugno 2026 &#9733;</div>
+        <div class="fc-row">
+          <span class="fc-who">Climb 680m</span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span style="font-weight:700;color:#D4A017;">2'04"</span>
+            <span style="color:#777;font-size:12px;">&middot; FC 160</span>
+            <span style="color:#2a9d4e;font-size:11px;font-weight:700;">&minus;8" &minus;7bpm</span>
+          </span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-who">Completa 829m</span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span style="font-weight:700;color:#D4A017;">2'22"</span>
+            <span style="color:#777;font-size:12px;">&middot; FC 158</span>
+            <span style="color:#2a9d4e;font-size:11px;font-weight:700;">&minus;10" &minus;7bpm</span>
+          </span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-who">Sprint 1.09km</span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span style="font-weight:700;color:#D4A017;">2'50"</span>
+            <span style="color:#777;font-size:12px;">&middot; FC 152</span>
+            <span style="color:#2a9d4e;font-size:11px;font-weight:700;">&minus;7" &minus;10bpm</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:12px 16px;background:#FFF5F2;border-radius:10px;border:1px solid #FFCBB0;font-size:13px;color:#FC4C02;font-weight:600;">
+      &rarr; Stesso sforzo percepito, risultato migliore — efficienza aerobica in crescita
+    </div>
+  </div>
+
+  <!-- 3 MINI CARD -->
+  <div class="section-label">Cadenza &middot; Medaglie PR &middot; Prossimi obiettivi</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:18px;">
+
+    <!-- Cadenza -->
+    <div class="card">
+      <div class="card-title">Cadenza rpm</div>
+      <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:12px;">
+        <span style="font-size:40px;font-weight:800;letter-spacing:-2px;color:#aaa;">73</span>
+        <span style="font-size:22px;color:#ddd;font-weight:600;">&rarr;</span>
+        <span style="font-size:40px;font-weight:800;letter-spacing:-2px;color:#FC4C02;">76</span>
+      </div>
+      <div style="font-size:12px;color:#bbb;margin-bottom:12px;border-bottom:1px solid #f5f5f5;padding-bottom:10px;">media tra le uscite</div>
+      <div style="font-size:13px;color:#555;line-height:1.7;">
+        Obiettivo: <strong style="color:#1A1A1A;">83–88 rpm</strong><br>
+        in piano a 30 km/h<br>
+        <span style="color:#2a9d4e;font-weight:700;">Sprint: gi&agrave; 91 rpm!</span>
+      </div>
+    </div>
+
+    <!-- Medaglie -->
+    <div class="card">
+      <div class="card-title">Medaglie PR &mdash; 11 totali</div>
+      <div class="medal-item">
+        <div class="medal-dot" style="background:#FFF3C0;color:#9A6E00;">1</div>
+        <div>
+          <div class="medal-count c-gold">&times;3</div>
+          <div class="medal-label">ORO &mdash; Vicarello</div>
+        </div>
+      </div>
+      <div class="medal-item">
+        <div class="medal-dot" style="background:#F2F2F2;color:#777;">2</div>
+        <div>
+          <div class="medal-count c-mid">&times;1</div>
+          <div class="medal-label">Argento</div>
+        </div>
+      </div>
+      <div class="medal-item">
+        <div class="medal-dot" style="background:#FFEEE0;color:#A0522D;">3</div>
+        <div>
+          <div class="medal-count" style="color:#CD7F32;">&times;7</div>
+          <div class="medal-label">Bronzo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Obiettivi -->
+    <div class="card">
+      <div class="card-title">Prossima uscita</div>
+      <div class="obj-item">
+        <div class="obj-num">1</div>
+        <div class="obj-text"><strong>Cadenza</strong><br>83 rpm min in piano</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-num">2</div>
+        <div class="obj-text"><strong>Vicarello</strong><br>punta FC &lt;155 bpm</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-num">3</div>
+        <div class="obj-text"><strong>Zone FC</strong><br>&gt;80% in Z1–Z2</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LAP PROGRESSIONE -->
+  <div class="section-label">Progressione lap — negative split &uarr;</div>
+  <div class="card" style="margin-bottom:18px;">
+
+    <div style="margin-bottom:20px;">
+      <div class="bar-row">
+        <div class="bar-who c-muted">Lap 1</div>
+        <div class="bar-track"><div class="bar-fill" style="width:69.5%;background:#ddd;"></div></div>
+        <div class="bar-val c-muted">23.2 km/h</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-who c-mid">Lap 2</div>
+        <div class="bar-track"><div class="bar-fill" style="width:78.1%;background:#bbb;"></div></div>
+        <div class="bar-val c-mid">26.1 km/h</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-who" style="color:#777;">Lap 3</div>
+        <div class="bar-track"><div class="bar-fill" style="width:88.0%;background:#888;"></div></div>
+        <div class="bar-val" style="color:#555;">29.4 km/h</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-who c-orange" style="font-weight:700;">Lap 4 &#9733;</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#FC4C02;"></div></div>
+        <div class="bar-val c-orange">33.4 km/h</div>
+      </div>
+    </div>
+
+    <!-- Dettaglio lap 4 colonne -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-top:1px solid #f0f0f0;padding-top:16px;">
+      <div style="text-align:center;">
+        <div style="font-size:11px;color:#ccc;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Lap 1</div>
+        <div style="font-size:12px;color:#ccc;line-height:1.8;">26.6 km<br>135 W<br>75 rpm</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:11px;color:#bbb;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Lap 2</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">35.3 km<br>141 W<br>75 rpm</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:11px;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Lap 3</div>
+        <div style="font-size:12px;color:#666;line-height:1.8;">23.7 km<br>160 W<br>76 rpm</div>
+      </div>
+      <div style="text-align:center;background:#FFF5F2;border-radius:10px;padding:12px 8px;">
+        <div style="font-size:11px;color:#FC4C02;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Lap 4 &#9733;</div>
+        <div style="font-size:13px;color:#FC4C02;font-weight:700;line-height:1.8;">20.3 km<br>193 W<br>81 rpm</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:12px 16px;background:#F2FFF6;border-radius:10px;font-size:13px;color:#2a9d4e;font-weight:600;border:1px solid #B8E6C0;">
+      &uarr; Finisce forte — sforzo distribuito bene &nbsp;&middot;&nbsp; Negative split: 23.2 &rarr; 33.4 km/h
+    </div>
+  </div>
+
+  <div class="footer">
+    Strava &nbsp;&middot;&nbsp; Garmin &nbsp;&middot;&nbsp; FCmax 182 bpm &nbsp;&middot;&nbsp; dati reali API &nbsp;&middot;&nbsp; 21 giugno 2026
+  </div>
+
+</div>
+</body>
+</html>

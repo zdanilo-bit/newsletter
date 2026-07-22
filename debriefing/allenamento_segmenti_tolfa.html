@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allenamento Segmenti — Percorso 1 → PR Tolfa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #EBEBEB;
+  padding: 40px 24px 60px;
+  color: #1A1A1A;
+}
+.container { max-width: 1020px; margin: 0 auto; }
+
+/* HEADER */
+.page-header { margin-bottom: 28px; }
+.page-title { font-size: 28px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 4px; }
+.page-title span { color: #FC4C02; }
+.page-sub { font-size: 13px; color: #888; font-weight: 500; }
+
+/* CARD */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 20px 24px;
+}
+.card-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #AAA; margin-bottom: 10px;
+}
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #AAA; margin: 24px 0 10px;
+}
+
+/* HERO */
+.hero-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
+.hero-card {
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 16px 18px;
+}
+.hero-val { font-size: 38px; font-weight: 900; line-height: 1; letter-spacing: -1px; }
+.hero-val.orange { color: #FC4C02; }
+.hero-val.green  { color: #2a9d4e; }
+.hero-val.red    { color: #E53E3E; }
+.hero-val.blue   { color: #4A90D9; }
+.hero-sub { font-size: 12px; color: #888; margin-top: 4px; font-weight: 500; }
+.hero-delta { font-size: 12px; font-weight: 700; margin-top: 5px; }
+.hero-delta.up  { color: #FC4C02; }
+.hero-delta.down{ color: #2a9d4e; }
+
+/* ZONE BADGE */
+.zbadge {
+  display: inline-block; border-radius: 5px;
+  padding: 1px 7px; font-size: 10px; font-weight: 700; color: #fff;
+}
+.z1 { background: #A8D5BA; color: #1A1A1A; }
+.z2 { background: #4A90D9; }
+.z3 { background: #F6AD55; color: #1A1A1A; }
+.z4 { background: #ED6445; }
+.z5 { background: #C0392B; }
+
+/* TIPO BADGE */
+.tbadge {
+  display: inline-block; border-radius: 5px;
+  padding: 2px 8px; font-size: 10px; font-weight: 700;
+}
+.lungo   { background: #EBF5FB; color: #2E86C1; }
+.medio   { background: #FEF9E7; color: #B7950B; }
+.sprint  { background: #FDEDEC; color: #E74C3C; }
+.piano   { background: #EAFAF1; color: #1E8449; }
+
+/* SEGMENTI TABLE */
+.seg-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.seg-table th {
+  text-align: left; padding: 6px 10px; background: #F7F7F7;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #888; border-bottom: 1px solid #EBEBEB;
+}
+.seg-table td { padding: 8px 10px; border-bottom: 1px solid #F2F2F2; vertical-align: middle; }
+.seg-table tr:last-child td { border-bottom: none; }
+.seg-table tr:hover td { background: #FAFAFA; }
+.seg-name { font-weight: 600; color: #1A1A1A; }
+.seg-num  { font-weight: 700; color: #1A1A1A; }
+.seg-note { font-size: 11px; color: #888; margin-top: 2px; }
+.target-fc { font-weight: 700; }
+.target-w  { color: #AAA; font-size: 11px; }
+
+/* BAR MINI */
+.mini-bar { height: 6px; border-radius: 3px; margin-top: 4px; }
+
+/* CORRISPONDENZA */
+.corr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.corr-card {
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 16px 18px;
+}
+.corr-title { font-size: 13px; font-weight: 800; margin-bottom: 10px; color: #1A1A1A; }
+.corr-row {
+  display: flex; align-items: stretch; gap: 8px; margin-bottom: 8px; font-size: 12px;
+}
+.corr-tolfa {
+  flex: 1; background: #FFF3EE; border-radius: 8px;
+  padding: 7px 10px; border-left: 3px solid #FC4C02;
+}
+.corr-arrow { font-size: 14px; color: #CCC; display: flex; align-items: center; flex-shrink:0; }
+.corr-p1 {
+  flex: 1; background: #F0F8FF; border-radius: 8px;
+  padding: 7px 10px; border-left: 3px solid #4A90D9;
+}
+.corr-label { font-size: 10px; color: #AAA; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
+.corr-val { font-weight: 700; color: #1A1A1A; font-size: 12px; }
+.corr-sub { font-size: 10px; color: #888; }
+
+/* SESSIONI */
+.week-tabs { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+.week-card {
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 16px 18px; position: relative; overflow: hidden;
+}
+.week-stripe { position: absolute; top:0;left:0;right:0; height:4px; }
+.w1-stripe { background: #4A90D9; }
+.w2-stripe { background: #F6AD55; }
+.w3-stripe { background: #ED6445; }
+.w4-stripe { background: #FC4C02; }
+.week-num { font-size: 10px; font-weight: 700; color: #AAA; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:2px; }
+.week-name { font-size: 15px; font-weight: 800; margin-bottom: 10px; }
+.w4-name { color: #FC4C02; }
+.sess-row { margin-bottom: 8px; }
+.sess-day { font-size: 10px; font-weight: 700; color: #AAA; text-transform: uppercase; margin-bottom: 2px; }
+.sess-desc { font-size: 12px; font-weight: 600; color: #1A1A1A; }
+.sess-detail { font-size: 11px; color: #888; margin-top: 1px; }
+.week-focus { margin-top: 10px; padding-top: 8px; border-top: 1px solid #F0F0F0; font-size: 11px; color: #FC4C02; font-weight: 600; }
+
+/* TARGET CARD */
+.target-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+.target-card {
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 14px 16px;
+}
+.tg-label { font-size: 10px; font-weight: 700; color: #AAA; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+.tg-seg { font-size: 13px; font-weight: 800; margin-bottom: 6px; }
+.tg-row { display: flex; justify-content: space-between; font-size: 11px; padding: 3px 0; border-bottom: 1px solid #F5F5F5; }
+.tg-row:last-child { border-bottom: none; }
+.tg-key { color: #888; }
+.tg-val { font-weight: 700; }
+.tg-now  { color: #4A90D9; }
+.tg-want { color: #2a9d4e; }
+
+/* FINALE CARD */
+.finale-card {
+  background: #FC4C02; border-radius: 16px; padding: 22px 26px;
+  color: #fff; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px;
+}
+.fin-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px; }
+.fin-title { font-size: 20px; font-weight: 900; }
+.fin-sub { font-size: 12px; opacity: 0.85; margin-top: 6px; }
+.fin-big { font-size: 58px; font-weight: 900; letter-spacing: -2px; line-height: 1; }
+.fin-unit { font-size: 14px; opacity: 0.8; font-weight: 700; }
+
+.footer { text-align:right; font-size:10px; color:#CCC; margin-top:14px; }
+
+/* WARN BOX */
+.warn { background:#FFF8F5; border-radius:10px; padding:10px 14px; font-size:11px; color:#FC4C02; font-weight:600; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="page-title">Percorso 1 → <span>Segmento Tolfa</span></div>
+    <div class="page-sub">Scomposizione segmenti allenamento · PR da battere: 58:03 (29 lug 2022) · Segmento "– Tolfa" 20.97km +615m</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-row">
+    <div class="hero-card">
+      <div class="card-label">PR da battere (Tolfa)</div>
+      <div class="hero-val orange">58:03</div>
+      <div class="hero-sub">29 lug 2022 · 21.7 km/h · non battuto da 4 anni</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Perf. recente (23/06)</div>
+      <div class="hero-val blue">63'40"</div>
+      <div class="hero-sub">moving time · FC 140.7 · cad 58.6 rpm</div>
+      <div class="hero-delta up">↑ non era un tentativo PR — giro lungo 113km</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Target</div>
+      <div class="hero-val green">&lt;58:03</div>
+      <div class="hero-sub">Battere il PR · ottimistico &lt;57:00</div>
+      <div class="hero-delta down">↓ 64" per battere · 2025 best: 59:40 (a 97")</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Gap critico</div>
+      <div class="hero-val" style="font-size:22px;line-height:1.4;font-weight:900;color:#ED6445;">Cadenza<br><span style="font-size:14px;color:#888;font-weight:600;">58.6 → 65+ rpm</span></div>
+      <div class="hero-sub">salita in forza → meno efficiente. +6 rpm = −3' stimati</div>
+    </div>
+  </div>
+
+  <!-- SEGMENTI PERCORSO 1 -->
+  <div class="section-label">Segmenti Percorso 1 — Classificati per Uso</div>
+  <div class="card" style="margin-bottom:16px; padding:0; overflow:hidden;">
+    <table class="seg-table">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Segmento</th>
+          <th>Dist.</th>
+          <th>D+</th>
+          <th>Tempo att.</th>
+          <th>FC att.</th>
+          <th>Cad att.</th>
+          <th>FC target W2–W3</th>
+          <th>Uso nel piano</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- SALITE LUNGHE -->
+        <tr>
+          <td><span class="tbadge lungo">LUNGO</span></td>
+          <td>
+            <div class="seg-name">Palidoro Braccianese</div>
+            <div class="seg-note">Km 3 → km 20 · parte da Palidoro</div>
+          </td>
+          <td class="seg-num">16.3 km</td>
+          <td class="seg-num">+281 m</td>
+          <td class="seg-num">43'48"</td>
+          <td><span class="zbadge z2">Z2</span> 140.8</td>
+          <td>71.9</td>
+          <td class="target-fc" style="color:#F6AD55;">149–158 <span class="zbadge z3" style="font-size:9px;">Z3</span></td>
+          <td>Blocco aerobico di base (simula km 0–15 di Tolfa)</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge lungo">LUNGO</span></td>
+          <td>
+            <div class="seg-name">I Terzi integrale (Bobo)</div>
+            <div class="seg-note">Km ~34 → km ~53 · inizio Lap 3</div>
+          </td>
+          <td class="seg-num">18.6 km</td>
+          <td class="seg-num">+280 m</td>
+          <td class="seg-num">48'10"</td>
+          <td><span class="zbadge z2">Z2</span> 139.7</td>
+          <td>71.4</td>
+          <td class="target-fc" style="color:#F6AD55;">150–160 <span class="zbadge z3" style="font-size:9px;">Z3</span></td>
+          <td>Massimo volume salita — simulazione durata Tolfa</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge lungo">LUNGO</span></td>
+          <td>
+            <div class="seg-name">I Terzi Total</div>
+            <div class="seg-note">Km ~36 → km ~52 · Lap 3</div>
+          </td>
+          <td class="seg-num">15.5 km</td>
+          <td class="seg-num">+322 m</td>
+          <td class="seg-num">41'38"</td>
+          <td><span class="zbadge z2">Z2</span> 141.0</td>
+          <td>72.8</td>
+          <td class="target-fc" style="color:#F6AD55;">150–162 <span class="zbadge z3" style="font-size:9px;">Z3</span></td>
+          <td>Più D+ relativo — simula tratto duro centrale di Tolfa</td>
+        </tr>
+        <!-- SALITE MEDIE -->
+        <tr>
+          <td><span class="tbadge medio">MEDIO</span></td>
+          <td>
+            <div class="seg-name">Vigna di Valle (completo)</div>
+            <div class="seg-note">Km ~22 → km ~24 · salita classica VdV</div>
+          </td>
+          <td class="seg-num">1.98 km</td>
+          <td class="seg-num">+100 m</td>
+          <td class="seg-num">5'46"</td>
+          <td><span class="zbadge z3">Z3</span> 154.8</td>
+          <td>68.0</td>
+          <td class="target-fc" style="color:#ED6445;">158–165 <span class="zbadge z4" style="font-size:9px;">Z4</span></td>
+          <td>Ripetute threshold · simula rampe finali Tolfa</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge medio">MEDIO</span></td>
+          <td>
+            <div class="seg-name">gpm vigna di valle inferiore</div>
+            <div class="seg-note">Km ~22 → km ~23.7 · parte bassa VdV</div>
+          </td>
+          <td class="seg-num">1.73 km</td>
+          <td class="seg-num">+78 m</td>
+          <td class="seg-num">4'36"</td>
+          <td><span class="zbadge z2">Z2</span> 148.6</td>
+          <td>75.6</td>
+          <td class="target-fc" style="color:#F6AD55;">155–163 <span class="zbadge z3" style="font-size:9px;">Z3</span></td>
+          <td>Threshold 4-5 min · 3–4 ripetute con 3 min recupero</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge medio">MEDIO</span></td>
+          <td>
+            <div class="seg-name">@ traliccio</div>
+            <div class="seg-note">Km ~21 → km ~23 · avvicinamento VdV</div>
+          </td>
+          <td class="seg-num">2.29 km</td>
+          <td class="seg-num">+62.8 m</td>
+          <td class="seg-num">6'54"</td>
+          <td><span class="zbadge z2">Z2</span> 144.1</td>
+          <td>72.2</td>
+          <td class="target-fc" style="color:#F6AD55;">152–161 <span class="zbadge z3" style="font-size:9px;">Z3</span></td>
+          <td>Salita media continua · allenamento ritmo gara</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge medio">MEDIO</span></td>
+          <td>
+            <div class="seg-name">Terzi 5km climbing</div>
+            <div class="seg-note">Km ~38 → km ~44 · Lap 3 salita I Terzi</div>
+          </td>
+          <td class="seg-num">5.64 km</td>
+          <td class="seg-num">+89 m</td>
+          <td class="seg-num">14'55"</td>
+          <td><span class="zbadge z2">Z2</span> 140.5</td>
+          <td>73.8</td>
+          <td class="target-fc" style="color:#F6AD55;">150–160 <span class="zbadge z3" style="font-size:9px;">Z3</span></td>
+          <td>15 min Z3 continui — cuore della sessione threshold</td>
+        </tr>
+        <!-- SPRINT -->
+        <tr>
+          <td><span class="tbadge sprint">SPRINT</span></td>
+          <td>
+            <div class="seg-name">Vigna di Valle superiore</div>
+            <div class="seg-note">Km ~24 → km ~24.9 · parte alta VdV</div>
+          </td>
+          <td class="seg-num">890 m</td>
+          <td class="seg-num">+40 m</td>
+          <td class="seg-num">2'56"</td>
+          <td><span class="zbadge z4">Z4</span> 161.8</td>
+          <td>65.4</td>
+          <td class="target-fc" style="color:#ED6445;">163–170 <span class="zbadge z4" style="font-size:9px;">Z4</span></td>
+          <td>Attivazione neuromuscolare · simula strappi Tolfa piazza</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge sprint">SPRINT</span></td>
+          <td>
+            <div class="seg-name">Vigna di Valle 2° rampetta ⭐ ORO</div>
+            <div class="seg-note">Km ~24.5 → km ~24.9 · strappo finale VdV</div>
+          </td>
+          <td class="seg-num">375 m</td>
+          <td class="seg-num">+24.6 m</td>
+          <td class="seg-num">42"</td>
+          <td><span class="zbadge z2">Z2</span> 140.2</td>
+          <td>67.5</td>
+          <td class="target-fc" style="color:#ED6445;">160–170 <span class="zbadge z4" style="font-size:9px;">Z4</span></td>
+          <td>Strappo breve pieno gas · 5–6 ripetute · neuromuscolare</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge sprint">SPRINT</span></td>
+          <td>
+            <div class="seg-name">Strappo Vigna di Valle</div>
+            <div class="seg-note">Km ~24 → km ~24.7 · zona VdV</div>
+          </td>
+          <td class="seg-num">734 m</td>
+          <td class="seg-num">+0 m</td>
+          <td class="seg-num">2'40"</td>
+          <td><span class="zbadge z4">Z4</span> 163.6</td>
+          <td>68.4</td>
+          <td class="target-fc" style="color:#ED6445;">165–172 <span class="zbadge z4" style="font-size:9px;">Z4</span></td>
+          <td>Già in Z4 · usa come benchmark intensità</td>
+        </tr>
+        <!-- PIANURA/RECUPERO -->
+        <tr>
+          <td><span class="tbadge piano">PIANO</span></td>
+          <td>
+            <div class="seg-name">TT Passoscuro–Palidoro</div>
+            <div class="seg-note">Km 0 → km 3 · uscita da casa</div>
+          </td>
+          <td class="seg-num">3.23 km</td>
+          <td class="seg-num">+18 m</td>
+          <td class="seg-num">7'37"</td>
+          <td><span class="zbadge z1">Z1</span> 125.2</td>
+          <td>70.3</td>
+          <td class="target-fc">— riscaldamento</td>
+          <td>Riscaldamento e defaticamento · cadenza 82–86 rpm</td>
+        </tr>
+        <tr>
+          <td><span class="tbadge piano">PIANO</span></td>
+          <td>
+            <div class="seg-name">SP15 da Braccianense</div>
+            <div class="seg-note">Km ~38 → km ~54 · ritorno Lap 3</div>
+          </td>
+          <td class="seg-num">16.2 km</td>
+          <td class="seg-num">+23 m</td>
+          <td class="seg-num">26'39" (m)</td>
+          <td><span class="zbadge z2">Z2</span> 144.2</td>
+          <td>65.6</td>
+          <td class="target-fc">— recupero attivo</td>
+          <td>Rientro Z1–Z2 dopo sessione · cadenza alta 80+ rpm</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CORRISPONDENZA TOLFA / PERCORSO 1 -->
+  <div class="section-label">Come il Percorso 1 Simula Tolfa — Tratto per Tratto</div>
+  <div class="corr-grid" style="margin-bottom:16px;">
+    <div class="corr-card">
+      <div class="corr-title">🟠 Mappa analogica Tolfa ↔ Percorso 1</div>
+      <div class="corr-row">
+        <div class="corr-tolfa">
+          <div class="corr-label">Tolfa · km 0–5</div>
+          <div class="corr-val">Partenza / falsopiano</div>
+          <div class="corr-sub">piano da S.Severa, Z1–Z2</div>
+        </div>
+        <div class="corr-arrow">→</div>
+        <div class="corr-p1">
+          <div class="corr-label">Percorso 1</div>
+          <div class="corr-val">Passoscuro → Palidoro</div>
+          <div class="corr-sub">TT 3.2km · riscaldamento Z1</div>
+        </div>
+      </div>
+      <div class="corr-row">
+        <div class="corr-tolfa">
+          <div class="corr-label">Tolfa · km 5–13</div>
+          <div class="corr-val">Salita progressiva centrale</div>
+          <div class="corr-sub">Z2→Z3 · 8km continui · cad 60–65</div>
+        </div>
+        <div class="corr-arrow">→</div>
+        <div class="corr-p1">
+          <div class="corr-label">Percorso 1</div>
+          <div class="corr-val">Palidoro → Braccianese</div>
+          <div class="corr-sub">16km +281m · target Z3 in W2–W3</div>
+        </div>
+      </div>
+      <div class="corr-row">
+        <div class="corr-tolfa">
+          <div class="corr-label">Tolfa · km 13–18</div>
+          <div class="corr-val">Tratto duro — rampe sostenute</div>
+          <div class="corr-sub">Z3–Z4 · FC 155–165 · 20–25 min</div>
+        </div>
+        <div class="corr-arrow">→</div>
+        <div class="corr-p1">
+          <div class="corr-label">Percorso 1</div>
+          <div class="corr-val">I Terzi Total / Bobo</div>
+          <div class="corr-sub">15–18km +280–322m · cuore del piano</div>
+        </div>
+      </div>
+      <div class="corr-row">
+        <div class="corr-tolfa">
+          <div class="corr-label">Tolfa · km 18–21</div>
+          <div class="corr-val">Finale — strappi e piazza</div>
+          <div class="corr-sub">Z4 · FC 162+ · breve e duro</div>
+        </div>
+        <div class="corr-arrow">→</div>
+        <div class="corr-p1">
+          <div class="corr-label">Percorso 1</div>
+          <div class="corr-val">Vigna di Valle (tutti i sub-seg.)</div>
+          <div class="corr-sub">+100m in 5'46" · target Z4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="corr-card">
+      <div class="corr-title">📌 Il vero problema: cadenza 58.6 rpm</div>
+      <div style="font-size:13px;line-height:1.6;color:#444;margin-bottom:12px;">
+        Su Tolfa pedalavi a <strong>58.6 rpm</strong> — salita quasi tutta in <em>forza</em>.
+        A quella cadenza i muscoli si acidificano prima e la fatica accumula più velocemente.
+        I segmenti del percorso 1 vanno eseguiti con <strong>cadenza imposta: 65–70 rpm minimo in salita</strong>, anche se sembrerà "corto" (rapporto più leggero).
+      </div>
+      <div style="background:#F0F8FF;border-radius:10px;padding:12px 14px;">
+        <div style="font-size:11px;font-weight:700;color:#2E86C1;margin-bottom:8px;">Esercizio cadenza — ogni sessione:</div>
+        <div style="font-size:12px;color:#444;line-height:1.6;">
+          → Su <em>Palidoro Braccianese</em>: mantieni <strong>68–72 rpm</strong> costanti<br>
+          → Su <em>Vigna di Valle</em> ripetute: imponi <strong>66–70 rpm</strong> anche se FC sale<br>
+          → Su <em>sprint 2° rampetta</em>: spingi a <strong>75–80 rpm</strong> (uscita di sella)<br>
+          → Obiettivo finale su Tolfa: <strong>65+ rpm media</strong> (attuale 58.6)
+        </div>
+      </div>
+      <div class="warn">⚠️ Non aumentare la cadenza e l'intensità insieme. Prima la cadenza (W1–W2), poi l'intensità (W2–W3).</div>
+    </div>
+  </div>
+
+  <!-- SESSIONI SETTIMANE -->
+  <div class="section-label">Piano Sessioni — Percorso 1 · 4 Settimane</div>
+  <div class="week-tabs">
+
+    <div class="week-card">
+      <div class="week-stripe w1-stripe"></div>
+      <div class="week-num">Settimana 1</div>
+      <div class="week-name">Cadenza + Z2</div>
+      <div class="sess-row">
+        <div class="sess-day">Mar</div>
+        <div class="sess-desc">60 min · tutto Z2 · <span class="zbadge z2">Z2</span></div>
+        <div class="sess-detail">Palidoro Braccianese a FC 135–145 · imponi 70 rpm costanti</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">Gio</div>
+        <div class="sess-desc">Percorso 1 parziale + 3×5' <span class="zbadge z3">Z3</span></div>
+        <div class="sess-detail">Terzi 5km × 3 ripetute · FC 150–158 · cad 67–70 rpm · rec 3 min Z1</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">WE</div>
+        <div class="sess-desc">Percorso 1 completo · Z2 <span class="zbadge z2">Z2</span></div>
+        <div class="sess-detail">I Terzi Bobo in Z2 · FC &lt;148 · cadenza 70 rpm imposta</div>
+      </div>
+      <div class="week-focus">🎯 Focus cadenza: 70 rpm in salita, anche se FC scende</div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-stripe w2-stripe"></div>
+      <div class="week-num">Settimana 2</div>
+      <div class="week-name">Threshold Progressivo</div>
+      <div class="sess-row">
+        <div class="sess-day">Mar</div>
+        <div class="sess-desc">2×15' Z3 · <span class="zbadge z3">Z3</span></div>
+        <div class="sess-detail">Palidoro Braccianese × 2 blocchi · FC 152–160 · cad 68–72 · rec 5 min piano</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">Gio</div>
+        <div class="sess-desc">25' continui Z3 · <span class="zbadge z3">Z3</span></div>
+        <div class="sess-detail">I terzi Total 25' senza soste · FC 155–162 · cad 68–70 rpm</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">WE</div>
+        <div class="sess-desc">Percorso 1 · Z2→Z3 + 4×Vigna di Valle</div>
+        <div class="sess-detail">Lap base Z2 · poi 4 ripetute Vigna di Valle · FC 158–165 · cad 68+ rpm</div>
+      </div>
+      <div class="week-focus">🎯 25' Z3 continui il giovedì è il benchmark della settimana</div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-stripe w3-stripe"></div>
+      <div class="week-num">Settimana 3</div>
+      <div class="week-name">Simulazione Tolfa</div>
+      <div class="sess-row">
+        <div class="sess-day">Mar</div>
+        <div class="sess-desc">40 min Z2 leggero · <span class="zbadge z2">Z2</span></div>
+        <div class="sess-detail">Gambe fresche · solo cadenza 72+ rpm · nessun carico</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">Gio</div>
+        <div class="sess-desc">🔑 35–40 min Z3→Z4 · <span class="zbadge z3">Z3</span><span class="zbadge z4">Z4</span></div>
+        <div class="sess-detail">Riscaldamento 20 min · poi I Terzi Bobo + Vigna di Valle tutto Z3 · FC 158–165 · simula sforzo Tolfa</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">WE</div>
+        <div class="sess-desc">Percorso 1 completo — test tutto Z3</div>
+        <div class="sess-detail">Palidoro Braccianese + I Terzi in Z3 · FC 155–162 · verifica: reggi 40 min?</div>
+      </div>
+      <div class="week-focus">🎯 Il giovedì è la sessione più dura del ciclo — è quasi un Tolfa in miniatura</div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-stripe w4-stripe"></div>
+      <div class="week-num">Settimana 4</div>
+      <div class="week-name w4-name">Taper + PR 🏁</div>
+      <div class="sess-row">
+        <div class="sess-day">Mar</div>
+        <div class="sess-desc">45 min Z1 · <span class="zbadge z1">Z1</span></div>
+        <div class="sess-detail">Solo Passoscuro–Palidoro andata/ritorno · cadenza 82+ rpm · FC &lt;135</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">Gio</div>
+        <div class="sess-desc">35 min Z1 + 3× strappo 2° rampetta</div>
+        <div class="sess-detail">Volume minimo · solo attivazione neuromuscolare · niente accumulo fatica</div>
+      </div>
+      <div class="sess-row">
+        <div class="sess-day">WE</div>
+        <div class="sess-desc" style="color:#FC4C02;font-weight:800;">🎯 Passoscuro → Tolfa → rientro</div>
+        <div class="sess-detail">Solo andata su Tolfa · poi rientro relaxed. Strategia: cauto fino a Rimissini, poi Z3 pieno</div>
+      </div>
+      <div class="week-focus">🏁 Mar + Gio minimali → arrivi fresco al WE</div>
+    </div>
+
+  </div>
+
+  <!-- TARGET PER SEGMENTO -->
+  <div class="section-label">Target FC per Segmento — Da Ora a Settimana 3</div>
+  <div class="target-grid">
+    <div class="target-card">
+      <div class="tg-label">Salita lunga</div>
+      <div class="tg-seg">Palidoro Braccianese / I Terzi</div>
+      <div class="tg-row"><span class="tg-key">Ora (W1)</span><span class="tg-val tg-now">FC 140–148 · cad 70 rpm</span></div>
+      <div class="tg-row"><span class="tg-key">W2</span><span class="tg-val" style="color:#F6AD55;">FC 150–158 · cad 70 rpm</span></div>
+      <div class="tg-row"><span class="tg-key">W3</span><span class="tg-val tg-want">FC 155–162 · cad 68–70 rpm</span></div>
+      <div class="tg-row"><span class="tg-key">Indicatore OK</span><span class="tg-val">40 min FC 155+ senza cedimento</span></div>
+    </div>
+    <div class="target-card">
+      <div class="tg-label">Salita media (ripetute)</div>
+      <div class="tg-seg">Vigna di Valle completo · gpm inf.</div>
+      <div class="tg-row"><span class="tg-key">Ora</span><span class="tg-val tg-now">FC 148–155 · cad 68 rpm</span></div>
+      <div class="tg-row"><span class="tg-key">W2</span><span class="tg-val" style="color:#F6AD55;">FC 155–162 · cad 68–70 rpm</span></div>
+      <div class="tg-row"><span class="tg-key">W3</span><span class="tg-val tg-want">FC 160–166 · cad 68–72 rpm</span></div>
+      <div class="tg-row"><span class="tg-key">Indicatore OK</span><span class="tg-val">4 ripetute Vigna di Valle FC160+</span></div>
+    </div>
+    <div class="target-card">
+      <div class="tg-label">Sprint / Strappi</div>
+      <div class="tg-seg">2° rampetta · Vigna sup. · Strappo VdV</div>
+      <div class="tg-row"><span class="tg-key">Ora</span><span class="tg-val tg-now">FC 140–163 (eterogeneo)</span></div>
+      <div class="tg-row"><span class="tg-key">W2–W3</span><span class="tg-val" style="color:#ED6445;">FC 163–170 · Z4 pieno</span></div>
+      <div class="tg-row"><span class="tg-key">Cadenza</span><span class="tg-val">75–80 rpm uscita di sella</span></div>
+      <div class="tg-row"><span class="tg-key">Volume</span><span class="tg-val">5–6 ripetute · rec 2–3 min Z1</span></div>
+    </div>
+  </div>
+
+  <!-- STRATEGIA GIORNO PR -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-label">Strategia Giorno PR — Come affrontare il segmento "- Tolfa"</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px;">
+      <div style="background:#F0F8FF;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:10px;font-weight:700;color:#2E86C1;text-transform:uppercase;margin-bottom:4px;">Km 0–5 · Partenza</div>
+        <div style="font-size:20px;font-weight:900;color:#4A90D9;margin-bottom:3px;">Z2</div>
+        <div style="font-size:11px;color:#555;">FC 138–145<br>cad 68 rpm<br>non esplodere</div>
+      </div>
+      <div style="background:#FEF9E7;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:10px;font-weight:700;color:#B7950B;text-transform:uppercase;margin-bottom:4px;">Km 5–10 · Rimissini</div>
+        <div style="font-size:20px;font-weight:900;color:#F6AD55;margin-bottom:3px;">Z2–Z3</div>
+        <div style="font-size:11px;color:#555;">FC 148–155<br>cad 65–68 rpm<br>entra graduale</div>
+      </div>
+      <div style="background:#FEF5F0;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:10px;font-weight:700;color:#C0392B;text-transform:uppercase;margin-bottom:4px;">Km 10–16 · Cuore</div>
+        <div style="font-size:20px;font-weight:900;color:#ED6445;margin-bottom:3px;">Z3</div>
+        <div style="font-size:11px;color:#555;">FC 155–162<br>cad 65–68 rpm<br>ritmo costante</div>
+      </div>
+      <div style="background:#FEF5F0;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:10px;font-weight:700;color:#C0392B;text-transform:uppercase;margin-bottom:4px;">Km 16–19 · Sasso</div>
+        <div style="font-size:20px;font-weight:900;color:#ED6445;margin-bottom:3px;">Z3–Z4</div>
+        <div style="font-size:11px;color:#555;">FC 162–168<br>cad 66–70 rpm<br>spingi qui</div>
+      </div>
+      <div style="background:#FFF3EE;border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-size:10px;font-weight:700;color:#FC4C02;text-transform:uppercase;margin-bottom:4px;">Km 19–21 · Finale</div>
+        <div style="font-size:20px;font-weight:900;color:#FC4C02;margin-bottom:3px;">TUTTO</div>
+        <div style="font-size:11px;color:#555;">FC &gt;168<br>cad 70+ rpm<br>quello che hai</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINALE -->
+  <div class="finale-card">
+    <div>
+      <div class="fin-label">Obiettivo Settimana 4</div>
+      <div class="fin-title">Battere 58:03 — segmento "– Tolfa"</div>
+      <div class="fin-sub">
+        Cadenza 65+ rpm · FC media 155–162 (Z3) · partenza paziente · finale pieno<br>
+        Bastano 64" in meno. Il 2025 ci sei arrivato a 97" (59:40). Estate = condizione migliore = momento giusto.
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <div class="fin-big">&lt;58:03</div>
+      <div class="fin-unit">battere il PR</div>
+    </div>
+  </div>
+
+  <div class="footer">Strava API · Garmin · FCmax 182 bpm · watt stimati fisica (no power meter) · Percorso 1: att. 15118735734 · Target: segmento 1276342</div>
+
+</div>
+</body>
+</html>

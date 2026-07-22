@@ -1,0 +1,195 @@
+<h2 class="sr-only">Sintesi cadenza e obiettivo PR Tolfa 2026</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{font-family:system-ui,-apple-system,sans-serif;color:var(--text-primary);display:flex;flex-direction:column;gap:12px}
+.row{display:grid;gap:12px}
+.r2{grid-template-columns:1fr 1fr}
+.r3{grid-template-columns:1fr 1fr 1fr}
+.card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:16px 18px}
+.lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px}
+.big{font-size:36px;font-weight:900;line-height:1;letter-spacing:-1px}
+.med{font-size:22px;font-weight:800;line-height:1;letter-spacing:-.5px}
+.sm{font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.4}
+.delta{font-size:12px;font-weight:700;margin-top:6px}
+.or{color:#FC4C02}.gr{color:#3a9e5f}.bl{color:#3a7abf}.mu{color:var(--text-muted)}
+.tag{display:inline-block;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.tag-or{background:#FC4C02;color:#fff}
+.tag-gr{background:#3a9e5f;color:#fff}
+.tag-bl{background:#3a7abf;color:#fff}
+.divider{width:100%;height:0.5px;background:var(--border)}
+/* formula */
+.formula{display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 0}
+.fbox{text-align:center}
+.fv{font-size:18px;font-weight:900}
+.fl{font-size:10px;color:var(--text-muted);margin-top:2px}
+.fsym{font-size:20px;font-weight:300;color:var(--text-muted)}
+/* barre cadenza */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.bar-date{font-size:11px;color:var(--text-secondary);width:56px;flex-shrink:0;text-align:right}
+.bar-track{flex:1;background:var(--surface-1);border-radius:4px;height:20px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:11px;font-weight:700;color:#fff;transition:width .4s}
+.bar-cad{font-size:11px;font-weight:700;width:36px;flex-shrink:0;text-align:right}
+</style>
+
+<div class="wrap">
+
+<!-- TITOLO -->
+<div class="card" style="background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);border-color:#333">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:4px">Microciclo Tolfa · W1 · luglio 2026</div>
+      <div style="font-size:22px;font-weight:900;color:#fff;line-height:1.2">Cadenza: la svolta che<br>porta al PR</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:11px;color:#888;margin-bottom:2px">obiettivo</div>
+      <div style="font-size:28px;font-weight:900;color:#FC4C02;letter-spacing:-1px">&lt; 58:03</div>
+      <div style="font-size:11px;color:#888">su segmento Tolfa</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMULA MECCANICA -->
+<div class="card">
+  <div class="lbl">la meccanica — perché la cadenza conta</div>
+  <div class="formula">
+    <div class="fbox"><div class="fv or">Velocità</div><div class="fl">km/h</div></div>
+    <div class="fsym">=</div>
+    <div class="fbox"><div class="fv gr">Cadenza</div><div class="fl">giri/min</div></div>
+    <div class="fsym">×</div>
+    <div class="fbox"><div class="fv bl">Sviluppo</div><div class="fl">m/giro</div></div>
+  </div>
+  <div class="divider" style="margin:10px 0"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px">
+    <div style="background:var(--bg-danger,#fcebeb);border-radius:8px;padding:10px 12px">
+      <div style="font-weight:700;color:#a32d2d;margin-bottom:4px">❌ Ora su Tolfa</div>
+      <div style="color:var(--text-secondary);line-height:1.6"><b>58.6 rpm</b> × sviluppo grande<br>→ forza enorme ad ogni colpo<br>→ muscoli si esauriscono<br>→ lattato → rallenti</div>
+    </div>
+    <div style="background:var(--bg-success,#eaf3de);border-radius:8px;padding:10px 12px">
+      <div style="font-weight:700;color:#3B6D11;margin-bottom:4px">✓ Obiettivo</div>
+      <div style="color:var(--text-secondary);line-height:1.6"><b>75+ rpm</b> × sviluppo adeguato<br>→ colpi leggeri, aerobico<br>→ stesso wattaggio<br>→ sostieni più a lungo → PR</div>
+    </div>
+  </div>
+</div>
+
+<!-- TREND CADENZA 19 GIRI -->
+<div class="card">
+  <div class="lbl" style="margin-bottom:12px">evoluzione cadenza — 19 giri Fiumicino · 2018→2026 · database Garmin completo</div>
+  <div id="bars"></div>
+  <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary)"><div style="width:12px;height:12px;border-radius:3px;background:#FC4C02"></div>Oggi (record)</div>
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary)"><div style="width:12px;height:12px;border-radius:3px;background:#3a9e5f"></div>Sopra media</div>
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary)"><div style="width:12px;height:12px;border-radius:3px;background:#3a7abf"></div>Media storica</div>
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary)"><div style="width:12px;height:12px;border-radius:3px;background:#888"></div>Target Tolfa</div>
+  </div>
+</div>
+
+<!-- CONFRONTI CHIAVE -->
+<div class="row r3">
+  <div class="card">
+    <div class="lbl">oggi vs media storica</div>
+    <div class="big gr">+5.8</div>
+    <div class="sm">rpm in più rispetto<br>alla media storica 2018–2025</div>
+    <div class="delta" style="margin-top:8px">
+      <span style="color:var(--text-muted)">79.7</span> vs <span style="color:var(--text-muted)">73.9</span> rpm<br>
+      <span class="gr">07/07: 78.4 · 09/07: 79.7 ★</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="lbl">sforzo relativo — ultimi 2 giri W1</div>
+    <div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:4px">
+      <div><div style="font-size:11px;color:var(--text-muted)">07/07 D+598m</div><div class="big gr">130</div></div>
+      <div style="padding-bottom:6px;color:var(--text-muted)">·</div>
+      <div><div style="font-size:11px;color:var(--text-muted)">09/07 D+594m</div><div class="big or">141</div></div>
+      <div style="padding-bottom:6px;color:var(--text-muted)">vs</div>
+      <div><div style="font-size:11px;color:var(--text-muted)">media D+564m</div><div class="big" style="color:#888">142</div></div>
+    </div>
+    <div class="sm">Due giri W1 sopra la media D+.<br>Foratura km 31.9 il 09/07 — 20 min persi.</div>
+  </div>
+  <div class="card">
+    <div class="lbl">gap da colmare su Tolfa</div>
+    <div class="big or">−17</div>
+    <div class="sm">rpm da recuperare<br>58.6 rpm → 75+ rpm</div>
+    <div class="delta" style="margin-top:8px">
+      <span class="gr">stima risparmio: 3–4 min</span><br>
+      <span style="color:var(--text-muted)">= PR sotto 58:03</span>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM: ROADMAP -->
+<div class="card" style="background:var(--bg-accent,#e6f1fb);border-color:var(--border-accent,#b5d4f4)">
+  <div class="lbl" style="color:var(--text-accent,#185fa5)">piano cadenza — microciclo 4 settimane</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px">
+    <div style="text-align:center;background:var(--surface-2);border-radius:8px;padding:10px 6px">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;font-weight:700">W1 · ora</div>
+      <div style="font-size:20px;font-weight:900;color:#3a7abf">75+</div>
+      <div style="font-size:10px;color:var(--text-secondary)">rpm percorso 1<br>Z2 costante</div>
+    </div>
+    <div style="text-align:center;background:var(--surface-2);border-radius:8px;padding:10px 6px">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;font-weight:700">W2</div>
+      <div style="font-size:20px;font-weight:900;color:#3a7abf">75+</div>
+      <div style="font-size:10px;color:var(--text-secondary)">rpm + blocchi<br>Z3 su salite</div>
+    </div>
+    <div style="text-align:center;background:var(--surface-2);border-radius:8px;padding:10px 6px">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;font-weight:700">W3</div>
+      <div style="font-size:20px;font-weight:900;color:#F6AD55">78+</div>
+      <div style="font-size:10px;color:var(--text-secondary)">simulazione<br>Tolfa pace</div>
+    </div>
+    <div style="text-align:center;background:#FC4C02;border-radius:8px;padding:10px 6px">
+      <div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:4px;font-weight:700">W4 · PR</div>
+      <div style="font-size:20px;font-weight:900;color:#fff">&lt;58:03</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.8)">Tolfa<br>tutto dentro</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const giri=[
+  {data:'13/05/18',cad:71.0,oggi:false},
+  {data:'07/10/18',cad:78.0,oggi:false},
+  {data:'26/07/22',cad:73.0,oggi:false},
+  {data:'28/06/23',cad:75.0,oggi:false},
+  {data:'10/08/23',cad:72.0,oggi:false},
+  {data:'18/07/24',cad:74.0,oggi:false},
+  {data:'23/07/24',cad:74.0,oggi:false},
+  {data:'25/07/24',cad:73.0,oggi:false},
+  {data:'06/08/24',cad:75.0,oggi:false},
+  {data:'09/07/25',cad:74.0,oggi:false},
+  {data:'11/07/25',cad:76.0,oggi:false},
+  {data:'15/07/25',cad:76.0,oggi:false},
+  {data:'22/07/25',cad:74.0,oggi:false},
+  {data:'29/07/25',cad:73.0,oggi:false},
+  {data:'03/09/25',cad:75.0,oggi:false},
+  {data:'05/09/25',cad:72.0,oggi:false},
+  {data:'09/09/25',cad:72.0,oggi:false},
+  {data:'07/07/26',cad:78.4,oggi:false},
+  {data:'09/07/26',cad:79.7,oggi:true},
+];
+const MIN=68, MAX=82, MEDIA=73.9, TARGET=75;
+const bars=document.getElementById('bars');
+giri.forEach(r=>{
+  const pct=((r.cad-MIN)/(MAX-MIN)*100).toFixed(1);
+  const col=r.oggi?'#FC4C02':r.cad>=TARGET?'#3a9e5f':'#3a7abf';
+  const div=document.createElement('div');
+  div.className='bar-row';
+  div.innerHTML=`<div class="bar-date">${r.data}</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${pct}%;background:${col}">${r.cad}</div>
+    </div>
+    <div class="bar-cad" style="color:${col}">${r.oggi?'★':''}</div>`;
+  bars.appendChild(div);
+});
+// Linea media
+const mediaLine=document.createElement('div');
+mediaLine.style.cssText='display:flex;align-items:center;gap:8px;margin-top:4px';
+const mediaPct=((MEDIA-MIN)/(MAX-MIN)*100).toFixed(1);
+mediaLine.innerHTML=`<div style="width:56px;font-size:10px;color:var(--text-muted);text-align:right">media</div>
+  <div style="flex:1;position:relative;height:1px;background:var(--border)">
+    <div style="position:absolute;left:${mediaPct}%;top:-8px;width:1.5px;height:16px;background:#888"></div>
+    <div style="position:absolute;left:${mediaPct}%;top:-18px;font-size:10px;color:#888;transform:translateX(-50%)">${MEDIA}</div>
+  </div>
+  <div style="width:36px"></div>`;
+bars.appendChild(mediaLine);
+</script>

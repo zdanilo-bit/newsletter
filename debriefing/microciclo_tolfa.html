@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micro-Ciclo Tolfa — Battere 58:03</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #EBEBEB;
+  padding: 40px 24px 60px;
+  min-height: 100vh;
+  color: #1A1A1A;
+}
+.container { max-width: 980px; margin: 0 auto; }
+
+/* HEADER */
+.page-header { margin-bottom: 32px; }
+.page-title {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.page-title span { color: #FC4C02; }
+.page-sub { font-size: 14px; color: #888; font-weight: 500; }
+
+/* CARD BASE */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 20px 24px;
+}
+.card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #AAA;
+  margin-bottom: 6px;
+}
+
+/* HERO ROW */
+.hero-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.hero-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 18px 20px;
+}
+.hero-val {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+  color: #1A1A1A;
+  letter-spacing: -1px;
+}
+.hero-val.orange { color: #FC4C02; }
+.hero-val.green  { color: #2a9d4e; }
+.hero-val.gold   { color: #C8940A; }
+.hero-sub { font-size: 12px; color: #888; margin-top: 4px; font-weight: 500; }
+.hero-delta {
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+.hero-delta.down { color: #2a9d4e; }
+.hero-delta.up   { color: #FC4C02; }
+
+/* ZONE BADGE inline */
+.zbadge {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+.z2 { background: #4A90D9; }
+.z3 { background: #F6AD55; color: #1A1A1A; }
+.z4 { background: #ED6445; }
+.z1 { background: #A8D5BA; color: #1A1A1A; }
+
+/* SECTION LABEL */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #AAA;
+  margin: 28px 0 12px;
+}
+
+/* SETTIMANE GRID */
+.weeks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.week-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.week-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #AAA;
+  margin-bottom: 2px;
+}
+.week-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.week-title.orange { color: #FC4C02; }
+.day-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.day-lbl {
+  min-width: 28px;
+  font-weight: 700;
+  color: #888;
+  font-size: 11px;
+  padding-top: 1px;
+  text-transform: uppercase;
+}
+.day-content { flex: 1; }
+.day-desc { color: #1A1A1A; font-weight: 500; }
+.day-note { color: #888; font-size: 11px; margin-top: 1px; }
+.week-focus {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #F0F0F0;
+  font-size: 12px;
+  color: #FC4C02;
+  font-weight: 600;
+}
+.week-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #EBEBEB;
+}
+.week-accent.w1 { background: #4A90D9; }
+.week-accent.w2 { background: #F6AD55; }
+.week-accent.w3 { background: #ED6445; }
+.week-accent.w4 { background: #FC4C02; }
+
+/* SESSIONE TIPO + CONTROLLO */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.sess-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.step-num {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #FC4C02;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-body { flex: 1; font-size: 13px; line-height: 1.5; }
+.step-title { font-weight: 700; color: #1A1A1A; }
+.step-detail { color: #888; }
+
+.check-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.check-dot {
+  min-width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.green-dot { background: #2a9d4e; }
+.red-dot   { background: #E53E3E; }
+.check-text { flex: 1; }
+.check-title { font-weight: 600; color: #1A1A1A; }
+.check-note { color: #888; font-size: 11px; }
+
+/* REGOLE CARD */
+.rules-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.rule-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  padding: 18px 20px;
+}
+.rule-icon { font-size: 24px; margin-bottom: 8px; }
+.rule-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+.rule-list { list-style: none; }
+.rule-list li {
+  font-size: 12px;
+  color: #555;
+  padding: 3px 0;
+  border-bottom: 1px solid #F5F5F5;
+  line-height: 1.4;
+}
+.rule-list li:last-child { border-bottom: none; }
+.rule-list li::before { content: "→ "; color: #FC4C02; font-weight: 700; }
+
+/* OBIETTIVO HERO (bottom) */
+.obiettivo-card {
+  background: #FC4C02;
+  border-radius: 16px;
+  padding: 24px 28px;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.ob-left {}
+.ob-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px; }
+.ob-title { font-size: 22px; font-weight: 900; line-height: 1.2; }
+.ob-sub { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+.ob-right { text-align: right; }
+.ob-big { font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -2px; }
+.ob-unit { font-size: 16px; font-weight: 700; opacity: 0.8; }
+
+/* FC TARGET BAR */
+.fc-bar-row { margin-bottom: 10px; }
+.fc-bar-label { font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px; display: flex; justify-content: space-between; }
+.fc-bar-track { background: #F0F0F0; border-radius: 99px; height: 10px; position: relative; }
+.fc-bar-fill { height: 10px; border-radius: 99px; }
+
+/* FOOTER */
+.footer {
+  text-align: right;
+  font-size: 11px;
+  color: #CCC;
+  margin-top: 12px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="page-title">Micro-Ciclo <span>Tolfa</span></div>
+    <div class="page-sub">4 settimane · 3 uscite/settimana · Martedì · Giovedì · Weekend</div>
+  </div>
+
+  <!-- HERO ROW -->
+  <div class="hero-row">
+    <div class="hero-card">
+      <div class="card-label">PR attuale Tolfa</div>
+      <div class="hero-val">58:03</div>
+      <div class="hero-sub">29 lug 2022 · 21.7 km/h · non battuto da 4 anni</div>
+      <div class="hero-delta up">↑ 2025 best: 59:40 (18 mag) — a 97" dal PR</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Target PR</div>
+      <div class="hero-val green">&lt;58:03</div>
+      <div class="hero-sub">Battere il PR · ottimistico &lt;57:00</div>
+      <div class="hero-delta down">↓ 64" per battere · 2'40" per &lt;57'</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Zona richiesta</div>
+      <div class="hero-val" style="font-size:28px; line-height:1.3; font-weight:900; color:#F6AD55;">Z3 TEMPO<br><span style="font-size:16px;color:#888;font-weight:600;">costante per 60 min</span></div>
+      <div class="hero-sub">FC 149–163 bpm · sostenuto</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Cadenza obiettivo</div>
+      <div class="hero-val orange">78+</div>
+      <div class="hero-sub">Attuale: 72.6 rpm in salita</div>
+      <div class="hero-delta up">↑ +5 rpm in salita → meno carico muscolare</div>
+    </div>
+  </div>
+
+  <!-- STORICO + ANALISI -->
+  <div class="card" style="margin-bottom:20px; display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div>
+      <div class="card-label">Storico PR personali — segmento "– Tolfa"</div>
+      <div style="margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #F0F0F0;font-size:13px;">
+          <span style="font-weight:800;color:#C8940A;">🥇 58:03</span><span style="color:#888;">29 lug 2022 · 21.7 km/h</span><span style="font-size:11px;background:#FEF9E7;color:#C8940A;border-radius:4px;padding:1px 6px;font-weight:700;">PR</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #F0F0F0;font-size:13px;">
+          <span style="font-weight:700;">59:26</span><span style="color:#888;">8 mag 2021 · 21.2 km/h</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #F0F0F0;font-size:13px;">
+          <span style="font-weight:700;color:#FC4C02;">59:40</span><span style="color:#888;">18 mag 2025 · 21.1 km/h</span><span style="font-size:11px;background:#FFF3EE;color:#FC4C02;border-radius:4px;padding:1px 6px;font-weight:700;">best 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #F0F0F0;font-size:13px;">
+          <span style="font-weight:600;">1:00:22</span><span style="color:#888;">13 lug 2025 · 20.8 km/h</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #F0F0F0;font-size:13px;">
+          <span style="font-weight:600;">1:00:27</span><span style="color:#888;">18 giu 2023 · 20.8 km/h</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13px;">
+          <span style="font-weight:600;color:#888;">1:03:40</span><span style="color:#888;">23 giu 2026 · moving (non tent.)</span><span style="font-size:11px;background:#F0F0F0;color:#888;border-radius:4px;padding:1px 6px;font-weight:700;">giro 113km</span>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:#FC4C02;font-weight:600;">⚡ Servono solo 64" per battere il PR — l'estate è il momento giusto</div>
+      </div>
+    </div>
+    <div>
+      <div class="card-label">Analisi del gap · Come si usa il Percorso 1</div>
+      <div style="font-size:13px;line-height:1.65;color:#444;margin-top:6px;">
+        Il PR (58:03) è a <strong>21.7 km/h</strong>. Nel 2025 ci sei arrivato a 97" con <strong>59:40</strong>. Il punto non è la forma — sei vicino. Il problema è l'<strong>intensità sul segmento</strong>: il 23/06 hai pedalato a FC 140.7 (Z2) e cad 58.6 rpm (forza pura) su un giro da 113km. Un tentativo serio con FC 155–160 e cad 65+ rpm è un'altra uscita. <br><br>
+        Il percorso 1 (Passoscuro → Braccianese → Vigna di Valle → I Terzi, 66km +589m) è la palestra. Simula i tratti chiave di Tolfa e permette di fare lavoro <span class="zbadge z3">Z3</span> ripetuto senza km inutili.
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTIMANE -->
+  <div class="section-label">Il Piano — 4 Settimane</div>
+  <div class="weeks-grid">
+
+    <!-- W1 -->
+    <div class="week-card">
+      <div class="week-accent w1"></div>
+      <div class="week-num">Settimana 1</div>
+      <div class="week-title">Build Aerobico</div>
+      <div class="day-row">
+        <div class="day-lbl">Mar</div>
+        <div class="day-content">
+          <div class="day-desc">60–70 min Z2 <span class="zbadge z2" style="font-size:10px;">Z2</span></div>
+          <div class="day-note">FC 125–145 · cadenza 82–85 rpm in piano · nessuna forzatura</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">Gio</div>
+        <div class="day-content">
+          <div class="day-desc">75 min Z2 + 2×10 min <span class="zbadge z3" style="font-size:10px;">Z3</span></div>
+          <div class="day-note">Salita Braccianese · FC 150–160 · recupero 5 min Z1 tra le ripetute</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">WE</div>
+        <div class="day-content">
+          <div class="day-desc">Percorso 1 completo — Z2 <span class="zbadge z2" style="font-size:10px;">Z2</span></div>
+          <div class="day-note">FC media &lt;145 · cadenza 76+ rpm · osserva le salite senza spingere</div>
+        </div>
+      </div>
+      <div class="week-focus">🎯 Attiva i sistemi aerobici · impara le salite del percorso 1</div>
+    </div>
+
+    <!-- W2 -->
+    <div class="week-card">
+      <div class="week-accent w2"></div>
+      <div class="week-num">Settimana 2</div>
+      <div class="week-title">Threshold Progressivo</div>
+      <div class="day-row">
+        <div class="day-lbl">Mar</div>
+        <div class="day-content">
+          <div class="day-desc">60 min Z2 + 2×15 min <span class="zbadge z3" style="font-size:10px;">Z3</span></div>
+          <div class="day-note">FC 152–162 · +5 min rispetto W1 · salita o falsopiano</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">Gio</div>
+        <div class="day-content">
+          <div class="day-desc">Riscaldamento + 25 min <span class="zbadge z3" style="font-size:10px;">Z3</span> continuato</div>
+          <div class="day-note">Salita lunga · FC 155–163 · cadenza 76–80 · non sfondare Z4</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">WE</div>
+        <div class="day-content">
+          <div class="day-desc">Percorso 1 — lap 2 in <span class="zbadge z3" style="font-size:10px;">Z3</span></div>
+          <div class="day-note">Braccianese/I Terzi: tieni FC 155–163 sulle salite · resto Z2</div>
+        </div>
+      </div>
+      <div class="week-focus">🎯 Costruisci la tenuta in Z3 · 25 min continuo è il benchmark</div>
+    </div>
+
+    <!-- W3 -->
+    <div class="week-card">
+      <div class="week-accent w3"></div>
+      <div class="week-num">Settimana 3</div>
+      <div class="week-title">Simulazione Tolfa</div>
+      <div class="day-row">
+        <div class="day-lbl">Mar</div>
+        <div class="day-content">
+          <div class="day-desc">60 min Z2 leggero <span class="zbadge z2" style="font-size:10px;">Z2</span></div>
+          <div class="day-note">Gambe fresche · cadenza alta (84+ rpm) · nessun carico</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">Gio</div>
+        <div class="day-content">
+          <div class="day-desc">Simulazione: 35–40 min <span class="zbadge z3" style="font-size:10px;">Z3</span>→<span class="zbadge z4" style="font-size:10px;">Z4</span></div>
+          <div class="day-note">Riscaldamento 25 min · poi 35–40 min FC 158–168 continuo · simula Tolfa</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">WE</div>
+        <div class="day-content">
+          <div class="day-desc">Percorso 1 — test Z3 completo</div>
+          <div class="day-note">Tutte le salite in Z3 · verifica: riesci a tenere FC 155–163 per 20+ min?</div>
+        </div>
+      </div>
+      <div class="week-focus">🎯 Giovedì è la sessione chiave · se reggi 40 min sei pronto</div>
+    </div>
+
+    <!-- W4 -->
+    <div class="week-card">
+      <div class="week-accent w4"></div>
+      <div class="week-num">Settimana 4</div>
+      <div class="week-title orange">Taper + PR 🏁</div>
+      <div class="day-row">
+        <div class="day-lbl">Mar</div>
+        <div class="day-content">
+          <div class="day-desc">45 min Z1–Z2 leggero <span class="zbadge z1" style="font-size:10px;">Z1</span></div>
+          <div class="day-note">FC &lt;140 · cadenza 85+ rpm · gambe che girano, non che spingono</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">Gio</div>
+        <div class="day-content">
+          <div class="day-desc">40 min Z1 + 3×2 min strappi</div>
+          <div class="day-note">Volume minimo · solo 3 accelerazioni brevi per attivare le gambe · nessun effort</div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-lbl">WE</div>
+        <div class="day-content">
+          <div class="day-desc" style="color:#FC4C02;font-weight:800;">🎯 PERCORSO TOLFA — tentativo PR</div>
+          <div class="day-note">Parto cauto fino a Rimissini · spingo da Sasso → Manziana → Tolfa</div>
+        </div>
+      </div>
+      <div class="week-focus">🏁 Martedì e Giovedì servono per arrivare fresco al WE</div>
+    </div>
+
+  </div>
+
+  <!-- SESSIONE TIPO + CONTROLLI -->
+  <div class="section-label">Sessione Threshold (Giovedì W2–W3) — Come si fa</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Struttura sessione tipo giovedì</div>
+      <div style="margin-top:12px;">
+        <div class="sess-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Riscaldamento · 25–30 min <span class="zbadge z2">Z2</span></div>
+            <div class="step-detail">FC 125–140 · cadenza 82–86 rpm · flat o leggero falsopiano</div>
+          </div>
+        </div>
+        <div class="sess-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Blocco Threshold · 25–40 min <span class="zbadge z3">Z3</span></div>
+            <div class="step-detail">FC 152–163 · salita Braccianese o tratto lungo · cadenza 76–80 · respiro controllato, non affannato. W2: 25 min. W3: 35–40 min.</div>
+          </div>
+        </div>
+        <div class="sess-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Recupero attivo · 15 min <span class="zbadge z1">Z1</span></div>
+            <div class="step-detail">FC &lt;130 · gira le gambe · nessuna forzatura finale</div>
+          </div>
+        </div>
+        <div style="background:#FFF8F5;border-radius:10px;padding:12px;margin-top:8px;font-size:12px;color:#FC4C02;font-weight:600;">
+          ⚠️ Se la FC supera 163–165 bpm — abbassa il ritmo. Non sfondare in Z4 in W1–W2.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Segnali di progresso (e allarmi)</div>
+      <div style="margin-top:12px;">
+        <div style="font-size:12px;font-weight:700;color:#2a9d4e;margin-bottom:8px;">✅ Stai migliorando se…</div>
+        <div class="check-item">
+          <div class="check-dot green-dot"></div>
+          <div class="check-text">
+            <div class="check-title">Stessa FC, ritmo più alto</div>
+            <div class="check-note">Salita Braccianese in 2'10" a FC155 invece di 2'20"</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-dot green-dot"></div>
+          <div class="check-text">
+            <div class="check-title">FC scende più veloce in recupero</div>
+            <div class="check-note">Da Z3 a &lt;130 bpm in meno di 90 secondi di piano</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-dot green-dot"></div>
+          <div class="check-text">
+            <div class="check-title">Cadenza Z3 è salita</div>
+            <div class="check-note">In salita giri a 76–80 rpm senza perdere potenza</div>
+          </div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:#E53E3E;margin:12px 0 8px;">🔴 Fermati se…</div>
+        <div class="check-item">
+          <div class="check-dot red-dot"></div>
+          <div class="check-text">
+            <div class="check-title">Gambe pesanti oltre 3 giorni</div>
+            <div class="check-note">Togli il giovedì, torna giovedì successivo</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-dot red-dot"></div>
+          <div class="check-text">
+            <div class="check-title">FC a riposo +5–8 bpm vs normale</div>
+            <div class="check-note">Giornata Z1 o rest day — segnale di accumulo fatica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGOLE OPERATIVE -->
+  <div class="section-label">Regole Operative</div>
+  <div class="rules-row">
+    <div class="rule-card">
+      <div class="rule-icon">🗻</div>
+      <div class="rule-title">Sul Percorso 1 (allenamento)</div>
+      <ul class="rule-list">
+        <li>WE W1: tutto in Z2 · osserva · non spingere</li>
+        <li>WE W2: salite in Z3 · resto Z2 · finisci forte il lap 3</li>
+        <li>WE W3: test completo Z3 · tiene 20 min? Sei pronto</li>
+        <li>Vigna di Valle: usala come benchmark settimana su settimana</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">📈</div>
+      <div class="rule-title">Cadenza — la regola dei 5 rpm</div>
+      <ul class="rule-list">
+        <li>In piano: obiettivo 84–88 rpm (attuale ~76)</li>
+        <li>In salita: obiettivo 76–80 rpm (attuale ~72)</li>
+        <li>Non aumentare tutto insieme: +1–2 rpm ogni settimana</li>
+        <li>Sprint Vicarello: spingi fino a 88–92 rpm</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">🏁</div>
+      <div class="rule-title">Giorno PR — strategia Tolfa</div>
+      <ul class="rule-list">
+        <li>Fino a Rimissini: Z2 paziente · FC &lt;148</li>
+        <li>Rimissini (20 min, +240m): entra in Z3 graduale</li>
+        <li>Sasso–Manziana (6'41"): FC 162–168 · dai gas</li>
+        <li>Tolfa finale: tieni il passo · non esplodere</li>
+        <li>Non guardare il Garmin ogni 10 secondi</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- OBIETTIVO CARD FINALE -->
+  <div class="obiettivo-card">
+    <div class="ob-left">
+      <div class="ob-label">Obiettivo Settimana 4</div>
+      <div class="ob-title">Battere 58:03 sul segmento "– Tolfa"</div>
+      <div class="ob-sub">Bastano 64" in meno · FC 155–162 · cad 65+ rpm · Z3 costante dal km 5 al km 19<br>
+      Realistico: &lt;58:03 · Ottimistico: &lt;57:00 · Il 2025 ci sei arrivato a 97" (59:40)</div>
+    </div>
+    <div class="ob-right">
+      <div class="ob-big">&lt;58:03</div>
+      <div class="ob-unit">battere il PR</div>
+    </div>
+  </div>
+
+  <!-- FC TARGET BARS -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-label" style="margin-bottom:14px;">Progressione FC target su Tolfa — da Z2 a Z3</div>
+    <div class="fc-bar-row">
+      <div class="fc-bar-label">
+        <span>Attuale (23/06) — FC 142 media</span>
+        <span style="color:#4A90D9;font-weight:700;">Z2 · margine enorme</span>
+      </div>
+      <div class="fc-bar-track">
+        <div class="fc-bar-fill" style="width:78%; background:#4A90D9;"></div>
+      </div>
+    </div>
+    <div class="fc-bar-row">
+      <div class="fc-bar-label">
+        <span>Target PR — FC 155–162 media</span>
+        <span style="color:#F6AD55;font-weight:700;">Z3 Tempo · zona giusta</span>
+      </div>
+      <div class="fc-bar-track">
+        <div class="fc-bar-fill" style="width:87%; background:#F6AD55;"></div>
+      </div>
+    </div>
+    <div class="fc-bar-row">
+      <div class="fc-bar-label">
+        <span>Limite da non superare — FC 164+</span>
+        <span style="color:#ED6445;font-weight:700;">Z4 · non sostenibile 60 min</span>
+      </div>
+      <div class="fc-bar-track">
+        <div class="fc-bar-fill" style="width:92%; background:#ED6445;"></div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:#888;margin-top:10px;">FCmax 182 bpm · Zone Strava ufficiali · watt non misurati (stima fisica)</div>
+  </div>
+
+  <div class="footer">Strava · Garmin · FCmax 182 bpm · dati API reali · watt stimati fisica (no power meter)</div>
+
+</div>
+</body>
+</html>

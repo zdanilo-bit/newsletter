@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passoscuro · Giro del Lago · Manziana · Sasso — 21.06.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #050810;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+.dt {
+  background: #080c10;
+  background-image:
+    linear-gradient(rgba(0,200,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  padding: 28px 26px 30px;
+  border-radius: 6px;
+  font-family: 'Chakra Petch', sans-serif;
+  color: #fff;
+  width: 720px;
+}
+.dt-hdr {
+  border-bottom: 1px solid rgba(0,200,255,.15);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+.dt-route {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #00c8ff;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.dt-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(0,200,255,.35);
+  text-transform: uppercase;
+}
+.dt-kpi {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.dt-kpi2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.kpi {
+  background: #0d1520;
+  border: 1px solid rgba(0,200,255,.15);
+  border-radius: 4px;
+  padding: 14px 12px 12px;
+}
+.kpi-val {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  display: block;
+  font-family: 'Chakra Petch', sans-serif;
+}
+.kpi-lbl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(0,200,255,.5);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 6px;
+}
+.kpi2 {
+  background: #0d1520;
+  border: 1px solid rgba(0,200,255,.10);
+  border-radius: 4px;
+  padding: 11px 14px 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.kpi2-val {
+  font-size: 21px;
+  font-weight: 700;
+  font-family: 'Chakra Petch', sans-serif;
+}
+.kpi2-lbl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(0,200,255,.4);
+  text-transform: uppercase;
+}
+.dt-card {
+  background: #0d1520;
+  border: 1px solid rgba(0,200,255,.18);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+}
+.dt-card-hdr {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #00c8ff;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dt-card-hdr::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 1px;
+  background: #00c8ff;
+}
+.dt-badge {
+  background: rgba(255,216,77,.1);
+  border: 1px solid rgba(255,216,77,.35);
+  color: #ffd84d;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.vt-head {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1.4fr .9fr;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(0,200,255,.3);
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,200,255,.08);
+  margin-bottom: 6px;
+}
+.vt-row {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1.4fr .9fr;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(0,200,255,.05);
+  align-items: center;
+}
+.vt-row:last-child { border-bottom: none; }
+.vt-n  { color: rgba(255,255,255,.65); font-size: 12px; }
+.vt-o  { color: rgba(255,255,255,.3);  font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+.vt-nw { color: #fff;                  font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+.vt-d  { color: #00e5a0;               font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; }
+.lap-item {
+  display: grid;
+  grid-template-columns: 42px 1fr 220px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+.lap-item:last-child { margin-bottom: 0; }
+.lap-lbl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(0,200,255,.45);
+  text-transform: uppercase;
+}
+.lap-bg {
+  height: 3px;
+  background: rgba(0,200,255,.07);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.lap-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+.lap-stat {
+  display: flex;
+  gap: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+}
+.ls-spd { color: #fff; font-weight: 600; min-width: 70px; }
+.ls-w   { color: #ff6b2b; min-width: 44px; }
+.ls-fc  { color: rgba(255,255,255,.35); }
+.pr-row {
+  display: flex;
+  gap: 0;
+  align-items: center;
+}
+.pr-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+}
+.pr-item:first-child { padding-left: 0; }
+.pr-sep { width: 1px; height: 36px; background: rgba(0,200,255,.12); }
+.pr-dots { display: flex; gap: 3px; flex-wrap: wrap; max-width: 90px; }
+.pr-dot  { width: 8px; height: 8px; border-radius: 50%; }
+.pr-cnt  { font-size: 20px; font-weight: 700; font-family: 'Chakra Petch', sans-serif; }
+.pr-lbl  { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,.3); text-transform: uppercase; }
+.footer {
+  margin-top: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: rgba(0,200,255,.18);
+  text-transform: uppercase;
+  text-align: right;
+  border-top: 1px solid rgba(0,200,255,.08);
+  padding-top: 10px;
+}
+</style>
+</head>
+<body>
+<div class="dt">
+
+  <!-- HEADER -->
+  <div class="dt-hdr">
+    <div class="dt-route">PASSOSCURO &nbsp;&mdash;&nbsp; GIRO DEL LAGO &nbsp;&mdash;&nbsp; MANZIANA &nbsp;&mdash;&nbsp; SASSO &nbsp;&mdash;&nbsp; PASSOSCURO</div>
+    <div class="dt-meta">21.06.2026 &nbsp;&middot;&nbsp; CANNONDALE SUPERSIX EVO RAPHA &nbsp;&middot;&nbsp; SHIMANO ULTEGRA 2&times; &nbsp;&middot;&nbsp; FCMAX 182 BPM</div>
+  </div>
+
+  <!-- KPI PRINCIPALI -->
+  <div class="dt-kpi">
+    <div class="kpi">
+      <span class="kpi-val">106</span>
+      <span class="kpi-lbl">KM DISTANZA</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-val">27.0</span>
+      <span class="kpi-lbl">KM/H MEDIA</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-val" style="color:#ff6b2b">129</span>
+      <span class="kpi-lbl">BPM FC MEDIA</span>
+    </div>
+    <div class="kpi" style="border-color:rgba(255,216,77,.28)">
+      <span class="kpi-val" style="color:#ffd84d">11</span>
+      <span class="kpi-lbl">PR TOTALI</span>
+    </div>
+  </div>
+
+  <!-- KPI SECONDARI -->
+  <div class="dt-kpi2">
+    <div class="kpi2">
+      <span class="kpi2-val" style="color:#00e5a0">+981</span>
+      <span class="kpi2-lbl">m D+</span>
+    </div>
+    <div class="kpi2">
+      <span class="kpi2-val">3:55</span>
+      <span class="kpi2-lbl">h moving time</span>
+    </div>
+    <div class="kpi2">
+      <span class="kpi2-val">76.3</span>
+      <span class="kpi2-lbl">rpm cadenza &uarr;</span>
+    </div>
+  </div>
+
+  <!-- VICARELLO -->
+  <div class="dt-card">
+    <div class="dt-card-hdr">
+      VICARELLO &nbsp;&middot;&nbsp; EFFICIENZA AEROBICA
+      <span class="dt-badge">3&times; ORO PR</span>
+    </div>
+    <div class="vt-head">
+      <span>SEGMENTO</span><span>13 GIU</span><span>21 GIU</span><span>&Delta;</span>
+    </div>
+    <div class="vt-row">
+      <span class="vt-n">Climb 680m</span>
+      <span class="vt-o">2'12" &middot; FC167</span>
+      <span class="vt-nw">2'04" &middot; FC160</span>
+      <span class="vt-d">&minus;8s &minus;7bpm</span>
+    </div>
+    <div class="vt-row">
+      <span class="vt-n">Completa 829m</span>
+      <span class="vt-o">2'32" &middot; FC165</span>
+      <span class="vt-nw">2'22" &middot; FC158</span>
+      <span class="vt-d">&minus;10s &minus;7bpm</span>
+    </div>
+    <div class="vt-row">
+      <span class="vt-n">Sprint 1.09km</span>
+      <span class="vt-o">2'57" &middot; FC162</span>
+      <span class="vt-nw">2'50" &middot; FC152</span>
+      <span class="vt-d">&minus;7s &minus;10bpm</span>
+    </div>
+  </div>
+
+  <!-- LAP -->
+  <div class="dt-card">
+    <div class="dt-card-hdr">PROGRESSIONE LAP</div>
+    <div class="lap-item">
+      <span class="lap-lbl">LAP 1</span>
+      <div class="lap-bg"><div class="lap-fill" style="width:69.5%;background:#00c8ff"></div></div>
+      <div class="lap-stat">
+        <span class="ls-spd">23.2 km/h</span>
+        <span class="ls-w">135 W</span>
+        <span class="ls-fc">FC 123</span>
+      </div>
+    </div>
+    <div class="lap-item">
+      <span class="lap-lbl">LAP 2</span>
+      <div class="lap-bg"><div class="lap-fill" style="width:78.1%;background:#00c8ff"></div></div>
+      <div class="lap-stat">
+        <span class="ls-spd">26.1 km/h</span>
+        <span class="ls-w">141 W</span>
+        <span class="ls-fc">FC 122</span>
+      </div>
+    </div>
+    <div class="lap-item">
+      <span class="lap-lbl">LAP 3</span>
+      <div class="lap-bg"><div class="lap-fill" style="width:88%;background:#ff6b2b"></div></div>
+      <div class="lap-stat">
+        <span class="ls-spd">29.4 km/h</span>
+        <span class="ls-w">160 W</span>
+        <span class="ls-fc">FC 139</span>
+      </div>
+    </div>
+    <div class="lap-item">
+      <span class="lap-lbl" style="color:#ffd84d">LAP 4</span>
+      <div class="lap-bg" style="background:rgba(255,216,77,.08)">
+        <div class="lap-fill" style="width:100%;background:#ffd84d"></div>
+      </div>
+      <div class="lap-stat">
+        <span class="ls-spd" style="color:#ffd84d">33.4 km/h</span>
+        <span class="ls-w" style="color:#ffd84d">193 W</span>
+        <span class="ls-fc" style="color:rgba(255,216,77,.5)">FC 146 &#9733;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PR -->
+  <div class="dt-card" style="margin-bottom:0">
+    <div class="dt-card-hdr">DISTRIBUZIONE PR</div>
+    <div class="pr-row">
+      <div class="pr-item">
+        <div class="pr-dots">
+          <div class="pr-dot" style="background:#ffd84d"></div>
+          <div class="pr-dot" style="background:#ffd84d"></div>
+          <div class="pr-dot" style="background:#ffd84d"></div>
+        </div>
+        <span class="pr-cnt" style="color:#ffd84d">&times;3</span>
+        <span class="pr-lbl">ORO</span>
+      </div>
+      <div class="pr-sep"></div>
+      <div class="pr-item">
+        <div class="pr-dots">
+          <div class="pr-dot" style="background:#9ab0c4"></div>
+        </div>
+        <span class="pr-cnt" style="color:#9ab0c4">&times;1</span>
+        <span class="pr-lbl">ARGENTO</span>
+      </div>
+      <div class="pr-sep"></div>
+      <div class="pr-item">
+        <div class="pr-dots">
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+          <div class="pr-dot" style="background:#ff6b2b"></div>
+        </div>
+        <span class="pr-cnt" style="color:#ff6b2b">&times;7</span>
+        <span class="pr-lbl">BRONZO</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">STRAVA API &middot; GARMIN &middot; FCMAX 182 BPM &middot; 11 ACHIEVEMENTS</div>
+
+</div>
+</body>
+</html>

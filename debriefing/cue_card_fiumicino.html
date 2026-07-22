@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cue Card Fiumicino · Piano giro</title>
+<style>
+  @page { size: A6 landscape; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Arial Black', Arial, sans-serif; }
+
+  .card {
+    width: 148mm;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #333;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .header {
+    background: #FC4C02;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header .title { color: #fff; font-size: 13px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+  .header .km-total { color: #fff; font-size: 12px; font-weight: 700; opacity: .9; }
+
+  .km-bar { height: 8px; display: flex; width: 100%; }
+  .km-seg { height: 100%; }
+
+  .blocks { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+
+  .block {
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .block::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+
+  .b-warmup     { background: #0a1a0a; } .b-warmup::before     { background: #3a9e5f; }
+  .b-palidoro   { background: #1a0500; } .b-palidoro::before   { background: #FC4C02; }
+  .b-flat       { background: #0a100f; } .b-flat::before       { background: #3a7abf; }
+  .b-anguillara { background: #120a1a; } .b-anguillara::before { background: #a855f7; }
+  .b-rientro    { background: #0d0d0d; } .b-rientro::before    { background: #888; }
+
+  .km-label { font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+  .b-warmup     .km-label { color: #3a9e5f; }
+  .b-palidoro   .km-label { color: #FC4C02; }
+  .b-flat       .km-label { color: #3a7abf; }
+  .b-anguillara .km-label { color: #a855f7; }
+  .b-rientro    .km-label { color: #888; }
+
+  .name { font-size: 13px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 3px; }
+  .sub  { font-size: 10px; color: #aaa; line-height: 1.4; }
+  .sub b { color: #fff; }
+
+  .star-badge {
+    display: inline-block;
+    background: #FC4C02;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .03em;
+    padding: 2px 5px;
+    margin-top: 3px;
+    text-transform: uppercase;
+  }
+
+  .b-right { text-align: right; }
+  .rpm { font-size: 26px; font-weight: 900; line-height: 1; }
+  .rpm-lbl { font-size: 8px; font-weight: 700; letter-spacing: .06em; color: #888; text-transform: uppercase; }
+  .fc { font-size: 10px; font-weight: 700; margin-top: 3px; }
+
+  .b-warmup     .rpm, .b-warmup     .fc { color: #3a9e5f; }
+  .b-palidoro   .rpm, .b-palidoro   .fc { color: #FC4C02; }
+  .b-flat       .rpm, .b-flat       .fc { color: #3a7abf; }
+  .b-anguillara .rpm, .b-anguillara .fc { color: #a855f7; }
+  .b-rientro    .rpm, .b-rientro    .fc { color: #888; }
+
+  .footer {
+    background: #111;
+    padding: 7px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #222;
+  }
+  .f-item { text-align: center; }
+  .f-val { font-size: 14px; font-weight: 900; color: #fff; }
+  .f-lbl { font-size: 8px; color: #666; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; margin-top: 1px; }
+  .f-sep { width: 1px; height: 26px; background: #333; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    <div class="title">🚴 Fiumicino · Piano giro</div>
+    <div class="km-total">66 km · D+ 600m</div>
+  </div>
+
+  <div class="km-bar">
+    <div class="km-seg" style="width:10.6%;background:#3a9e5f;print-color-adjust:exact;-webkit-print-color-adjust:exact"></div>
+    <div class="km-seg" style="width:24.7%;background:#FC4C02;print-color-adjust:exact;-webkit-print-color-adjust:exact"></div>
+    <div class="km-seg" style="width:12.1%;background:#3a7abf;print-color-adjust:exact;-webkit-print-color-adjust:exact"></div>
+    <div class="km-seg" style="width:21.2%;background:#a855f7;print-color-adjust:exact;-webkit-print-color-adjust:exact"></div>
+    <div class="km-seg" style="width:31.4%;background:#444;print-color-adjust:exact;-webkit-print-color-adjust:exact"></div>
+  </div>
+
+  <div class="blocks">
+
+    <div class="block b-warmup">
+      <div class="b-left">
+        <div class="km-label">km 0 → 7</div>
+        <div class="name">WARM UP</div>
+        <div class="sub">Litorale piano · <b>scaldati</b>, non spingere</div>
+      </div>
+      <div class="b-right">
+        <div class="rpm">78</div>
+        <div class="rpm-lbl">rpm</div>
+        <div class="fc">FC &lt; 135</div>
+      </div>
+    </div>
+
+    <div class="block b-palidoro">
+      <div class="b-left">
+        <div class="km-label">km 7 → 24 · 16.3km · D+281m</div>
+        <div class="name">PALIDORO BRACCIANESE</div>
+        <div class="sub">Tieni <b>80 rpm</b> anche in salita · mai sotto 78<br>Parti conservativo, spingi ultimi 3km</div>
+        <div class="star-badge">⭐ SEGMENTO CHIAVE · TARGET &lt; 41:39</div>
+      </div>
+      <div class="b-right">
+        <div class="rpm">80</div>
+        <div class="rpm-lbl">rpm</div>
+        <div class="fc">FC 145–150</div>
+      </div>
+    </div>
+
+    <div class="block b-flat">
+      <div class="b-left">
+        <div class="km-label">km 24 → 32</div>
+        <div class="name">PIANO</div>
+        <div class="sub">Recupero attivo · <b>respira</b> · gambe in movimento</div>
+      </div>
+      <div class="b-right">
+        <div class="rpm">80</div>
+        <div class="rpm-lbl">rpm</div>
+        <div class="fc">FC &lt; 140</div>
+      </div>
+    </div>
+
+    <div class="block b-anguillara">
+      <div class="b-left">
+        <div class="km-label">km 32 → 46</div>
+        <div class="name">ANGUILLARA · VIGNA DI VALLE</div>
+        <div class="sub">Salite brevi · <b>78+ rpm</b> · non esplodere</div>
+      </div>
+      <div class="b-right">
+        <div class="rpm">78</div>
+        <div class="rpm-lbl">rpm</div>
+        <div class="fc">FC 145–152</div>
+      </div>
+    </div>
+
+    <div class="block b-rientro">
+      <div class="b-left">
+        <div class="km-label">km 46 → 66</div>
+        <div class="name">RIENTRO</div>
+        <div class="sub">Z2 piena · <b>non mollare</b> la cadenza · chiudi a 78+</div>
+      </div>
+      <div class="b-right">
+        <div class="rpm">78</div>
+        <div class="rpm-lbl">rpm</div>
+        <div class="fc">FC &lt; 148</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="f-item">
+      <div class="f-val" style="color:#FC4C02">80</div>
+      <div class="f-lbl">RPM target</div>
+    </div>
+    <div class="f-sep"></div>
+    <div class="f-item">
+      <div class="f-val">145–150</div>
+      <div class="f-lbl">FC Palidoro</div>
+    </div>
+    <div class="f-sep"></div>
+    <div class="f-item">
+      <div class="f-val" style="color:#FC4C02">&lt;41:39</div>
+      <div class="f-lbl">Target seg.</div>
+    </div>
+    <div class="f-sep"></div>
+    <div class="f-item">
+      <div class="f-val" style="color:#e55">155+</div>
+      <div class="f-lbl">FC → rallenta</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
