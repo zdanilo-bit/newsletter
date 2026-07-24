@@ -67,6 +67,7 @@ Obiettivo stagionale: **PR su Tolfa (< 58:03)** entro fine W4 del microciclo lug
 | 16/07/26 | 44:35 | 78.2 rpm | 137.5 bpm | Uscita sotto-intensità |
 | 20/07/26 | 42:03 | 79.3 rpm | 141.4 bpm | Vento O favorevole rientro |
 | 22/07/26 | 42:17 | 79.8 rpm | 150.2 bpm | **FC nel target per la prima volta** · vento NNW 15–21 km/h contrario = −~40s stim. |
+| 24/07/26 | 47:50 | 78.0 rpm | 135.5 bpm | Vento forte in testa · gestione difensiva · ritorno 281W 85rpm · 8 PR tailwind |
 
 **Target allenamento**: FC 145–150 bpm · 80 rpm · sub 41:39
 **Avviso**: FC > 155 bpm → rallentare immediatamente
@@ -129,9 +130,24 @@ RIENTRO      → 78 rpm · FC <148 · 28°C · chiudi forte
 
 ### HTML iPhone (debriefing completo)
 - Design system **ZDPF Bike** (vedere sezione 10)
-- `max-width: 480px` · mobile-first
-- Font Google: Barlow Condensed + Inter + JetBrains Mono
+- `max-width: 540px` · mobile-first
+- Font: Impact/'Arial Black' per display, 'Courier New' per monospace dati (no Google Fonts dependency)
 - Salvare in: `C:\Users\DaniloU7b\Downloads\gpx garmin\debrief_[data].html`
+
+**Scala font approvata (luglio 2026)** — no testi sotto 9px:
+| Ruolo | Font-size |
+|---|---|
+| Eyebrow / label secondarie | 12px |
+| Sublabel / bsub | 11px |
+| Row label (rl) | 13px |
+| Row placeholder (rp) | 11px |
+| Row figure (rf) | 14px |
+| Coach body | 14px |
+| Grid label (gl) | 10px |
+| Badge / tag | 11px |
+| Display numbers (gv, ti) | invariati (26–72px) |
+
+**Workflow file**: nessun embedding. Generare file HTML → aggiornare `index.html` (calendario) → utente carica su GitHub. `briefing.html` = archivio analisi pregresse. Debrief domenica WE = formato Giro Lungo (tema viola `#8040b0`).
 
 ---
 
@@ -196,10 +212,17 @@ RIENTRO      → 78 rpm · FC <148 · 28°C · chiudi forte
 | `sintesi_cadenza_tolfa_2026.html` | Storico 19 giri Fiumicino + piano microciclo Tolfa |
 | `cue_card_fiumicino.png` | Striscia da bici (5 blocchi, RPM, FC, temperatura) |
 | `cue_card_iphone.png` | Card iPhone verticale per consultazione in giro |
-| `debrief_14lug.html` | Debriefing 14/07/26 con design ZDPF |
-| `debrief_16lug.html` | Debriefing 16/07/26 — uscita sotto-intensità (RE 93) |
-| `debrief_20lug.html` | Debriefing 20/07/26 — 42:03 Palidoro, FC 141, rimbalzo |
-| `debrief_22lug.html` | Debriefing 22/07/26 — SVOLTA: FC 150 Palidoro, 5 PR, vento NNW contrario |
+| `index.html` | Calendario luglio 2026 — celle colorate con link ai debrief |
+| `briefing.html` | Archivio analisi pregresse (Passo Oscuro, Giustiniana, Tolfa, Fiumicino) |
+| `debrief_05lug.html` | Giro Lungo 05/07 — 94.6km, 8 PR, tema viola |
+| `debrief_07lug.html` | Fiumicino 07/07 — 44:20 Palidoro, FC 140.6, BASSO |
+| `debrief_09lug.html` | Fiumicino 09/07 — 41:39 Palidoro ★ BEST, FC 146.9 |
+| `debrief_11lug.html` | Giro Lungo 11/07 — 86.7km, Palidoro 42:31, tema viola |
+| `debrief_14lug.html` | Fiumicino 14/07 — 42:58 Palidoro, FC 146.6 |
+| `debrief_16lug.html` | Fiumicino 16/07 — 44:35 Palidoro, FC 137.5, BASSO |
+| `debrief_20lug.html` | Fiumicino 20/07 — 42:03 Palidoro, FC 141, rimbalzo |
+| `debrief_22lug.html` | Fiumicino 22/07 — 42:17 Palidoro, FC 150.2 (prima volta target) |
+| `debrief_24lug.html` | Fiumicino 24/07 — 47:50 vento forte, gestione difensiva, 8 PR tailwind |
+| `passoscuro_26lug.html` | Pre-uscita domenica 26/07 — Passo Oscuro, target aggiornati luglio |
 | `DZ_AI_COACH_MEMORY.md` | Questo file |
 | `activities.json` | Database Garmin (2865 attività, aggiornato 14/07/26) |
-| `Design.md` | Design system ZDPF Bike completo |
